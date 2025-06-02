@@ -4,4 +4,6 @@ module com.event {
 
     opens com.event to javafx.fxml;
     exports com.event;
+
+    opens com.controllers to javafx.fxml;
 }
