@@ -27,6 +27,15 @@
     "failedLoginAttempts": 0,
     "studentVerified": false,
     "ticketConfirmation": ["ba4cce17-a624-4d2b-80fe-eae11665feb6"],
-    "favorites": ["6584ff0a-459b-4827-9132-68b86e839455"]
+    "favorites": ["6584ff0a-459b-4827-9132-68b86e839455"],
+    "reviews": [
+      {
+        "reviewID": "7b1460a3-9b66-4d8e-8a4e-ba5bb88b37f8",
+        "event": "6584ff0a-459b-4827-9132-68b86e839455",
+        "rating": 5,
+        "content": "Great!",
+        "timestamp": "2025-06-10T20:00:00Z"
+      }
+    ]
   }
 ]
