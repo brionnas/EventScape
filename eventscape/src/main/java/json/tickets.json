@@ -1,10 +1,7 @@
 [
   {
     "ticketUUID": "6d0130f9-a02c-4a3d-ab2f-b20cd7462fc7",
-    "event": {
-      "eventId": "6584ff0a-459b-4827-9132-68b86e839455",
-      "name": "Random event"
-    },
+    "eventId": "6584ff0a-459b-4827-9132-68b86e839455",
     "quantity": 2,
     "seatNum": "A12",
     "person": {
@@ -16,10 +13,7 @@
   },
   {
     "ticketUUID": "ba4cce17-a624-4d2b-80fe-eae11665feb6",
-    "event": {
-      "eventId": "295b1e3c-9818-4a59-bbde-9af260fabcb8",
-      "name": "Random event 2"
-    },
+    "eventId": "295b1e3c-9818-4a59-bbde-9af260fabcb8",
     "quantity": 2,
     "seatNum": "B7",
     "person": {
