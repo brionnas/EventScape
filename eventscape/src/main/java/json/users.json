@@ -11,7 +11,13 @@
     "isLocked": false,
     "failedLoginAttempts": 0,
     "studentVerified": true,
-    "ticketConfirmation": ["6d0130f9-a02c-4a3d-ab2f-b20cd7462fc7"],
+    "tickets":[
+      {
+        "ticketConfirmation": ["6d0130f9-a02c-4a3d-ab2f-b20cd7462fc7"],
+        "seatNum": "A12",
+        "status": "Confirmed"
+      }
+    ],
     "favorites": ["6584ff0a-459b-4827-9132-68b86e839455"]
   },
   {
@@ -26,7 +32,13 @@
     "isLocked": false,
     "failedLoginAttempts": 0,
     "studentVerified": false,
-    "ticketConfirmation": ["ba4cce17-a624-4d2b-80fe-eae11665feb6"],
+    "tickets":[
+      {
+        "ticketConfirmation": ["ba4cce17-a624-4d2b-80fe-eae11665feb6"],
+        "seatNum": "B7",
+        "status": "Confirmed"
+      }
+    ],
     "favorites": ["6584ff0a-459b-4827-9132-68b86e839455"],
     "reviews": [
       {
