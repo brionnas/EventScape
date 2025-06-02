@@ -58,6 +58,19 @@ public class User{
         return passwordHash;
     }
 
-    public 
+    public boolean getIsLocked(){
+        return isLocked;
+    }
 
+    public int getFailedLoginAttempts(){
+        return failedLoginAttempts;
+    }
+
+    public boolean getStudentVerified(){
+        return studentVerified
+    }
+
+    public List<Tickets> getTickets(){
+        return tickets;
+    }
 }
