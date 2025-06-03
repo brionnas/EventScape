@@ -1,6 +1,6 @@
 package com.model;
 
-public class DataConstants {
+public abstract class DataConstants {
 
     protected static final String USER_FILE_NAME = "src/main/java/com/data/users.json";
 	protected static final String USER_TEMP_FILE_NAME = "src/main/java/com/data/users_temp.json";
