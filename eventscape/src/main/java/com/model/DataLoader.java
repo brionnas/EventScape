@@ -34,8 +34,16 @@ public class DataLoader extends DataConstants {
             e.printStackTrace();
         }
 
-
+        return users;
     }
     
+    public static void main(String[] args) {
+        ArrayList<User> users = DataLoader.getUsers();
+
+        for(User user : users) {
+             System.out.println(user); 
+        }
+        
+    }
 
 }
