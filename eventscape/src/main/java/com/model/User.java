@@ -29,6 +29,10 @@ public class User{
         this.tickets = new ArrayList<>();
     }
 
+    public User(UUID id, String userFirstName, String userLastName, int age, String phoneNumber2) {
+        //TODO Auto-generated constructor stub
+    }
+
     public String getUserName(){
         return userName;
     }
