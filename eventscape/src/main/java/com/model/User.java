@@ -12,7 +12,7 @@ public class User{
     private boolean isLocked;
     private int failedLoginAttempts;
     private boolean studentVerified;
-    private List<Ticket> tickets;
+    //private List<Ticket> tickets;
 
     public User(String userName, String firstName, String lastName,
     String email, String phoneNumber, String passwordHash){
@@ -24,9 +24,9 @@ public class User{
         this.birthDate = birthDate;
         this.passwordHash = passwordHash;
         this.isLocked = false;
-        this.failedLoginAttempts = false;
+        //this.failedLoginAttempts = false;
         this.studentVerified = false;
-        this.tickets = new ArrayList<>();
+       // this.tickets = new ArrayList<>();
     }
 
     public User(UUID id, String userFirstName, String userLastName, int age, String phoneNumber2) {
@@ -53,9 +53,9 @@ public class User{
         return phoneNumber;
     }
 
-    public String getBirthDate()[
+    public String getBirthDate(){
         return birthDate;
-    ]
+    }
 
     public String getPasswordHash(){
         return passwordHash;
@@ -70,13 +70,13 @@ public class User{
     }
 
     public boolean getStudentVerified(){
-        return studentVerified
+        return false;
     }
-
+/* 
     public List<Tickets> getTickets(){
         return tickets;
     }
-
+*/
     public String toString() {
         return firstName + " " + lastName;
     }

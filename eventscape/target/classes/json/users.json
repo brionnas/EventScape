@@ -1,6 +1,5 @@
 [
   {
-    "userID": "21a6065a-9e59-4654-9e0d-533279a8fabd",
     "userName": "smithadam",
     "firstName": "Adam",
     "lastName": "Smith",
@@ -21,7 +20,6 @@
     "favorites": ["6584ff0a-459b-4827-9132-68b86e839455"]
   },
   {
-    "userID": "05c505df-d335-4ed5-961e-25bbe246197e",
     "userName": "jorgediego",
     "firstName": "Diego",
     "lastName": "Jorge",
