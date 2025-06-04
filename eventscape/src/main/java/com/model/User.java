@@ -15,7 +15,7 @@ public class User{
     private ArrayList<Ticket> tickets;
 
     public User(String userName, String firstName, String lastName,
-    String email, String phoneNumber, String passwordHash, String passwordHash2, boolean isLocked2, int failedAttempts, boolean studentVerified2){
+    String email, String phoneNumber, Date birthDate, String passwordHash, boolean isLocked2, int failedAttempts, boolean studentVerified2){
         this.userName = userName;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -24,9 +24,9 @@ public class User{
         this.birthDate = birthDate;
         this.passwordHash = passwordHash;
         this.isLocked = false;
-        //this.failedLoginAttempts = false;
+        this.failedLoginAttempts = 0;
         this.studentVerified = false;
-       // this.tickets = new ArrayList<>();
+        this.tickets = new ArrayList<>();
     }
 
     public User(UUID id, String userFirstName, String userLastName, int age, String phoneNumber2) {
