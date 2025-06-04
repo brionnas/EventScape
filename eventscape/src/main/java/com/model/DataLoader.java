@@ -3,6 +3,9 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.UUID;
 import java.util.jar.Attributes.Name;
+import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -25,11 +28,16 @@ public class DataLoader extends DataConstants {
                 String userLastName = (String)personJSON.get(USER_LAST_NAME); 
                 String email = (String) personJSON.get("email");
                 String phoneNumber = (String) personJSON.get(USER_PHONE_NUMBER);
-                String birthDate = (String) personJSON.get("birthDate");
+
+                String birthDateStr = (String) personJSON.get("birthDate"); 
+                SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy"); 
+                Date birthDate = formatter.parse(birthDateStr); 
                 String passwordHash = (String) personJSON.get("passwordHash");
-                boolean isLocked = (Boolean) personJSON.get("isLocked");
+                boolean isLocked = Boolean.parseBoolean((String)personJSON.get("isLocked"));
                 int failedAttempts = ((Long) personJSON.get("failedLoginAttempts")).intValue();
-                boolean studentVerified = (Boolean) personJSON.get("studentVerified");
+                boolean studentVerified = Boolean.parseBoolean((String)personJSON.get("studentVerified"));
+
+                
 
             users.add(new User(userName, userFirstName, userLastName, 
                                 email, phoneNumber, birthDate, passwordHash, 
@@ -41,6 +49,8 @@ public class DataLoader extends DataConstants {
         } catch (Exception e) { 
             e.printStackTrace();
         }
+
+
 
         return users;
     }
