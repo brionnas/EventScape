@@ -1,6 +1,7 @@
 package com.model;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class User {
     private String userName;
@@ -59,4 +60,4 @@ public class User {
 public String toString() {
     return userName + ": " + firstName + " " + lastName + ", Email: " + email;
 }
-
+}
