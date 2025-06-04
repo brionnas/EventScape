@@ -78,8 +78,8 @@ public class User{
     }
 */
     public String toString() {
-        return firstName + " " + lastName  + " " + "\n" + email + "" + phoneNumber + "" + birthDate + "" + 
-            passwordHash + "" + isLocked + "" + failedLoginAttempts + "" + studentVerified + "" ;
+        return firstName + "  " + lastName  + " " + "\n" + email + ""  + "\n" + phoneNumber + ""  + "\n" + birthDate + ""  + "\n"+ 
+            passwordHash + ""  + "\n"+ isLocked + ""  + "\n"+ failedLoginAttempts + ""  + "\n"+ studentVerified + ""  + "\n";
             //will have ti implement tickets as well 
     }
 }
