@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class DataWriter extends DataConstants { 
 
@@ -15,10 +18,20 @@ public class DataWriter extends DataConstants {
        // Users users = Users.getInstance(); //Needs a Users.java singleton
        // ArrayList<User> userList = users.getUsers();
 
+
         ArrayList<User> userList = new ArrayList<>();
-        userList.add(new User("pplante", "Portia", "Plante", 
-        "random@email.sc.edu", "2309553344", "2000-01-01", 
-        "123password", false, 0, true));
+
+        try{
+            SimpleDateFormat formatter = new SimpleDateFormat("MM-dd-yyyy");
+            Date birthDate = formatter.parse("01-01-2000");
+
+            userList.add(new User("pplante", "Portia", "Plante", 
+            "random@email.sc.edu", "2309553344", birthDate, 
+            "123password", false, 0, true));
+        } 
+        catch (ParseException e) {
+            e.printStackTrace();  // Or handle it in some user-friendly way
+    }
         
         User user = userList.get(0);
 

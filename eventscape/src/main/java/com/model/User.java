@@ -15,7 +15,7 @@ public class User{
     private ArrayList<Ticket> tickets;
 
     public User(String userName, String firstName, String lastName,
-    String email, String phoneNumber, String passwordHash, String passwordHash2, boolean isLocked2, int failedAttempts, boolean studentVerified2){
+    String email, String phoneNumber, Date birthDate, String passwordHash, boolean isLocked2, int failedAttempts, boolean studentVerified2){
         this.userName = userName;
         this.firstName = firstName;
         this.lastName = lastName;
