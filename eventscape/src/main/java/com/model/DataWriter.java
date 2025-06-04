@@ -4,19 +4,19 @@ package com.model;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import java.util.Date;
-import java.io.FileReader;
-import java.util.UUID;
 
 
-//public class DataWriter extends DataConstants { 
-public class DataWriter{
+public class DataWriter extends DataConstants { 
 
     public static void saveUsers() {
-        Users users = Users.getInstance(); //Needs a Users.java singleton
-        ArrayList<User> userList = users.getUsers();
+       // Users users = Users.getInstance(); //Needs a Users.java singleton
+       // ArrayList<User> userList = users.getUsers();
+
+        ArrayList<User> userList = new ArrayList<>();
+        userList.add(new User("pplante", "Portia", "Plante", "random@email.sc.edu", "2309553344", "2000-01-01", "123password", false, 0, true));
 
         JSONArray jsonUsers = new JSONArray();
 
@@ -24,7 +24,7 @@ public class DataWriter{
             jsonUsers.add(getUserJSON(user));
         }
 
-        try (FileWriter file = new FileWriter("waiting for constants")) {
+        try (FileWriter file = new FileWriter(USER_FILE_NAME)) {
             file.write(jsonUsers.toJSONString());
             file.flush();
         } catch (IOException e) {
@@ -34,27 +34,27 @@ public class DataWriter{
 
     public static JSONObject getUserJSON(User user) {
         JSONObject userDetails = new JSONObject();
-        userDetails.put("waiting for constants", user.getUserName());
-        userDetails.put("waiting for constants", user.getFirstName());
-        userDetails.put("waiting for constants", user.getLastName());
-        userDetails.put("waiting for constants", user.getEmail());
-        userDetails.put("waiting for constants", user.getPhoneNumber());
-        userDetails.put("waiting for constants", user.getBirthDate());
-        userDetails.put("waiting for constants", user.getPasswordHash());
-        userDetails.put("waiting for constants", user.getIsLocked());
-        userDetails.put("waiting for constants", user.getFailedLoginAttempts());
-        userDetails.put("waiting for constants", user.getStudentVerified());
+        userDetails.put("userName", user.getUserName());
+        userDetails.put(USER_FIRST_NAME, user.getFirstName());
+        userDetails.put(USER_LAST_NAME, user.getLastName());
+        userDetails.put("email", user.getEmail());
+        userDetails.put(USER_PHONE_NUMBER, user.getPhoneNumber());
+        userDetails.put("birthDate", user.getBirthDate());
+        userDetails.put("passwordHash", user.getPasswordHash());
+        userDetails.put("isLocked", user.getIsLocked());
+        userDetails.put("failedLoginAttempts", user.getFailedLoginAttempts());
+        userDetails.put("studentVerified", user.getStudentVerified());
 
-        JSONArray jsonTickets = new JSONArray();
+       /*  JSONArray jsonTickets = new JSONArray();
         for (Ticket ticket : user.getTickets()) { //Waiting for Ticket stub class to call for it
             jsonTickets.add(ticket.toString());
         }
-        userDetails.put("waiting for constants", jsonTickets);
+        userDetails.put("tickets", jsonTickets); */
 
         return userDetails;
     }
 
     public static void main(String[] args) {
-        saveUsers();
+        DataWriter.saveUsers();
     }
 }

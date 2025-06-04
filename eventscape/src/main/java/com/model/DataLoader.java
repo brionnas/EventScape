@@ -22,13 +22,20 @@ public class DataLoader extends DataConstants {
                 String userName = (String)personJSON.get(USER_NAME); 
                 String userFirstName = (String)personJSON.get(USER_FIRST_NAME); 
                 String userLastName = (String)personJSON.get(USER_LAST_NAME); 
-                //int age = ((Long)personJSON.get(USER_AGE)).intValue(); 
-                //String phoneNumber = (String)personJSON.get(USER_PHONE_NUMBER); 
-                
-                users.add(new User(userFirstName, userFirstName, userLastName, "", "", "")); 
-            }
+                String email = (String) personJSON.get("email");
+                String phoneNumber = (String) personJSON.get(USER_PHONE_NUMBER);
+                String birthDate = (String) personJSON.get("birthDate");
+                String passwordHash = (String) personJSON.get("passwordHash");
+                boolean isLocked = (Boolean) personJSON.get("isLocked");
+                int failedAttempts = ((Long) personJSON.get("failedLoginAttempts")).intValue();
+                boolean studentVerified = (Boolean) personJSON.get("studentVerified");
 
-            return users; 
+            users.add(new User(userName, userFirstName, userLastName, 
+                                email, phoneNumber, birthDate, passwordHash, 
+                                isLocked, failedAttempts, studentVerified));
+
+
+            }
 
         } catch (Exception e) { 
             e.printStackTrace();
@@ -38,12 +45,12 @@ public class DataLoader extends DataConstants {
     }
     
     public static void main(String[] args) {
-        ArrayList<User> users = DataLoader.getUsers();
+    ArrayList<User> users = DataLoader.getUsers();
 
-        for(User user : users) {
-             System.out.println(user); 
-        }
-        
+    for(User user : users) {
+        System.out.println(user);
     }
+}
+
 
 }
