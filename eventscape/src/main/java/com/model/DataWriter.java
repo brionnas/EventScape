@@ -16,11 +16,22 @@ public class DataWriter extends DataConstants {
        // ArrayList<User> userList = users.getUsers();
 
         ArrayList<User> userList = new ArrayList<>();
-        userList.add(new User("pplante", "Portia", "Plante", "random@email.sc.edu", "2309553344", "2000-01-01", "123password", false, 0, true));
+        userList.add(new User("pplante", "Portia", "Plante", 
+        "random@email.sc.edu", "2309553344", "2000-01-01", 
+        "123password", false, 0, true));
+        
+        User user = userList.get(0);
+
+        Ticket ticket1 = new Ticket("ba4cce17-a624-4d2b-80fe-eae11665feb6", "B7", "Confirmed");
+        Ticket ticket2 = new Ticket("d3a88e28-3d23-4e95-a2aa-1234567890ab", "C3", "Pending");
+
+        user.setTickets(new ArrayList<>());
+        user.getTickets().add(ticket1);
+        user.getTickets().add(ticket2);
 
         JSONArray jsonUsers = new JSONArray();
 
-        for (User user : userList) {
+        for (User currentUser : userList) {
             jsonUsers.add(getUserJSON(user));
         }
 
@@ -45,12 +56,24 @@ public class DataWriter extends DataConstants {
         userDetails.put("failedLoginAttempts", user.getFailedLoginAttempts());
         userDetails.put("studentVerified", user.getStudentVerified());
 
-       /*  JSONArray jsonTickets = new JSONArray();
-        for (Ticket ticket : user.getTickets()) { //Waiting for Ticket stub class to call for it
-            jsonTickets.add(ticket.toString());
-        }
-        userDetails.put("tickets", jsonTickets); */
+        JSONArray ticketArray = new JSONArray();
+        if (user.getTickets() != null){ 
+            for(Ticket ticket : user.getTickets()){
+       JSONObject ticketJSON = new JSONObject();
 
+                JSONArray confirmationArray = new JSONArray();
+                confirmationArray.add(ticket.getTicketConfirmation());
+
+                ticketJSON.put("ticketConfirmation", confirmationArray);
+                ticketJSON.put("seatNum", ticket.getSeatNum());
+                ticketJSON.put("status", ticket.getStatus());
+
+                ticketArray.add(ticketJSON);
+
+        
+            }
+        }
+        userDetails.put("tickets", ticketArray);
         return userDetails;
     }
 
