@@ -1,1 +1,51 @@
-[{"firstName":"Portia","lastName":"Plante","phoneNumber":"2309553344","tickets":[{"seatNum":"B7","ticketConfirmation":"ba4cce17-a624-4d2b-80fe-eae11665feb6","status":"Confirmed"},{"seatNum":"C3","ticketConfirmation":"d3a88e28-3d23-4e95-a2aa-1234567890ab","status":"Pending"}],"isLocked":false,"userName":"pplante","failedLoginAttempts":0,"birthDate":null,"email":"random@email.sc.edu","passwordHash":"2000-01-01","studentVerified":false}]
+[
+  {
+    "userName": "smithadam",
+    "firstName": "Adam",
+    "lastName": "Smith",
+    "email": "smithadam@example.com",
+    "phoneNumber": "1234567890",
+    "birthDate": "2002-07-15",
+    "passwordHash": "abc123hash",
+    "isLocked": false,
+    "failedLoginAttempts": 0,
+    "studentVerified": true,
+    "tickets":[
+      {
+        "ticketConfirmation": "6d0130f9-a02c-4a3d-ab2f-b20cd7462fc7",
+        "seatNum": "A12",
+        "status": "Confirmed"
+      }
+    ],
+    "favorites": ["6584ff0a-459b-4827-9132-68b86e839455"]
+  },
+  {
+    "userName": "jorgediego",
+    "firstName": "Diego",
+    "lastName": "Jorge",
+    "email": "jorgediego@example.com",
+    "phoneNumber": "0987654321",
+    "birthDate": "2001-01-02",
+    "passwordHash": "def456hash",
+    "isLocked": false,
+    "failedLoginAttempts": 0,
+    "studentVerified": false,
+    "tickets":[
+      {
+        "ticketConfirmation": "ba4cce17-a624-4d2b-80fe-eae11665feb6",
+        "seatNum": "B7",
+        "status": "Confirmed"
+      }
+    ],
+    "favorites": ["6584ff0a-459b-4827-9132-68b86e839455"],
+    "reviews": [
+      {
+        "reviewID": "7b1460a3-9b66-4d8e-8a4e-ba5bb88b37f8",
+        "event": "6584ff0a-459b-4827-9132-68b86e839455",
+        "rating": 5,
+        "content": "Great!",
+        "timestamp": "2025-06-10T20:00:00Z"
+      }
+    ]
+  }
+]
