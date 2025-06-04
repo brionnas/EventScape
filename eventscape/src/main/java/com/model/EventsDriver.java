@@ -1,12 +1,15 @@
 package com.model;
 
+import java.util.List;
+
 public class EventsDriver {
     public static void main(String[] args) {
-        String userFilePath = "eventscape/src/main/java/com/model/User.java"; // Adjust to your project structure
-        List<User> users = DataLoader.loadUsers(userFilePath);
+        // Use the correct method and file path:
+        List<User> users = DataLoader.getUsers();
 
         for (User user : users) {
             System.out.println("User: " + user.getUserName() + " | Email: " + user.getEmail());
         }
     }
 }
+
