@@ -12,7 +12,7 @@ public class User{
     private boolean isLocked;
     private int failedLoginAttempts;
     private boolean studentVerified;
-    //private List<Ticket> tickets;
+    private ArrayList<Ticket> tickets;
 
     public User(String userName, String firstName, String lastName,
     String email, String phoneNumber, String passwordHash, String passwordHash2, boolean isLocked2, int failedAttempts, boolean studentVerified2){
@@ -72,14 +72,18 @@ public class User{
     public boolean getStudentVerified(){
         return false;
     }
-/* 
-    public List<Tickets> getTickets(){
+
+    public ArrayList<Ticket> getTickets(){
         return tickets;
     }
-*/
+
     public String toString() {
         return firstName + "  " + lastName  + " " + "\n" + email + ""  + "\n" + phoneNumber + ""  + "\n" + birthDate + ""  + "\n"+ 
             passwordHash + ""  + "\n"+ isLocked + ""  + "\n"+ failedLoginAttempts + ""  + "\n"+ studentVerified + ""  + "\n";
             //will have ti implement tickets as well 
+    }
+
+    public void setTickets(ArrayList<Ticket> tickets) {
+     this.tickets = tickets;
     }
 }
