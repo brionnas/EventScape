@@ -30,7 +30,6 @@ public class DataLoader extends DataConstants {
                 int failedAttempts = ((Long) personJSON.get("failedLoginAttempts")).intValue();
                 boolean studentVerified = (Boolean) personJSON.get("studentVerified");
 
-            //TBF figure out what is wrong this this section of code
             users.add(new User(userName, userFirstName, userLastName, 
                                 email, phoneNumber, birthDate, passwordHash, 
                                 isLocked, failedAttempts, studentVerified));
