@@ -10,7 +10,7 @@
 "isLocked":false,
 "userName":"pplante",
 "failedLoginAttempts":0,
-"birthDate":Sat Jan 01 00:00:00 EST 2000,
+"birthDate":"Sat Jan 01 00:00:00 EST 2000",
 "email":"random@email.sc.edu",
 "passwordHash":"123password",
 "studentVerified":false}]
