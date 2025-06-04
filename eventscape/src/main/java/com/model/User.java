@@ -1,9 +1,7 @@
 package com.model;
+import java.util.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class User {
+public class User{
     private String userName;
     private String firstName;
     private String lastName;
@@ -14,50 +12,74 @@ public class User {
     private boolean isLocked;
     private int failedLoginAttempts;
     private boolean studentVerified;
-    private List<Ticket> tickets;
- 
-    public User(String userName, String firstName, String lastName,
-            String email, String phoneNumber, String birthDate,
-            String passwordHash, boolean isLocked,
-            int failedLoginAttempts, boolean studentVerified) {
-    this.userName = userName;
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.email = email;
-    this.phoneNumber = phoneNumber;
-    this.birthDate = birthDate;
-    this.passwordHash = passwordHash;
-    this.isLocked = isLocked;
-    this.failedLoginAttempts = failedLoginAttempts;
-    this.studentVerified = studentVerified;
-    this.tickets = new ArrayList<>();
-}
+    //private List<Ticket> tickets;
 
-    public String getUserName() { 
-        return userName; }
-    public String getFirstName() { 
-        return firstName; }
-    public String getLastName() { 
-        return lastName; }
-    public String getEmail() { 
-        return email; }
-    public String getPhoneNumber() { 
-        return phoneNumber; }
-    public String getBirthDate() { 
-        return birthDate; }
-    public String getPasswordHash() {
-        return passwordHash; }
-    public boolean getIsLocked() { 
-        return isLocked; }
-    public int getFailedLoginAttempts() { 
-        return failedLoginAttempts; }
-    public boolean getStudentVerified() { 
-        return studentVerified; }
-    public List<Ticket> getTickets() { 
-        return tickets; }
-         public void setTickets(List<Ticket> tickets) { this.tickets = tickets; }
-    @Override
-public String toString() {
-    return userName + ": " + firstName + " " + lastName + ", Email: " + email;
-}
+    public User(String userName, String firstName, String lastName,
+    String email, String phoneNumber, String passwordHash, String passwordHash2, boolean isLocked2, int failedAttempts, boolean studentVerified2){
+        this.userName = userName;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.birthDate = birthDate;
+        this.passwordHash = passwordHash;
+        this.isLocked = false;
+        //this.failedLoginAttempts = false;
+        this.studentVerified = false;
+       // this.tickets = new ArrayList<>();
+    }
+
+    public User(UUID id, String userFirstName, String userLastName, int age, String phoneNumber2) {
+        //TODO Auto-generated constructor stub
+    }
+
+    public String getUserName(){
+        return userName;
+    }
+
+    public String getFirstName(){
+        return firstName;
+    }
+
+    public String getLastName(){
+        return lastName;
+    }
+
+    public String getEmail(){
+        return email;
+    }
+
+    public String getPhoneNumber(){
+        return phoneNumber;
+    }
+
+    public String getBirthDate(){
+        return birthDate;
+    }
+
+    public String getPasswordHash(){
+        return passwordHash;
+    }
+
+    public boolean getIsLocked(){
+        return isLocked;
+    }
+
+    public int getFailedLoginAttempts(){
+        return failedLoginAttempts;
+    }
+
+    public boolean getStudentVerified(){
+        return false;
+    }
+/* 
+    public List<Tickets> getTickets(){
+        return tickets;
+    }
+*/
+    public String toString() {
+        return firstName + " " + lastName  + " " + "\n" + email + "" + phoneNumber + "" + birthDate + "" + 
+            passwordHash + "" + isLocked + "" + failedLoginAttempts + "" + studentVerified + "" ;
+            //will have ti implement tickets as well 
+    }
 }
