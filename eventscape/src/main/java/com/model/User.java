@@ -7,7 +7,7 @@ public class User{
     private String lastName;
     private String email;
     private String phoneNumber;
-    private String birthDate;
+    private Date birthDate;
     private String passwordHash;
     private boolean isLocked;
     private int failedLoginAttempts;
@@ -53,7 +53,7 @@ public class User{
         return phoneNumber;
     }
 
-    public String getBirthDate(){
+    public Date getBirthDate(){
         return birthDate;
     }
 
@@ -85,5 +85,9 @@ public class User{
 
     public void setTickets(ArrayList<Ticket> tickets) {
      this.tickets = tickets;
+    }
+
+    public void setBirthDate(Date birthDate) {
+    this.birthDate = birthDate;
     }
 }
