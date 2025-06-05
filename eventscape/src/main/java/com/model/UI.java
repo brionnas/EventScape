@@ -5,8 +5,8 @@ import java.util.Date;
 import java.util.Scanner;
 
 public class UI {
-    private Scanner scanner = new Scanner(System.in);
-    private Facade facade = Facade.getInstance();
+    private final Scanner scanner = new Scanner(System.in);
+    private final Facade facade = Facade.getInstance();
 
     public void start() {
         System.out.println("Welcome to the Event Management System");
