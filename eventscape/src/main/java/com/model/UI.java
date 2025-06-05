@@ -1,22 +1,23 @@
 package com.model;
 
-import java.util.Scanner;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Scanner;
 
 public class UI {
     private Scanner scanner = new Scanner(System.in);
-    private Facade facade = Facade.getInstance();  // Assuming singleton facade for users
+    private Facade facade = Facade.getInstance();
 
     public void start() {
         System.out.println("Welcome to the Event Management System");
         boolean running = true;
+
         while (running) {
-            System.out.println("\nPlease select an option:");
+            System.out.println("\nMenu:");
             System.out.println("1. Login");
             System.out.println("2. Create Account");
             System.out.println("3. Exit");
-            System.out.print("Choice: ");
+            System.out.print("Choose an option: ");
 
             String choice = scanner.nextLine();
 
@@ -28,67 +29,68 @@ public class UI {
                     createAccount();
                     break;
                 case "3":
-                    System.out.println("Thank you for using the system. Goodbye!");
+                    System.out.println("Goodbye!");
                     running = false;
                     break;
                 default:
-                    System.out.println("Invalid option, please try again.");
+                    System.out.println("Invalid option. Try again.");
             }
         }
     }
 
     private void login() {
-        System.out.print("Enter username: ");
+        System.out.print("Username: ");
         String username = scanner.nextLine();
 
-        System.out.print("Enter password: ");
+        System.out.print("Password: ");
         String password = scanner.nextLine();
 
         User user = facade.login(username, password);
+
         if (user != null) {
             System.out.println("Login successful! Welcome, " + user.getFirstName() + ".");
-            // You can extend here for user menu or event browsing
+            // Additional UI actions for logged-in user could go here
         } else {
             System.out.println("Invalid username or password.");
         }
     }
 
     private void createAccount() {
-        System.out.print("Enter username: ");
+        System.out.print("Username: ");
         String username = scanner.nextLine();
 
-        System.out.print("Enter first name: ");
+        System.out.print("First name: ");
         String firstName = scanner.nextLine();
 
-        System.out.print("Enter last name: ");
+        System.out.print("Last name: ");
         String lastName = scanner.nextLine();
 
-        System.out.print("Enter email: ");
+        System.out.print("Email: ");
         String email = scanner.nextLine();
 
-        System.out.print("Enter phone number: ");
+        System.out.print("Phone number: ");
         String phone = scanner.nextLine();
 
-        System.out.print("Enter birth date (yyyy-MM-dd): ");
+        System.out.print("Birth date (yyyy-MM-dd): ");
         String birthDateStr = scanner.nextLine();
 
-        System.out.print("Enter password: ");
+        System.out.print("Password: ");
         String password = scanner.nextLine();
 
         Date birthDate;
         try {
             birthDate = new SimpleDateFormat("yyyy-MM-dd").parse(birthDateStr);
         } catch (Exception e) {
-            System.out.println("Invalid date format. Please try again.");
+            System.out.println("Invalid date format.");
             return;
         }
 
         User newUser = new User(username, firstName, lastName, email, phone, birthDate, password, false, 0, false);
 
         if (facade.addUser(newUser)) {
-            System.out.println("Account created successfully!");
+            System.out.println("Account created!");
         } else {
-            System.out.println("Username already exists or error creating account.");
+            System.out.println("Username already taken.");
         }
     }
 }
