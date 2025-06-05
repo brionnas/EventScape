@@ -107,24 +107,54 @@ public class Event {
         this.ticketsLeft = ticketsLeft; 
     }
 
-    public void setLatitude(String latitude) { 
-        this.latitude = latitude; 
-    }
-    public void setLongitude(String longitude) { 
-        this.longitude = longitude; 
-    }
-    public void setHost(UUID host) { 
-        this.host = host; 
-    }
-    public void setAttendees(List<UUID> attendees) { 
-        this.attendees = attendees; 
+
+
+    /**
+     * Remove a user from the event
+     *@return true if successfully removed, false otherwise
+     */
+    public boolean removeUserFromEvent(User user) {
+        if (attendees.remove(user)) {
+            // Remove their ticket as well
+            ticketList.removeIf(ticket -> ticket.getTicketConfirmation().contains(user.getUserName()));
+            getWaitList();
+            return true;
+        }
+        return false;
     }
 
-    public void setWaitlist(List<UUID> waitlist) { 
-        this.waitlist = waitlist; 
+    /**
+     * Update the waitlist if there are available spots
+     */
+    public class WaitlistUpdateResult {
+    private boolean wasUpdated;
+    private int remainingWaitlistSize;
+
+    public WaitlistUpdateResult(boolean wasUpdated, int remainingWaitlistSize) {
+        this.wasUpdated = wasUpdated;
+        this.remainingWaitlistSize = remainingWaitlistSize;
     }
-    public void setTickets(List<UUID> tickets) { 
-        this.tickets = tickets; 
+
+    public boolean wasUpdated() {
+        return wasUpdated;
+    }
+
+    public int getRemainingWaitlistSize() {
+        return remainingWaitlistSize;
+    }
+}
+
+
+    /**
+     * Add a user to the event
+     * @return true if added successfully, false if event is full
+     */
+    public boolean addUserToEvent(User user) {
+        if (attendees.size() < capacity) {
+            attendees.add(user);
+            return true;
+        }
+        return false;
     }
     public void setReviews(List<UUID> reviews) { 
         this.reviews = reviews; 
@@ -149,5 +179,22 @@ public class Event {
                 ", reviews=" + reviews +
                 '}';
     }
-    
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Event event = (Event) obj;
+        return eventId.equals(event.eventId);
+    }
+
+    @Override
+    public int hashCode() {
+        return eventId.hashCode();
+    }
+
+    public WaitlistUpdateResult updateWaitlist() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'updateWaitlist'");
+    }
 }

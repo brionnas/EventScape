@@ -29,9 +29,9 @@ public class UserList {
         users.add(user);
     }
 
-    public User getUserByUsername(String username) {
+    public User getUserByUsername(User newUser) {
         for (User user : users) {
-            if (user.getUserName().equalsIgnoreCase(username)) {
+            if (user.getUserName().equalsIgnoreCase(newUser.getUserName())) {
                 return user;
             }
         }

@@ -16,16 +16,21 @@ public class Facade {
         return instance;
     }
 
-    public User findUser(String username) {
-        return userList.getUserByUsername(username);
+    public User findUser(User newUser) {
+        return userList.getUserByUsername(newUser);
     }
 
-    public boolean addUser(String username) {
-        User user = findUser(username);
+    public boolean addUser(User newUser) {
+        User user = findUser(newUser);
         if (user != null) {
             userList.removeUser(user);
             return true;
         }
         return false;
+    }
+
+    public User login(String username, String password) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'login'");
     }
 }
