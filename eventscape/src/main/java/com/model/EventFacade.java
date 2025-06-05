@@ -19,11 +19,11 @@ public class EventFacade {
     }
 
     public List<Event> getAllEvents() {
-        return eventList.getEvents();
+        return eventList.getAllEvents();
     }
 
     public Event findEventById(UUID id) {
-        for (Event e : eventList.getEvents()) {
+        for (Event e : eventList.getAllEvents()) {
             if (e.getEventId().equals(id)) {
                 return e;
             }

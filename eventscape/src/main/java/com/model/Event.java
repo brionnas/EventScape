@@ -103,7 +103,7 @@ public class Event {
         if (attendees.remove(user)) {
             // Remove their ticket as well
             ticketList.removeIf(ticket -> ticket.getTicketConfirmation().contains(user.getUserName()));
-            updateWaitlist();
+            getWaitList();
             return true;
         }
         return false;
@@ -112,22 +112,24 @@ public class Event {
     /**
      * Update the waitlist if there are available spots
      */
-    public Pair<Boolean, Integer> updateWaitlist() {
-        if (attendees.size() < capacity && !waitList.isEmpty()) {
-            // Move first person from waitlist to confirmed
-            Ticket waitlistTicket = waitList.remove(0);
-            waitlistTicket.setStatus("Confirmed");
-            ticketList.add(waitlistTicket);
-            
-            // Update waitlist positions
-            for (int i = 0; i < waitList.size(); i++) {
-                
-            }
-            
-            return new Pair<>(true, -1); 
-        }
-        return new Pair<>(false, waitList.size());
+    public class WaitlistUpdateResult {
+    private boolean wasUpdated;
+    private int remainingWaitlistSize;
+
+    public WaitlistUpdateResult(boolean wasUpdated, int remainingWaitlistSize) {
+        this.wasUpdated = wasUpdated;
+        this.remainingWaitlistSize = remainingWaitlistSize;
     }
+
+    public boolean wasUpdated() {
+        return wasUpdated;
+    }
+
+    public int getRemainingWaitlistSize() {
+        return remainingWaitlistSize;
+    }
+}
+
 
     /**
      * Add a user to the event
@@ -218,5 +220,10 @@ public class Event {
     @Override
     public int hashCode() {
         return eventId.hashCode();
+    }
+
+    public WaitlistUpdateResult updateWaitlist() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'updateWaitlist'");
     }
 }
