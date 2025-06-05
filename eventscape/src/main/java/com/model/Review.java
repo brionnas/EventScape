@@ -1,9 +1,9 @@
 package com.model;
 
 public class Review {
-    private String reviewerUsername;
-    private String comment;
-    private int rating; // e.g., 1–5 stars
+    private final String reviewerUsername;
+    private final String comment;
+    private final int rating; // e.g., 1–5 stars
 
     public Review(String reviewerUsername, String comment, int rating) {
         this.reviewerUsername = reviewerUsername;
