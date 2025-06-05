@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class DataWriter extends DataConstants { 
 
@@ -15,10 +18,20 @@ public class DataWriter extends DataConstants {
        // Users users = Users.getInstance(); //Needs a Users.java singleton
        // ArrayList<User> userList = users.getUsers();
 
+
         ArrayList<User> userList = new ArrayList<>();
-        userList.add(new User("pplante", "Portia", "Plante", 
-        "random@email.sc.edu", "2309553344", "2000-01-01", 
-        "123password", false, 0, true));
+
+        try{
+            SimpleDateFormat formatter = new SimpleDateFormat("MM-dd-yyyy");
+            Date birthDate = formatter.parse("01-01-2000");
+
+            userList.add(new User("pplante", "Portia", "Plante", 
+            "random@email.sc.edu", "2309553344", birthDate, 
+            "123password", false, 0, true));
+        } 
+        catch (ParseException e) {
+            e.printStackTrace();  // Or handle it in some user-friendly way
+    }
         
         User user = userList.get(0);
 
@@ -45,16 +58,17 @@ public class DataWriter extends DataConstants {
 
     public static JSONObject getUserJSON(User user) {
         JSONObject userDetails = new JSONObject();
-        userDetails.put("userName", user.getUserName());
+        userDetails.put(USER_NAME, user.getUserName());
         userDetails.put(USER_FIRST_NAME, user.getFirstName());
         userDetails.put(USER_LAST_NAME, user.getLastName());
-        userDetails.put("email", user.getEmail());
+        userDetails.put(USER_EMAIL, user.getEmail());
         userDetails.put(USER_PHONE_NUMBER, user.getPhoneNumber());
-        userDetails.put("birthDate", user.getBirthDate());
-        userDetails.put("passwordHash", user.getPasswordHash());
-        userDetails.put("isLocked", user.getIsLocked());
-        userDetails.put("failedLoginAttempts", user.getFailedLoginAttempts());
-        userDetails.put("studentVerified", user.getStudentVerified());
+        userDetails.put(USER_BIRTH_DATE, user.getBirthDate());
+        userDetails.put(USER_PASSWORD_HASH, user.getPasswordHash());
+        userDetails.put(USER_IS_LOCKED, user.getIsLocked());
+        userDetails.put(USER_FAILED_LOGIN_ATTEMPTS, user.getFailedLoginAttempts());
+        userDetails.put(USER_STUDENT_VARIFIED, user.getStudentVerified());
+        userDetails.put(USER_TICKETS, user.getTickets());
 
         JSONArray ticketArray = new JSONArray();
         if (user.getTickets() != null){ 
@@ -62,15 +76,12 @@ public class DataWriter extends DataConstants {
        JSONObject ticketJSON = new JSONObject();
 
                 JSONArray confirmationArray = new JSONArray();
-                confirmationArray.add(ticket.getTicketConfirmation());
 
-                ticketJSON.put("ticketConfirmation", confirmationArray);
+                ticketJSON.put("ticketConfirmation", ticket.getTicketConfirmation());
                 ticketJSON.put("seatNum", ticket.getSeatNum());
                 ticketJSON.put("status", ticket.getStatus());
 
                 ticketArray.add(ticketJSON);
-
-        
             }
         }
         userDetails.put("tickets", ticketArray);

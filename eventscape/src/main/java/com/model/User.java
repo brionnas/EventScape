@@ -7,7 +7,7 @@ public class User{
     private String lastName;
     private String email;
     private String phoneNumber;
-    private String birthDate;
+    private Date birthDate;
     private String passwordHash;
     private boolean isLocked;
     private int failedLoginAttempts;
@@ -15,7 +15,7 @@ public class User{
     private ArrayList<Ticket> tickets;
 
     public User(String userName, String firstName, String lastName,
-    String email, String phoneNumber, String passwordHash, String passwordHash2, boolean isLocked2, int failedAttempts, boolean studentVerified2){
+    String email, String phoneNumber, Date birthDate, String passwordHash, boolean isLocked2, int failedAttempts, boolean studentVerified2){
         this.userName = userName;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -24,9 +24,9 @@ public class User{
         this.birthDate = birthDate;
         this.passwordHash = passwordHash;
         this.isLocked = false;
-        //this.failedLoginAttempts = false;
+        this.failedLoginAttempts = 0;
         this.studentVerified = false;
-       // this.tickets = new ArrayList<>();
+        this.tickets = new ArrayList<>();
     }
 
     public User(UUID id, String userFirstName, String userLastName, int age, String phoneNumber2) {
@@ -53,7 +53,7 @@ public class User{
         return phoneNumber;
     }
 
-    public String getBirthDate(){
+    public Date getBirthDate(){
         return birthDate;
     }
 
@@ -78,12 +78,27 @@ public class User{
     }
 
     public String toString() {
-        return firstName + "  " + lastName  + " " + "\n" + email + ""  + "\n" + phoneNumber + ""  + "\n" + birthDate + ""  + "\n"+ 
-            passwordHash + ""  + "\n"+ isLocked + ""  + "\n"+ failedLoginAttempts + ""  + "\n"+ studentVerified + ""  + "\n";
-            //will have ti implement tickets as well 
+        return 
+        firstName + "  " 
+        + lastName  + " " + "\n"
+        + phoneNumber + ""  + "\n" 
+        + tickets + ""  + "\n" 
+       // + ticketConfirmation + ""  + "\n"
+       // + status + ""  + "\n"
+        + isLocked + ""  + "\n"
+        + userName + ""  + "\n"
+        + failedLoginAttempts + ""  + "\n"
+        + birthDate + "" + "\n"
+        + email + "" + "\n"
+        + passwordHash + "" + "\n"
+        + studentVerified + "" + "\n";
     }
 
     public void setTickets(ArrayList<Ticket> tickets) {
      this.tickets = tickets;
+    }
+
+    public void setBirthDate(Date birthDate) {
+    this.birthDate = birthDate;
     }
 }
