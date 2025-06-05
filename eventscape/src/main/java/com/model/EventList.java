@@ -5,7 +5,7 @@ import java.util.List;
 
 public class EventList {
     private static EventList instance;
-    private List<Event> events;
+    private final List<Event> events;
 
     private EventList() {
         events = new ArrayList<>();
