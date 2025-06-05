@@ -12,5 +12,6 @@ public enum Genre {
     ITALIAN,
     SOCCER,
     BASKETBALL,
-    FOOTBALL
+    FOOTBALL,
+    OTHER;
 }
