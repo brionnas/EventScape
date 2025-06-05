@@ -30,18 +30,20 @@ public class DataLoader extends DataConstants {
                 String phoneNumber = (String) personJSON.get(USER_PHONE_NUMBER);
 
                 String birthDateStr = (String) personJSON.get("birthDate"); 
-                SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy"); 
-                Date birthDate = formatter.parse(birthDateStr); 
+                SimpleDateFormat inputformatter = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy"); 
+                Date parsedDate = inputformatter.parse(birthDateStr); 
+                String birthDateString = inputformatter.format(parsedDate); 
+
                 String passwordHash = (String) personJSON.get("passwordHash");
-                boolean isLocked = Boolean.parseBoolean((String)personJSON.get("isLocked"));
-                int failedAttempts = ((Long) personJSON.get("failedLoginAttempts")).intValue();
-                boolean studentVerified = Boolean.parseBoolean((String)personJSON.get("studentVerified"));
+                String isLockedStr = String.valueOf((Boolean) personJSON.get("isLocked"));
+                String failedAttemptsStr = String.valueOf(((Long) personJSON.get("failedLoginAttempts")).intValue());
+                String studentVerifiedStr = String.valueOf((Boolean) personJSON.get("studentVerified"));
 
-                
+    
 
-            users.add(new User(userName, userFirstName, userLastName, 
-                                email, phoneNumber, birthDate, passwordHash, 
-                                isLocked, failedAttempts, studentVerified));
+             users.add(new User(userName, userFirstName, userLastName, 
+                                email, phoneNumber, birthDateString, passwordHash, 
+                                isLockedStr, failedAttemptsStr, studentVerifiedStr));
 
 
             }

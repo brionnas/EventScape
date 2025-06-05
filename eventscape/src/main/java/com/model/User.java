@@ -78,9 +78,20 @@ public class User{
     }
 
     public String toString() {
-        return firstName + "  " + lastName  + " " + "\n" + email + ""  + "\n" + phoneNumber + ""  + "\n" + birthDate + ""  + "\n"+ 
-            passwordHash + ""  + "\n"+ isLocked + ""  + "\n"+ failedLoginAttempts + ""  + "\n"+ studentVerified + ""  + "\n";
-            //will have ti implement tickets as well 
+        return 
+        firstName + "  " 
+        + lastName  + " " + "\n"
+        + phoneNumber + ""  + "\n" 
+        + tickets + ""  + "\n" 
+       // + ticketConfirmation + ""  + "\n"
+       // + status + ""  + "\n"
+        + isLocked + ""  + "\n"
+        + userName + ""  + "\n"
+        + failedLoginAttempts + ""  + "\n"
+        + birthDate + "" + "\n"
+        + email + "" + "\n"
+        + passwordHash + "" + "\n"
+        + studentVerified + "" + "\n";
     }
 
     public void setTickets(ArrayList<Ticket> tickets) {
