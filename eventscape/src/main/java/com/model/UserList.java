@@ -1,5 +1,6 @@
 package com.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserList {
@@ -8,6 +9,9 @@ public class UserList {
 
     private UserList() {
         users = DataLoader.getUsers(); // Load users from file
+        if (users == null) {
+            users = new ArrayList<>(); // Initialize with an empty list if loading fails
+        }
     }
 
     public static UserList getInstance() {
