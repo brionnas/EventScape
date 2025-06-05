@@ -3,6 +3,8 @@ package com.model;
 import java.util.ArrayList;
 import java.util.Date;
 
+import java.util.UUID;
+
 public class User {
     private final String userName;
     private final String firstName;
@@ -15,6 +17,7 @@ public class User {
     private final int failedLoginAttempts;
     private final boolean studentVerified;
     private ArrayList<Ticket> tickets;
+    private ArrayList<UUID> favorites;
 
     public User(String userName, String firstName, String lastName, String email, String phoneNumber, Date birthDate, String passwordHash){
         this.userName = userName;
@@ -82,6 +85,9 @@ public class User {
     public ArrayList<Ticket> getTickets() {
          return tickets; 
         }
+    public ArrayList<UUID> getFavorites(){
+        return favorites;
+    }
 
     // Setters
     public void setTickets(ArrayList<Ticket> tickets) { 
@@ -89,6 +95,9 @@ public class User {
      }
     public void setBirthDate(Date birthDate) { 
         this.birthDate = birthDate; 
+    }
+    public void setFavorites(ArrayList<UUID> favorites){
+        this.favorites = favorites;
     }
 
     @Override

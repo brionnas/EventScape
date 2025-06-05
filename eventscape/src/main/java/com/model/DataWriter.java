@@ -1,6 +1,5 @@
 package com.model;
 
-	
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.ParseException;
@@ -11,10 +10,12 @@ import java.util.Date;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import java.util.UUID;
+
 public class DataWriter extends DataConstants { 
 
     public static void saveUsers() {
-       // Users users = Users.getInstance(); //Needs a Users.java singleton
+       // UserList users = UserList.getInstance();
        // ArrayList<User> userList = users.getUsers();
 
 
@@ -41,6 +42,10 @@ public class DataWriter extends DataConstants {
         user.getTickets().add(ticket1);
         user.getTickets().add(ticket2);
 
+        user.setFavorites(new ArrayList<>());
+        user.getFavorites().add(UUID.fromString("6584ff0a-459b-4827-9132-68b86e839455"));
+
+
         JSONArray jsonUsers = new JSONArray();
 
         for (User currentUser : userList) {
@@ -63,7 +68,7 @@ public class DataWriter extends DataConstants {
         userDetails.put(USER_EMAIL, user.getEmail());
         userDetails.put(USER_PHONE_NUMBER, user.getPhoneNumber());
         
-        SimpleDateFormat formatter = new SimpleDateFormat("MM-dd,yyyy");
+        SimpleDateFormat formatter = new SimpleDateFormat("MM-dd-yyyy");
         userDetails.put(USER_BIRTH_DATE, formatter.format(user.getBirthDate()));
 
         userDetails.put(USER_PASSWORD_HASH, user.getPasswordHash());
@@ -75,7 +80,7 @@ public class DataWriter extends DataConstants {
         JSONArray ticketArray = new JSONArray();
         if (user.getTickets() != null){ 
             for(Ticket ticket : user.getTickets()){
-       JSONObject ticketJSON = new JSONObject();
+        JSONObject ticketJSON = new JSONObject();
 
                 JSONArray confirmationArray = new JSONArray();
 
@@ -87,6 +92,15 @@ public class DataWriter extends DataConstants {
             }
         }
         userDetails.put("tickets", ticketArray);
+
+        JSONArray favoritesArray = new JSONArray();
+        if (user.getFavorites() != null){
+            for(UUID id : user.getFavorites()){
+                favoritesArray.add(id.toString());
+            }
+        }
+        userDetails.put("favorites", favoritesArray);
+
         return userDetails;
     }
 
