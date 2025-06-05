@@ -5,11 +5,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import javafx.util.Pair;
+
 public class Event {
     private UUID eventId;
     private String name;
     private Category category;
-    private Genre subCategory;
+    private String subCategory;
     private LocalDateTime dateTime;
     private int capacity;
     private float averageRating;
@@ -20,8 +22,9 @@ public class Event {
     private List<Review> reviews;
 
     // Constructor
-    public Event(String name, Category category, Genre subCategory, 
-                LocalDateTime dateTime, int capacity) {
+    public Event(UUID eventId, String name, Category category, String subCategory, Date date,
+                 int capacity, int ticketsLeft, String latitude, String longitude, UUID host,
+                 List<UUID> attendees, List<UUID> waitlist, List<UUID> tickets, List<UUID> reviews) {
         this.eventId = UUID.randomUUID();
         this.name = name;
         this.category = category;
