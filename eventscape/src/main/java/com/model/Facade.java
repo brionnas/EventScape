@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Facade {
     private static Facade instance;
-    private UserList userList;
+    private final UserList userList;
 
     private Facade() {
         userList = UserList.getInstance();
