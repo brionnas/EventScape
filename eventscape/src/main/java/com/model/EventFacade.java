@@ -4,7 +4,7 @@ import java.util.List;
 
 public class EventFacade {
     private static EventFacade instance;
-    private EventList eventList;
+    private final EventList eventList;
 
     private EventFacade() {
         eventList = EventList.getInstance();
