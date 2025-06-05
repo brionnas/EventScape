@@ -14,8 +14,9 @@ public class User{
     private boolean studentVerified;
     private ArrayList<Ticket> tickets;
 
-    public User(String userName, String firstName, String lastName,
-    String email, String phoneNumber, Date birthDateStr, String passwordHash, boolean isLocked2, int failedAttempts, boolean studentVerified2){
+    User(String userName, String firstName, String lastName,
+    String email, String phoneNumber, Date birthDate, String passwordHash, 
+    boolean isLocked, int failedAttempts, boolean studentVerified, ArrayList<Ticket> tickets){
         this.userName = userName;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -23,12 +24,11 @@ public class User{
         this.phoneNumber = phoneNumber;
         this.birthDate = birthDate;
         this.passwordHash = passwordHash;
-        this.isLocked = false;
-        this.failedLoginAttempts = 0;
-        this.studentVerified = false;
-        this.tickets = new ArrayList<>();
-    }
-
+        this.isLocked = isLocked;
+        this.failedLoginAttempts = failedAttempts;
+        this.studentVerified = studentVerified;
+        this.tickets = tickets;
+}
 
     public String getUserName(){
         return userName;
@@ -78,17 +78,14 @@ public class User{
         return 
         firstName + "  " 
         + lastName  + " " + "\n"
-        + phoneNumber + ""  + "\n" 
-        + tickets + ""  + "\n" 
-       // + ticketConfirmation + ""  + "\n"
-       // + status + ""  + "\n"
-        + isLocked + ""  + "\n"
-        + userName + ""  + "\n"
-        + failedLoginAttempts + ""  + "\n"
-        + birthDate + "" + "\n"
-        + email + "" + "\n"
-        + passwordHash + "" + "\n"
-        + studentVerified + "" + "\n";
+        + "Phone Number: " + phoneNumber + ""  + "\n" 
+        + "Is Locked: " + isLocked + ""  + "\n"
+        + "UserName: " + userName + ""  + "\n"
+        + "Failed Login Attempts: " + failedLoginAttempts + ""  + "\n"
+        + "Birthday: " + birthDate + "" + "\n"
+        + "Email: " + email + "" + "\n"
+        + "Password Hash: " + passwordHash + "" + "\n"
+        + "Student Verified: " + studentVerified + "" + "\n";
     }
 
     public void setTickets(ArrayList<Ticket> tickets) {

@@ -14,4 +14,8 @@ public class Ticket {
     public String getTicketConfirmation() { return ticketConfirmation; }
     public String getSeatNum() { return seatNum; }
     public String getStatus() { return status; }
+
+    public String toString() {
+        return "\nTicket: " + ticketConfirmation + ", " + seatNum + ", " + status;
+    }
 }

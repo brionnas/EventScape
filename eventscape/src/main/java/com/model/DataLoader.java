@@ -27,25 +27,26 @@ public class DataLoader extends DataConstants {
                 String userFirstName = (String)personJSON.get(USER_FIRST_NAME); 
                 String userLastName = (String)personJSON.get(USER_LAST_NAME); 
                 String phoneNumber = (String) personJSON.get(USER_PHONE_NUMBER);
-                String tickets = (String) personJSON.get(USER_TICKETS);
-                String ticketConfirmation = (String) personJSON.get(USER_TICKET_CONFIRMATION); 
                 String email = (String) personJSON.get("email");
-                String status = (String) personJSON.get("status"); 
-                String seatNum = (String) personJSON.get("seatNum");
-                String birthDateStr = (String) personJSON.get("birthDate"); 
-                SimpleDateFormat inputformatter = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy"); 
-                Date parsedDate = inputformatter.parse(birthDateStr); 
-
-                String birthDateString = inputformatter.format(parsedDate); 
+                Date birthDate = toDate((String) personJSON.get("birthDate")); 
                 String passwordHash = (String) personJSON.get("passwordHash");
                 boolean  isLocked2 = (Boolean) personJSON.get("isLocked");
                 int failedAttempts = ((Long) personJSON.get("failedLoginAttempts")).intValue();
                 boolean studentVerified = (Boolean) personJSON.get("studentVerified");
 
-                //User(String userName, String firstName, String lastName, String email, String phoneNumber,
-                // Date birthDate, String passwordHash, boolean isLocked2, int failedAttempts, boolean studentVerified2)
+                JSONArray ticketsJSON = (JSONArray) personJSON.get(USER_TICKETS);
+                ArrayList<Ticket> tickets = new ArrayList<>();
 
-             users.add(new User( userName, userFirstName, userLastName, email, phoneNumber, birthDateStr, passwordHash, isLocked2, failedAttempts, studentVerified));
+                for (int j=0; j < ticketsJSON.size(); j++) {
+                    JSONObject ticketJSON = (JSONObject)ticketsJSON.get(j); 
+                    String ticketConfirmation = (String) ticketJSON.get(USER_TICKET_CONFIRMATION); 
+                    String status = (String) ticketJSON.get("status"); 
+                    String seatNum = (String) ticketJSON.get("seatNum");
+                    Ticket myTicket = new Ticket(ticketConfirmation, status, seatNum);
+                    tickets.add(myTicket);
+                }
+
+             users.add(new User( userName, userFirstName, userLastName, email, phoneNumber, birthDate, passwordHash, isLocked2, failedAttempts, studentVerified, tickets));
 
 
             }
@@ -59,6 +60,16 @@ public class DataLoader extends DataConstants {
         return users;
     }
     
+    private static Date toDate(String dateString) {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+
+        try {
+            return formatter.parse(dateString);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
     public static void main(String[] args) {
     ArrayList<User> users = DataLoader.getUsers();
 

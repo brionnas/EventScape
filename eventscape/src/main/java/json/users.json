@@ -1,16 +1,26 @@
-[{"firstName":"Portia",
-"lastName":"Plante",
-"phoneNumber":"2309553344",
-"tickets":[{"seatNum":"B7",
-"ticketConfirmation":"ba4cce17-a624-4d2b-80fe-eae11665feb6",
-"status":"Confirmed"},
-{"seatNum":"C3",
-"ticketConfirmation":"d3a88e28-3d23-4e95-a2aa-1234567890ab",
-"status":"Pending"}],
-"isLocked":false,
-"userName":"pplante",
-"failedLoginAttempts":0,
-"birthDate":"Sat Jan 01 00:00:00 EST 2000",
-"email":"random@email.sc.edu",
-"passwordHash":"123password",
-"studentVerified":false}]
+[
+    {
+        "firstName": "Portia",
+        "lastName": "Plante",
+        "phoneNumber": "2309553344",
+        "tickets": [
+            {
+                "seatNum": "B7",
+                "ticketConfirmation": "ba4cce17-a624-4d2b-80fe-eae11665feb6",
+                "status": "Confirmed"
+            },
+            {
+                "seatNum": "C3",
+                "ticketConfirmation": "d3a88e28-3d23-4e95-a2aa-1234567890ab",
+                "status": "Pending"
+            }
+        ],
+        "isLocked": false,
+        "userName": "pplante",
+        "failedLoginAttempts": 0,
+        "birthDate": "2000-02-23",
+        "email": "random@email.sc.edu",
+        "passwordHash": "123password",
+        "studentVerified": false
+    }
+]
