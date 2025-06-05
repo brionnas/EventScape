@@ -26,24 +26,26 @@ public class DataLoader extends DataConstants {
                 String userName = (String)personJSON.get(USER_NAME); 
                 String userFirstName = (String)personJSON.get(USER_FIRST_NAME); 
                 String userLastName = (String)personJSON.get(USER_LAST_NAME); 
-                String email = (String) personJSON.get("email");
                 String phoneNumber = (String) personJSON.get(USER_PHONE_NUMBER);
-
+                String tickets = (String) personJSON.get(USER_TICKETS);
+                String ticketConfirmation = (String) personJSON.get(USER_TICKET_CONFIRMATION); 
+                String email = (String) personJSON.get("email");
+                String status = (String) personJSON.get("status"); 
+                String seatNum = (String) personJSON.get("seatNum");
                 String birthDateStr = (String) personJSON.get("birthDate"); 
                 SimpleDateFormat inputformatter = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy"); 
                 Date parsedDate = inputformatter.parse(birthDateStr); 
+
                 String birthDateString = inputformatter.format(parsedDate); 
-
                 String passwordHash = (String) personJSON.get("passwordHash");
-                String isLockedStr = String.valueOf((Boolean) personJSON.get("isLocked"));
-                String failedAttemptsStr = String.valueOf(((Long) personJSON.get("failedLoginAttempts")).intValue());
-                String studentVerifiedStr = String.valueOf((Boolean) personJSON.get("studentVerified"));
+                boolean  isLocked2 = (Boolean) personJSON.get("isLocked");
+                int failedAttempts = ((Long) personJSON.get("failedLoginAttempts")).intValue();
+                boolean studentVerified = (Boolean) personJSON.get("studentVerified");
 
-    
+                //User(String userName, String firstName, String lastName, String email, String phoneNumber,
+                // Date birthDate, String passwordHash, boolean isLocked2, int failedAttempts, boolean studentVerified2)
 
-             users.add(new User(userName, userFirstName, userLastName, 
-                                email, phoneNumber, birthDateString, passwordHash, 
-                                isLockedStr, failedAttemptsStr, studentVerifiedStr));
+             users.add(new User( userName, userFirstName, userLastName, email, phoneNumber, birthDateStr, passwordHash, isLocked2, failedAttempts, studentVerified));
 
 
             }

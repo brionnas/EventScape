@@ -15,7 +15,7 @@ public class User{
     private ArrayList<Ticket> tickets;
 
     public User(String userName, String firstName, String lastName,
-    String email, String phoneNumber, Date birthDate, String passwordHash, boolean isLocked2, int failedAttempts, boolean studentVerified2){
+    String email, String phoneNumber, Date birthDateStr, String passwordHash, boolean isLocked2, int failedAttempts, boolean studentVerified2){
         this.userName = userName;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -29,9 +29,6 @@ public class User{
         this.tickets = new ArrayList<>();
     }
 
-    public User(UUID id, String userFirstName, String userLastName, int age, String phoneNumber2) {
-        //TODO Auto-generated constructor stub
-    }
 
     public String getUserName(){
         return userName;
