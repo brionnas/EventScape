@@ -42,10 +42,7 @@ public class DataLoader extends DataConstants {
 
     
 
-             users.add(new User(userName, userFirstName, userLastName, 
-                                email, phoneNumber, birthDateString, passwordHash, 
-                                isLockedStr, failedAttemptsStr, studentVerifiedStr));
-
+            
 
             }
 
