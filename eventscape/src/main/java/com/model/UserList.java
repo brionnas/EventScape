@@ -1,5 +1,6 @@
 package com.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserList {
@@ -8,6 +9,9 @@ public class UserList {
 
     private UserList() {
         users = DataLoader.getUsers(); // Load users from file
+        if (users == null) {
+            users = new ArrayList<>(); // Initialize with an empty list if loading fails
+        }
     }
 
     public static UserList getInstance() {
@@ -25,14 +29,16 @@ public class UserList {
         users.add(user);
     }
 
-    public User getUserByUsername(String username) {
-        for (User user : users) {
-            if (user.getUserName().equalsIgnoreCase(username)) {
-                return user;
-            }
+    // ... other methods ...
+
+public User getUserByUsername(String username) {
+    for (User user : getUsers()) {
+        if (user.getUserName().equals(username)) {
+            return user;
         }
-        return null;
     }
+    return null;
+}
 
     public void removeUser(User user) {
         users.remove(user);

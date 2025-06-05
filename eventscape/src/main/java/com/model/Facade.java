@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Facade {
     private static Facade instance;
-    private UserList userList;
+    private final UserList userList;
 
     private Facade() {
         userList = UserList.getInstance();
@@ -26,7 +26,7 @@ public class Facade {
             userList.addUser(user);
             return true;
         }
-        return false; // user already exists
+        return false;
     }
 
     public User findUser(String username) {
@@ -40,5 +40,13 @@ public class Facade {
             return true;
         }
         return false;
+    }
+
+     public User login(String username, String password) {
+        User user = userList.getUserByUsername(username);
+        if (user != null && user.getPasswordHash().equals(password)) {
+            return user;
+        }
+        return null;
     }
 }

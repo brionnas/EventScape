@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.UUID;
 import java.util.jar.Attributes.Name;
 import java.util.Date;
+import java.util.List;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 
@@ -77,6 +78,12 @@ public class DataLoader extends DataConstants {
         System.out.println(user);
     }
 }
+
+    public static List<Event> getEvents() {
+        // This method is not implemented yet.        
+        throw new UnsupportedOperationException("Unimplemented method 'getEvents'");
+    }
+
 
 
 }

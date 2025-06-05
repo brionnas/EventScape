@@ -1,17 +1,19 @@
 package com.model;
-import java.util.*;
 
-public class User{
-    private String userName;
-    private String firstName;
-    private String lastName;
-    private String email;
-    private String phoneNumber;
+import java.util.ArrayList;
+import java.util.Date;
+
+public class User {
+    private final String userName;
+    private final String firstName;
+    private final String lastName;
+    private final String email;
+    private final String phoneNumber;
     private Date birthDate;
-    private String passwordHash;
-    private boolean isLocked;
-    private int failedLoginAttempts;
-    private boolean studentVerified;
+    private final String passwordHash;
+    private final boolean isLocked;
+    private final int failedLoginAttempts;
+    private final boolean studentVerified;
     private ArrayList<Ticket> tickets;
 
     User(String userName, String firstName, String lastName,
@@ -44,36 +46,38 @@ public class User{
 
     public String getEmail(){
         return email;
+     }
+    public String getPhoneNumber() {
+         return phoneNumber; 
+        }
+    public Date getBirthDate() {
+         return birthDate;
+         }
+    public String getPasswordHash() {
+         return passwordHash; 
+        }
+    public boolean getIsLocked() {
+         return isLocked; 
+        }
+    public int getFailedLoginAttempts() {
+         return failedLoginAttempts;
+         }
+    public boolean getStudentVerified() { 
+        return studentVerified; 
+    }
+    public ArrayList<Ticket> getTickets() {
+         return tickets; 
+        }
+
+    // Setters
+    public void setTickets(ArrayList<Ticket> tickets) { 
+        this.tickets = tickets;
+     }
+    public void setBirthDate(Date birthDate) { 
+        this.birthDate = birthDate; 
     }
 
-    public String getPhoneNumber(){
-        return phoneNumber;
-    }
-
-    public Date getBirthDate(){
-        return birthDate;
-    }
-
-    public String getPasswordHash(){
-        return passwordHash;
-    }
-
-    public boolean getIsLocked(){
-        return isLocked;
-    }
-
-    public int getFailedLoginAttempts(){
-        return failedLoginAttempts;
-    }
-
-    public boolean getStudentVerified(){
-        return false;
-    }
-
-    public ArrayList<Ticket> getTickets(){
-        return tickets;
-    }
-
+    @Override
     public String toString() {
         return 
         firstName + "  " 
@@ -86,13 +90,5 @@ public class User{
         + "Email: " + email + "" + "\n"
         + "Password Hash: " + passwordHash + "" + "\n"
         + "Student Verified: " + studentVerified + "" + "\n";
-    }
-
-    public void setTickets(ArrayList<Ticket> tickets) {
-     this.tickets = tickets;
-    }
-
-    public void setBirthDate(Date birthDate) {
-    this.birthDate = birthDate;
     }
 }

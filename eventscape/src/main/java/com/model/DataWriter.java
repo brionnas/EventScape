@@ -3,14 +3,13 @@ package com.model;
 	
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class DataWriter extends DataConstants { 
 
@@ -63,7 +62,10 @@ public class DataWriter extends DataConstants {
         userDetails.put(USER_LAST_NAME, user.getLastName());
         userDetails.put(USER_EMAIL, user.getEmail());
         userDetails.put(USER_PHONE_NUMBER, user.getPhoneNumber());
-        userDetails.put(USER_BIRTH_DATE, user.getBirthDate());
+        
+        SimpleDateFormat formatter = new SimpleDateFormat("MM-dd,yyyy");
+        userDetails.put(USER_BIRTH_DATE, formatter.format(user.getBirthDate()));
+
         userDetails.put(USER_PASSWORD_HASH, user.getPasswordHash());
         userDetails.put(USER_IS_LOCKED, user.getIsLocked());
         userDetails.put(USER_FAILED_LOGIN_ATTEMPTS, user.getFailedLoginAttempts());
@@ -79,7 +81,7 @@ public class DataWriter extends DataConstants {
 
                 ticketJSON.put("ticketConfirmation", ticket.getTicketConfirmation());
                 ticketJSON.put("seatNum", ticket.getSeatNum());
-                ticketJSON.put("status", ticket.getStatus());
+                ticketJSON.put("status", ticket.getStatus().toString());
 
                 ticketArray.add(ticketJSON);
             }
