@@ -4,16 +4,16 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class User {
-    private String userName;
-    private String firstName;
-    private String lastName;
-    private String email;
-    private String phoneNumber;
+    private final String userName;
+    private final String firstName;
+    private final String lastName;
+    private final String email;
+    private final String phoneNumber;
     private Date birthDate;
-    private String passwordHash;
-    private boolean isLocked;
-    private int failedLoginAttempts;
-    private boolean studentVerified;
+    private final String passwordHash;
+    private final boolean isLocked;
+    private final int failedLoginAttempts;
+    private final boolean studentVerified;
     private ArrayList<Ticket> tickets;
 
     
