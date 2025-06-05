@@ -16,8 +16,9 @@ public class User {
     private boolean studentVerified;
     private ArrayList<Ticket> tickets;
 
-    public User(String userName, String firstName, String lastName, String email, String phoneNumber,
-                Date birthDate, String passwordHash, boolean isLocked, int failedLoginAttempts, boolean studentVerified) {
+    public User(String userName, String firstName, String lastName,
+                String email, String phoneNumber, Date birthDate,
+                String passwordHash, boolean isLocked, int failedLoginAttempts, boolean studentVerified) {
         this.userName = userName;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -31,7 +32,7 @@ public class User {
         this.tickets = new ArrayList<>();
     }
 
-    // Getters and setters
+    // Getters
     public String getUserName() { return userName; }
     public String getFirstName() { return firstName; }
     public String getLastName() { return lastName; }
@@ -39,49 +40,25 @@ public class User {
     public String getPhoneNumber() { return phoneNumber; }
     public Date getBirthDate() { return birthDate; }
     public String getPasswordHash() { return passwordHash; }
-    public boolean isLocked() { return isLocked; }
+    public boolean getIsLocked() { return isLocked; }
     public int getFailedLoginAttempts() { return failedLoginAttempts; }
-    public boolean isStudentVerified() { return studentVerified; }
+    public boolean getStudentVerified() { return studentVerified; }
     public ArrayList<Ticket> getTickets() { return tickets; }
 
-    public void setTickets(ArrayList<Ticket> tickets) {
-        this.tickets = tickets;
-    }
+    // Setters
+    public void setTickets(ArrayList<Ticket> tickets) { this.tickets = tickets; }
+    public void setBirthDate(Date birthDate) { this.birthDate = birthDate; }
 
-    public void addTicket(Ticket ticket) {
-        tickets.add(ticket);
-    }
-
-    public void setPasswordHash(String passwordHash) {
-        this.passwordHash = passwordHash;
-    }
-
-    public void setLocked(boolean locked) {
-        isLocked = locked;
-    }
-
-    public void setFailedLoginAttempts(int attempts) {
-        failedLoginAttempts = attempts;
-    }
-
-    public void setStudentVerified(boolean verified) {
-        studentVerified = verified;
+    @Override
+    public String toString() {
+        return firstName + " " + lastName + "\n" +
+                "Username: " + userName + "\n" +
+                "Email: " + email + "\n" +
+                "Phone: " + phoneNumber + "\n" +
+                "Birth Date: " + birthDate + "\n" +
+                "Locked: " + isLocked + "\n" +
+                "Failed Logins: " + failedLoginAttempts + "\n" +
+                "Student Verified: " + studentVerified + "\n" +
+                "Tickets: " + tickets;
     }
 }
-/*
-    try {
-            birthDate = new SimpleDateFormat("yyyy-MM-dd").parse(birthDateStr);
-        } catch (ParseException e) {
-            System.out.println("Invalid date format. Please use yyyy-MM-dd.");
-            return;
-        }
-
-        User newUser = new User(username, firstName, lastName, email, phone, birthDate, password, false, 0, false);
-        if (facade.addUser(newUser)) {
-            System.out.println("Account created successfully!");
-        } else {
-            System.out.println("Username already exists. Please choose a different username.");
-        }
-    }
-}
-        */
