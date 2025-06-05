@@ -42,10 +42,9 @@ public class Facade {
         return false;
     }
 
-    // Login method (simple password match for demo)
-    public User login(String username, String password) {
-        User user = findUser(username);
-        if (user != null && user.getPasswordHash().equals(password) && !user.getIsLocked()) {
+     public User login(String username, String password) {
+        User user = userList.getUserByUsername(username);
+        if (user != null && user.getPasswordHash().equals(password)) {
             return user;
         }
         return null;
