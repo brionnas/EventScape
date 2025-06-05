@@ -1,7 +1,6 @@
 package com.model;
 
 import java.util.List;
-import java.util.UUID;
 
 public class EventFacade {
     private static EventFacade instance;
@@ -19,23 +18,23 @@ public class EventFacade {
     }
 
     public List<Event> getAllEvents() {
-        return eventList.getAllEvents();
-    }
-
-    public Event findEventById(UUID id) {
-        for (Event e : eventList.getAllEvents()) {
-            if (e.getEventId().equals(id)) {
-                return e;
-            }
-        }
-        return null;
+        return eventList.getEvents();
     }
 
     public void addEvent(Event event) {
         eventList.addEvent(event);
     }
 
-    public void removeEvent(Event event) {
-        eventList.removeEvent(event);
+    public Event getEventById(String eventId) {
+        return eventList.getEventById(eventId);
+    }
+
+    public boolean removeEvent(String eventId) {
+        Event event = getEventById(eventId);
+        if (event != null) {
+            eventList.removeEvent(event);
+            return true;
+        }
+        return false;
     }
 }
