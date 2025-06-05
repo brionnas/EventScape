@@ -5,6 +5,7 @@ module com.event {
 
     opens com.event to javafx.fxml;
     exports com.event;
+    exports com.model;
 
     opens com.controllers to javafx.fxml;
 }
