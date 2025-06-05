@@ -1,5 +1,6 @@
 package com.model;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
@@ -45,11 +46,11 @@ public class UI {
         System.out.print("Password: ");
         String password = scanner.nextLine();
 
-        User user = facade.login(username, password);
+        User user = facade.login(username, password); // Add this method in Facade if not present
 
         if (user != null) {
             System.out.println("Login successful! Welcome, " + user.getFirstName() + ".");
-            // Additional UI actions for logged-in user could go here
+            // TODO:more functionality for users l8er
         } else {
             System.out.println("Invalid username or password.");
         }
@@ -80,15 +81,15 @@ public class UI {
         Date birthDate;
         try {
             birthDate = new SimpleDateFormat("yyyy-MM-dd").parse(birthDateStr);
-        } catch (Exception e) {
-            System.out.println("Invalid date format.");
+        } catch (ParseException e) {
+            System.out.println("Invalid date format. Please use yyyy-MM-dd.");
             return;
         }
 
         User newUser = new User(username, firstName, lastName, email, phone, birthDate, password, false, 0, false);
 
         if (facade.addUser(newUser)) {
-            System.out.println("Account created!");
+            System.out.println("Account created successfully!");
         } else {
             System.out.println("Username already taken.");
         }
