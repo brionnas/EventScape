@@ -16,6 +16,7 @@ public class User {
     private boolean studentVerified;
     private ArrayList<Ticket> tickets;
 
+    
     public User(String userName, String firstName, String lastName,
                 String email, String phoneNumber, Date birthDate,
                 String passwordHash, boolean isLocked, int failedLoginAttempts, boolean studentVerified) {
@@ -33,21 +34,47 @@ public class User {
     }
 
     // Getters
-    public String getUserName() { return userName; }
-    public String getFirstName() { return firstName; }
-    public String getLastName() { return lastName; }
-    public String getEmail() { return email; }
-    public String getPhoneNumber() { return phoneNumber; }
-    public Date getBirthDate() { return birthDate; }
-    public String getPasswordHash() { return passwordHash; }
-    public boolean getIsLocked() { return isLocked; }
-    public int getFailedLoginAttempts() { return failedLoginAttempts; }
-    public boolean getStudentVerified() { return studentVerified; }
-    public ArrayList<Ticket> getTickets() { return tickets; }
+    public String getUserName() {
+         return userName; 
+        }
+    public String getFirstName() {
+         return firstName; 
+        }
+    public String getLastName() {
+         return lastName;
+         }
+    public String getEmail() { 
+        return email;
+     }
+    public String getPhoneNumber() {
+         return phoneNumber; 
+        }
+    public Date getBirthDate() {
+         return birthDate;
+         }
+    public String getPasswordHash() {
+         return passwordHash; 
+        }
+    public boolean getIsLocked() {
+         return isLocked; 
+        }
+    public int getFailedLoginAttempts() {
+         return failedLoginAttempts;
+         }
+    public boolean getStudentVerified() { 
+        return studentVerified; 
+    }
+    public ArrayList<Ticket> getTickets() {
+         return tickets; 
+        }
 
     // Setters
-    public void setTickets(ArrayList<Ticket> tickets) { this.tickets = tickets; }
-    public void setBirthDate(Date birthDate) { this.birthDate = birthDate; }
+    public void setTickets(ArrayList<Ticket> tickets) { 
+        this.tickets = tickets;
+     }
+    public void setBirthDate(Date birthDate) { 
+        this.birthDate = birthDate; 
+    }
 
     @Override
     public String toString() {
