@@ -21,20 +21,15 @@ public class EventFacade {
         return eventList.getEvents();
     }
 
+    public Event findEventById(String eventId) {
+        return eventList.getEventById(eventId);
+    }
+
     public void addEvent(Event event) {
         eventList.addEvent(event);
     }
 
-    public Event getEventById(String eventId) {
-        return eventList.getEventById(eventId);
-    }
-
-    public boolean removeEvent(String eventId) {
-        Event event = getEventById(eventId);
-        if (event != null) {
-            eventList.removeEvent(event);
-            return true;
-        }
-        return false;
+    public void removeEvent(Event event) {
+        eventList.removeEvent(event);
     }
 }
