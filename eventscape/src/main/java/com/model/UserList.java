@@ -29,14 +29,16 @@ public class UserList {
         users.add(user);
     }
 
-    public User getUserByUsername(User newUser) {
-        for (User user : users) {
-            if (user.getUserName().equalsIgnoreCase(newUser.getUserName())) {
-                return user;
-            }
+    // ... other methods ...
+
+public User getUserByUsername(String username) {
+    for (User user : getUsers()) {
+        if (user.getUserName().equals(username)) {
+            return user;
         }
-        return null;
     }
+    return null;
+}
 
     public void removeUser(User user) {
         users.remove(user);
