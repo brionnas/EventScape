@@ -2,27 +2,27 @@ package com.model;
 
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 public class Event {
-    private UUID eventId;
+    private String eventId;
     private String name;
-    private Category category;
+    private String category;
     private String subCategory;
     private Date date;
     private int capacity;
     private int ticketsLeft;
     private String latitude;
     private String longitude;
-    private UUID host;
-    private List<UUID> attendees;
-    private List<UUID> waitlist;
-    private List<UUID> tickets;
-    private List<UUID> reviews;
+    private String host;
+    private List<String> attendees;
+    private List<String> waitlist;
+    private List<String> tickets;
+    private List<String> reviews;
 
-    public Event(UUID eventId, String name, Category category, String subCategory, Date date,
-                 int capacity, int ticketsLeft, String latitude, String longitude, UUID host,
-                 List<UUID> attendees, List<UUID> waitlist, List<UUID> tickets, List<UUID> reviews) {
+    public Event(String eventId, String name, String category, String subCategory,
+                 Date date, int capacity, int ticketsLeft, String latitude, String longitude,
+                 String host, List<String> attendees, List<String> waitlist,
+                 List<String> tickets, List<String> reviews) {
         this.eventId = eventId;
         this.name = name;
         this.category = category;
@@ -39,162 +39,110 @@ public class Event {
         this.reviews = reviews;
     }
 
-    // Getters and setters here
-
-    public UUID getEventId() { 
+    // Getters and setters
+    public String getEventId() { 
         return eventId; 
     }
     public String getName() { 
-        return name; 
-    }
-    public Category getCategory() { 
-        return category; 
-    }
+        return name;
+     }
+    public String getCategory() {  
+        return category;
+     }
     public String getSubCategory() { 
         return subCategory; 
     }
     public Date getDate() { 
-        return date; 
-    }
-    public int getCapacity() { 
-        return capacity; 
-    }
-    public int getTicketsLeft() { 
-        return ticketsLeft; 
-    }
-    public String getLatitude() { 
-        return latitude; 
-    }
-    public String getLongitude() { 
-        return longitude; 
-    }
-    public UUID getHost() { 
-        return host; 
-    }
-    public List<UUID> getAttendees() { 
-        return attendees; 
-    }
-    public List<UUID> getWaitlist() { 
-        return waitlist; 
-    }
-    public List<UUID> getTickets() { 
-        return tickets; 
-    }
-    public List<UUID> getReviews() { 
-        return reviews; 
+        return date;
+     }
+    public int getCapacity() {
+         return capacity; 
+        }
+    public int getTicketsLeft() {
+         return ticketsLeft;
+         }
+    public String getLatitude() {
+         return latitude; 
+        }
+    public String getLongitude() {
+         return longitude; 
+        }
+    public String getHost() { 
+        return host;
+     }
+    public List<String> getAttendees() {
+         return attendees; 
+        }
+    public List<String> getWaitlist() {
+         return waitlist;
+         }
+    public List<String> getTickets() {
+         return tickets; 
+        }
+    public List<String> getReviews() {
+         return reviews;
+         }
+
+    public void setTicketsLeft(int ticketsLeft) {
+        this.ticketsLeft = ticketsLeft;
     }
 
-    // Setters
-    public void setEventId(UUID eventId) { 
-        this.eventId = eventId; 
+    public void setAttendees(List<String> attendees) {
+        this.attendees = attendees;
+    }       
+    public void setWaitlist(List<String> waitlist) {
+        this.waitlist = waitlist;
+    }
+    public void setTickets(List<String> tickets) {
+        this.tickets = tickets;
+    }
+    public void setReviews(List<String> reviews) {
+        this.reviews = reviews;
+    }
+    public void setEventId(String eventId) {
+        this.eventId = eventId;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+    public void setCategory(String category) {
+        this.category = category;
     }   
-    public void setName(String name) { 
-        this.name = name; 
+    public void setSubCategory(String subCategory) {
+        this.subCategory = subCategory;
+    }   
+    public void setDate(Date date) {
+        this.date = date;
     }
-    public void setCategory(Category category) { 
-        this.category = category; 
-    }
-    public void setSubCategory(String subCategory) { 
-        this.subCategory = subCategory; 
-    }
-    public void setDate(Date date) { 
-        this.date = date; 
-    }
-    public void setCapacity(int capacity) { 
-        this.capacity = capacity; 
-    }
-    public void setTicketsLeft(int ticketsLeft) { 
-        this.ticketsLeft = ticketsLeft; 
-    }
-
-
-
-    /**
-     * Remove a user from the event
-     *@return true if successfully removed, false otherwise
-     */
-    public boolean removeUserFromEvent(User user) {
-        if (attendees.remove(user)) {
-            // Remove their ticket as well
-            ticketList.removeIf(ticket -> ticket.getTicketConfirmation().contains(user.getUserName()));
-            getWaitList();
-            return true;
-        }
-        return false;
-    }
-
-    /**
-     * Update the waitlist if there are available spots
-     */
-    public class WaitlistUpdateResult {
-    private boolean wasUpdated;
-    private int remainingWaitlistSize;
-
-    public WaitlistUpdateResult(boolean wasUpdated, int remainingWaitlistSize) {
-        this.wasUpdated = wasUpdated;
-        this.remainingWaitlistSize = remainingWaitlistSize;
-    }
-
-    public boolean wasUpdated() {
-        return wasUpdated;
-    }
-
-    public int getRemainingWaitlistSize() {
-        return remainingWaitlistSize;
-    }
-}
-
-
-    /**
-     * Add a user to the event
-     * @return true if added successfully, false if event is full
-     */
-    public boolean addUserToEvent(User user) {
-        if (attendees.size() < capacity) {
-            attendees.add(user);
-            return true;
-        }
-        return false;
-    }
-    public void setReviews(List<UUID> reviews) { 
-        this.reviews = reviews; 
-    }
-
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
+    }   
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }   
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
+    }   
+    public void setHost(String host) {
+        this.host = host;
+    }   
     @Override
     public String toString() {
         return "Event{" +
-                "eventId=" + eventId +
+                "eventId='" + eventId + '\'' +
                 ", name='" + name + '\'' +
-                ", category=" + category +
+                ", category='" + category + '\'' +
                 ", subCategory='" + subCategory + '\'' +
                 ", date=" + date +
                 ", capacity=" + capacity +
                 ", ticketsLeft=" + ticketsLeft +
                 ", latitude='" + latitude + '\'' +
                 ", longitude='" + longitude + '\'' +
-                ", host=" + host +
+                ", host='" + host + '\'' +
                 ", attendees=" + attendees +
                 ", waitlist=" + waitlist +
                 ", tickets=" + tickets +
                 ", reviews=" + reviews +
                 '}';
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
-        Event event = (Event) obj;
-        return eventId.equals(event.eventId);
-    }
-
-    @Override
-    public int hashCode() {
-        return eventId.hashCode();
-    }
-
-    public WaitlistUpdateResult updateWaitlist() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'updateWaitlist'");
     }
 }
