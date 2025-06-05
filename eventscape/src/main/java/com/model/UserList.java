@@ -1,6 +1,7 @@
 package com.model;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class UserList {
@@ -30,6 +31,12 @@ public class UserList {
     }
 
     // ... other methods ...
+    public boolean addUser(String userName, String firstName, String lastName, String email, String phoneNumber, Date birthDate, String passwordHash) {
+        //validate that the user is not already in the system
+        User user = new User(userName, firstName, lastName, email, phoneNumber, birthDate, passwordHash);
+        users.add(user);
+        return true;
+    }
 
 public User getUserByUsername(String username) {
     for (User user : getUsers()) {
@@ -42,5 +49,10 @@ public User getUserByUsername(String username) {
 
     public void removeUser(User user) {
         users.remove(user);
+    }
+
+    public boolean save() {
+        DataWriter.saveUsers();
+        return true;
     }
 }

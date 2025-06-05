@@ -16,6 +16,20 @@ public class User {
     private final boolean studentVerified;
     private ArrayList<Ticket> tickets;
 
+    public User(String userName, String firstName, String lastName, String email, String phoneNumber, Date birthDate, String passwordHash){
+        this.userName = userName;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.birthDate = birthDate;
+        this.passwordHash = passwordHash;
+        this.isLocked = false;
+        this.failedLoginAttempts = 0;
+        this.studentVerified = false;
+        this.tickets =  new ArrayList<>();
+    }
+
     User(String userName, String firstName, String lastName,
     String email, String phoneNumber, Date birthDate, String passwordHash, 
     boolean isLocked, int failedAttempts, boolean studentVerified, ArrayList<Ticket> tickets){
@@ -89,6 +103,8 @@ public class User {
         + "Birthday: " + birthDate + "" + "\n"
         + "Email: " + email + "" + "\n"
         + "Password Hash: " + passwordHash + "" + "\n"
-        + "Student Verified: " + studentVerified + "" + "\n";
+        + "Student Verified: " + studentVerified + "" + "\n"
+        + "Tickets: " + tickets;
+
     }
 }

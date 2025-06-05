@@ -1,5 +1,6 @@
 package com.model;
 
+import java.util.Date;
 import java.util.List;
 
 public class Facade {
@@ -21,12 +22,8 @@ public class Facade {
         return userList.getUsers();
     }
 
-    public boolean addUser(User user) {
-        if (userList.getUserByUsername(user.getUserName()) == null) {
-            userList.addUser(user);
-            return true;
-        }
-        return false;
+    public boolean addUser(String userName, String firstName, String lastName, String email, String phoneNumber, Date birthDate, String passwordHash) {
+       return UserList.getInstance().addUser(userName, firstName, lastName, email, phoneNumber, birthDate, passwordHash);
     }
 
     public User findUser(String username) {
@@ -48,5 +45,9 @@ public class Facade {
             return user;
         }
         return null;
+    }
+
+    public void logout() {
+        UserList.getInstance().save();
     }
 }

@@ -29,7 +29,7 @@ public class DataLoader extends DataConstants {
                 String userLastName = (String)personJSON.get(USER_LAST_NAME); 
                 String phoneNumber = (String) personJSON.get(USER_PHONE_NUMBER);
                 String email = (String) personJSON.get("email");
-                Date birthDate = toDate((String) personJSON.get("birthDate")); 
+                Date birthDate = Utilities.toDate((String) personJSON.get("birthDate")); 
                 String passwordHash = (String) personJSON.get("passwordHash");
                 boolean  isLocked2 = (Boolean) personJSON.get("isLocked");
                 int failedAttempts = ((Long) personJSON.get("failedLoginAttempts")).intValue();
@@ -61,15 +61,6 @@ public class DataLoader extends DataConstants {
         return users;
     }
     
-    private static Date toDate(String dateString) {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-
-        try {
-            return formatter.parse(dateString);
-        } catch (Exception e) {
-            return null;
-        }
-    }
 
     public static void main(String[] args) {
     ArrayList<User> users = DataLoader.getUsers();
