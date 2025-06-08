@@ -39,5 +39,8 @@ public class EventList {
     public void removeEvent(Event event) {
         events.remove(event);
     }
+    public void save() {
+    DataWriter.saveEvents();
+}
 }
 

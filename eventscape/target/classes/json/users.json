@@ -1,1 +1,42 @@
-[{"favorites":[],"firstName":"Adam","lastName":"Smith","phoneNumber":"1234567890","tickets":[{"seatNum":"Pending","ticketConfirmation":"6d0130f9-a02c-4a3d-ab2f-b20cd7462fc7","status":"Confirmed"}],"isLocked":false,"userName":"smithadam","failedLoginAttempts":0,"birthDate":"08-23-0013","email":"smithadam@example.com","passwordHash":"abc123hash","studentVerified":true},{"favorites":[],"firstName":"Diego","lastName":"Jorge","phoneNumber":"0987654321","tickets":[{"seatNum":"Pending","ticketConfirmation":"ba4cce17-a624-4d2b-80fe-eae11665feb6","status":"Confirmed"}],"isLocked":false,"userName":"jorgediego","failedLoginAttempts":0,"birthDate":"07-25-0006","email":"jorgediego@example.com","passwordHash":"def456hash","studentVerified":false},{"favorites":[],"firstName":"Amy","lastName":"Smith","phoneNumber":"203-445-4433","tickets":[],"isLocked":false,"userName":"amstih","failedLoginAttempts":0,"birthDate":"08-20-0008","email":"asmith@email.com","passwordHash":"123","studentVerified":false}]
+[
+  {
+    "userName": "smithadam",
+    "firstName": "Adam",
+    "lastName": "Smith",
+    "email": "smithadam@example.com",
+    "phoneNumber": "1234567890",
+    "birthDate": "2002-07-15",
+    "passwordHash": "abc123hash",
+    "isLocked": false,
+    "failedLoginAttempts": 0,
+    "studentVerified": true,
+    "tickets":[
+      {
+        "ticketConfirmation": "6d0130f9-a02c-4a3d-ab2f-b20cd7462fc7",
+        "seatNum": "A12",
+        "status": "Confirmed"
+      }
+    ],
+    "favorites": ["6584ff0a-459b-4827-9132-68b86e839455"]
+  },
+  {
+    "userName": "jorgediego",
+    "firstName": "Diego",
+    "lastName": "Jorge",
+    "email": "jorgediego@example.com",
+    "phoneNumber": "0987654321",
+    "birthDate": "2001-01-02",
+    "passwordHash": "def456hash",
+    "isLocked": false,
+    "failedLoginAttempts": 0,
+    "studentVerified": false,
+    "tickets":[
+      {
+        "ticketConfirmation": "ba4cce17-a624-4d2b-80fe-eae11665feb6",
+        "seatNum": "B7",
+        "status": "Confirmed"
+      }
+    ],
+    "favorites": ["6584ff0a-459b-4827-9132-68b86e839455"]
+  }
+]
