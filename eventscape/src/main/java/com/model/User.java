@@ -19,7 +19,9 @@ public class User {
     private ArrayList<Ticket> tickets;
     private ArrayList<UUID> favorites;
 
-    public User(String userName, String firstName, String lastName, String email, String phoneNumber, Date birthDate, String passwordHash){
+    public User(String userName, String firstName, String lastName,
+                String email, String phoneNumber, Date birthDate,
+                String passwordHash){
         this.userName = userName;
         this.firstName = firstName;
         this.lastName = lastName;

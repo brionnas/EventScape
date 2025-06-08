@@ -2,23 +2,18 @@ package com.model;
 
 import java.io.FileWriter;
 import java.io.IOException;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.UUID;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import java.util.UUID;
-
-public class DataWriter extends DataConstants { 
+public class DataWriter extends DataConstants {
 
     public static void saveUsers() {
-       // UserList users = UserList.getInstance();
-       // ArrayList<User> userList = users.getUsers();
-
-
+        // Previously hardcoded user data for testing:
+        /*
         ArrayList<User> userList = new ArrayList<>();
 
         try{
@@ -26,13 +21,13 @@ public class DataWriter extends DataConstants {
             Date birthDate = formatter.parse("01-01-2000");
 
             userList.add(new User("pplante", "Portia", "Plante", 
-            "random@email.sc.edu", "2309553344", birthDate, 
-            "123password", false, 0, true));
+                "random@email.sc.edu", "2309553344", birthDate, 
+                "123password", false, 0, true));
         } 
         catch (ParseException e) {
-            e.printStackTrace();  // Or handle it in some user-friendly way
-    }
-        
+            e.printStackTrace();
+        }
+
         User user = userList.get(0);
 
         Ticket ticket1 = new Ticket("ba4cce17-a624-4d2b-80fe-eae11665feb6", "B7", "Confirmed");
@@ -44,16 +39,45 @@ public class DataWriter extends DataConstants {
 
         user.setFavorites(new ArrayList<>());
         user.getFavorites().add(UUID.fromString("6584ff0a-459b-4827-9132-68b86e839455"));
-
+        */
+        ArrayList<User> userList = new ArrayList<>(UserList.getInstance().getUsers());
 
         JSONArray jsonUsers = new JSONArray();
 
-        for (User currentUser : userList) {
+        for (User user : userList) {
             jsonUsers.add(getUserJSON(user));
         }
 
         try (FileWriter file = new FileWriter(USER_FILE_NAME)) {
             file.write(jsonUsers.toJSONString());
+            file.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void saveEvents() {
+        ArrayList<Event> events = new ArrayList<>(EventList.getInstance().getEvents());
+        JSONArray jsonEvents = new JSONArray();
+
+        for (Event event : events) {
+            JSONObject obj = new JSONObject();
+            obj.put("eventId", event.getEventId());
+            obj.put("name", event.getName());
+            obj.put("category", event.getCategory());
+            obj.put("subCategory", event.getSubCategory());
+            obj.put("date", event.getDate().toString());
+            obj.put("latitude", event.getLatitude());
+            obj.put("longitude", event.getLongitude());
+            obj.put("capacity", event.getCapacity());
+            obj.put("ticketsLeft", event.getTicketsLeft());
+            obj.put("host", event.getHost());
+
+            jsonEvents.add(obj);
+        }
+
+        try (FileWriter file = new FileWriter(EVENT_FILE_NAME)) {
+            file.write(jsonEvents.toJSONString());
             file.flush();
         } catch (IOException e) {
             e.printStackTrace();
@@ -67,7 +91,7 @@ public class DataWriter extends DataConstants {
         userDetails.put(USER_LAST_NAME, user.getLastName());
         userDetails.put(USER_EMAIL, user.getEmail());
         userDetails.put(USER_PHONE_NUMBER, user.getPhoneNumber());
-        
+
         SimpleDateFormat formatter = new SimpleDateFormat("MM-dd-yyyy");
         userDetails.put(USER_BIRTH_DATE, formatter.format(user.getBirthDate()));
 
@@ -75,19 +99,14 @@ public class DataWriter extends DataConstants {
         userDetails.put(USER_IS_LOCKED, user.getIsLocked());
         userDetails.put(USER_FAILED_LOGIN_ATTEMPTS, user.getFailedLoginAttempts());
         userDetails.put(USER_STUDENT_VARIFIED, user.getStudentVerified());
-        userDetails.put(USER_TICKETS, user.getTickets());
 
         JSONArray ticketArray = new JSONArray();
         if (user.getTickets() != null){ 
-            for(Ticket ticket : user.getTickets()){
-        JSONObject ticketJSON = new JSONObject();
-
-                JSONArray confirmationArray = new JSONArray();
-
+            for (Ticket ticket : user.getTickets()) {
+                JSONObject ticketJSON = new JSONObject();
                 ticketJSON.put("ticketConfirmation", ticket.getTicketConfirmation());
                 ticketJSON.put("seatNum", ticket.getSeatNum());
                 ticketJSON.put("status", ticket.getStatus().toString());
-
                 ticketArray.add(ticketJSON);
             }
         }
@@ -106,5 +125,6 @@ public class DataWriter extends DataConstants {
 
     public static void main(String[] args) {
         DataWriter.saveUsers();
+        DataWriter.saveEvents();
     }
-}
+} 
