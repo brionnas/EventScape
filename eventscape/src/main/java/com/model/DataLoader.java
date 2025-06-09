@@ -1,16 +1,13 @@
 package com.model;
 import java.io.FileReader;
 import java.util.ArrayList;
-import java.util.UUID;
-import java.util.jar.Attributes.Name;
 import java.util.Date;
 import java.util.List;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;;
+import org.json.simple.parser.JSONParser;
+;
 
 public class DataLoader extends DataConstants {
 
@@ -18,7 +15,7 @@ public class DataLoader extends DataConstants {
     {
         ArrayList<User> users = new ArrayList<User>();
 
-        try {
+        try { 
             FileReader reader = new FileReader(USER_FILE_NAME);
             JSONArray peopleJSON = (JSONArray)new JSONParser().parse(reader); 
 
@@ -75,7 +72,7 @@ public class DataLoader extends DataConstants {
         throw new UnsupportedOperationException("Unimplemented method 'getEvents'");
     }
 
-    /*public static ArrayList<Event> loadEvents() {
+    public static ArrayList<Event> loadEvents() {
     ArrayList<Event> events = new ArrayList<>();
 
     try {
@@ -141,7 +138,7 @@ public class DataLoader extends DataConstants {
     }
 
     return events;
-}*/
+}
 
 
 
