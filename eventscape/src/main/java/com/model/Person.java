@@ -18,7 +18,7 @@ public class Person {
      }
     public String getLastName() {
          return lastName; 
-        }
+        } 
     public Date getBirthDate() {
          return birthDate;
          }
