@@ -11,3 +11,6 @@ Map View: Embed Google Maps (or Leaflet) to plot venue locations.
 
 
 Basic Favorites: Allow users to “star” events in localStorage so they can revisit shows they like.
+
+Video Demonstration:
+https://www.youtube.com/watch?v=CHF3WBU8mRQ
