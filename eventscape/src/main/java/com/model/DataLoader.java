@@ -72,7 +72,7 @@ public class DataLoader extends DataConstants {
         throw new UnsupportedOperationException("Unimplemented method 'getEvents'");
     }
 
-    /*public static ArrayList<Event> loadEvents() {
+    public static ArrayList<Event> loadEvents() {
     ArrayList<Event> events = new ArrayList<>();
 
     try {
@@ -138,7 +138,7 @@ public class DataLoader extends DataConstants {
     }
 
     return events;
-}*/
+}
 
 
 
