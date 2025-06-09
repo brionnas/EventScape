@@ -10,6 +10,11 @@ import com.model.Facade;
 
 public class FacadeTests {
 
+    //add beforeeach 
+    //add after each
+    //email, duplicate, first name and last name null, password isn't long enough 
+
+
     @Test
     public void testTesting() {
         assertTrue(true); 
