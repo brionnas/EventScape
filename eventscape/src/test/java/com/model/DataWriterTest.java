@@ -29,8 +29,5 @@ public class DataWriterTest {
     assertTrue(email.contains("."));
     assertTrue(email.indexOf("@") > 0);
     assertTrue(email.indexOf("@") < email.lastIndexOf("."));
-    
-}
-}
-
+    }
 }
