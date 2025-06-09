@@ -75,6 +75,74 @@ public class DataLoader extends DataConstants {
         throw new UnsupportedOperationException("Unimplemented method 'getEvents'");
     }
 
+    /*public static ArrayList<Event> loadEvents() {
+    ArrayList<Event> events = new ArrayList<>();
+
+    try {
+        FileReader reader = new FileReader(EVENT_FILE_NAME);
+        JSONArray eventsJSON = (JSONArray) new JSONParser().parse(reader);
+
+        for (Object obj : eventsJSON) {
+            JSONObject eventJSON = (JSONObject) obj;
+
+            String eventId = (String) eventJSON.get("eventId");
+            String name = (String) eventJSON.get("name");
+            String category = (String) eventJSON.get("category");
+            String subCategory = (String) eventJSON.get("subCategory");
+
+            String dateStr = (String) eventJSON.get("date");
+            Date date = Utilities.toDate(dateStr); // assumes MM-dd-yyyy
+
+            int capacity = ((Long) eventJSON.get("capacity")).intValue();
+            int ticketsLeft = ((Long) eventJSON.get("ticketsLeft")).intValue();
+
+            String latitude = (String) eventJSON.get("latitude");
+            String longitude = (String) eventJSON.get("longitude");
+            String host = (String) eventJSON.get("host");
+
+            // Optional arrays (can be empty)
+            ArrayList<String> attendees = new ArrayList<>();
+            ArrayList<String> waitlist = new ArrayList<>();
+            ArrayList<String> tickets = new ArrayList<>();
+            ArrayList<String> reviews = new ArrayList<>();
+
+            JSONArray attendeesJSON = (JSONArray) eventJSON.get("attendees");
+            if (attendeesJSON != null) {
+                for (Object id : attendeesJSON)
+                    attendees.add((String) id);
+            }
+
+            JSONArray waitlistJSON = (JSONArray) eventJSON.get("waitlist");
+            if (waitlistJSON != null) {
+                for (Object id : waitlistJSON)
+                    waitlist.add((String) id);
+            }
+
+            JSONArray ticketsJSON = (JSONArray) eventJSON.get("tickets");
+            if (ticketsJSON != null) {
+                for (Object id : ticketsJSON)
+                    tickets.add((String) id);
+            }
+
+            JSONArray reviewsJSON = (JSONArray) eventJSON.get("reviews");
+            if (reviewsJSON != null) {
+                for (Object review : reviewsJSON)
+                    reviews.add((String) review);
+            }
+
+            Event event = new Event(eventId, name, category, subCategory, date,
+                    capacity, ticketsLeft, latitude, longitude, host,
+                    attendees, waitlist, tickets, reviews);
+
+            events.add(event);
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+
+    return events;
+}*/
+
 
 
 }

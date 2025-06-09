@@ -15,7 +15,8 @@ public class SimplifiedUI {
     public void run() {
         //scenario1();
         //scenario2();
-        createEventFromTerminal();
+        //scenario3();
+        scenario4();
 
     }
 
@@ -56,7 +57,7 @@ public class SimplifiedUI {
         
     }
 
-    public void createEventFromTerminal() {
+    public void scenario3() {
     Scanner sc = new Scanner(System.in);
     try {
         System.out.print("Enter event name: ");
@@ -88,16 +89,8 @@ public class SimplifiedUI {
         UUID eventId = UUID.randomUUID();
 
         Event newEvent = new Event(
-            eventId.toString(),
-            name,
-            category,
-            subCategory,
-            date,
-            capacity,
-            capacity, // ticketsLeft
-            latitude,
-            longitude,
-            host,
+            eventId.toString(), name, category, subCategory, date, capacity, capacity, // ticketsLeft
+            latitude, longitude, host,
             new ArrayList<>(), // attendees
             new ArrayList<>(), // waitlist
             new ArrayList<>(), // tickets
@@ -107,14 +100,72 @@ public class SimplifiedUI {
         EventList.getInstance().addEvent(newEvent);
         EventList.getInstance().save();
 
-        System.out.println("✅ Event created and saved!");
+        System.out.println("Event created and saved!");
 
     } catch (ParseException e) {
-        System.out.println("❌ Invalid date format. Use MM-dd-yyyy.");
+        System.out.println("Invalid date format. Use MM-dd-yyyy.");
     } catch (Exception e) {
-        System.out.println("❌ Error: " + e.getMessage());
+        System.out.println("Error: " + e.getMessage());
     }
 }
+
+    public void scenario4() {
+    Facade facade = Facade.getInstance();
+    Scanner sc = new Scanner(System.in);
+
+    //login method only for this scenario
+    System.out.print("Enter username: ");
+    String username = sc.nextLine();
+    System.out.print("Enter password: ");
+    String password = sc.nextLine();
+
+    User user = facade.login(username, password);
+    if (user == null) {
+        System.out.println("Invalid credentials");
+        return;
+    }
+
+    ArrayList<Event> events = DataLoader.loadEvents();
+    if (events.isEmpty()) {
+        System.out.println("No events available.");
+        return;
+    }
+
+    System.out.println("\n Available Events:");
+    for (int i = 0; i < events.size(); i++) {
+        Event e = events.get(i);
+        System.out.println(i + 1 + ". " + e.getName() + " | ID: " + e.getEventId() + " | Capacity Left: " + e.getTicketsLeft());
+    }
+
+    // Choose event
+    System.out.print("\nSelect event number to buy ticket: ");
+    int choice = Integer.parseInt(sc.nextLine()) - 1;
+    if (choice < 0 || choice >= events.size()) {
+        System.out.println("Invalid event selection.");
+        return;
+    }
+
+    Event selected = events.get(choice);
+
+    if (selected.getTicketsLeft() <= 0) {
+        System.out.println("No tickets left.");
+        return;
+    }
+
+    Ticket ticket = new Ticket(UUID.randomUUID().toString(), "GA", "Confirmed");
+
+    if (user.getTickets() == null)
+        user.setTickets(new ArrayList<>());
+
+    user.getTickets().add(ticket);
+    selected.setTicketsLeft(selected.getTicketsLeft() - 1);
+
+    UserList.getInstance().save();
+    EventList.getInstance().save();
+
+    System.out.println("Ticket purchased! Updated event capacity: " + selected.getTicketsLeft());
+}
+
 
     public static void main(String[] args){
         (new SimplifiedUI()).run();

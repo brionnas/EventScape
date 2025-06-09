@@ -5,10 +5,13 @@ import java.util.List;
 
 public class EventList {
     private static EventList instance;
-    private final List<Event> events;
+    //private final List<Event> events;
+    private ArrayList<Event> events;
+
 
     private EventList() {
-        events = new ArrayList<>();
+        //events = new ArrayList<>();
+        events = DataLoader.loadEvents();
         // Could load from DataLoader here if implemented
     }
 
@@ -39,8 +42,14 @@ public class EventList {
     public void removeEvent(Event event) {
         events.remove(event);
     }
+
+    public ArrayList<Event> getAllEvents() {
+        return events;
+    }
+    
+
     public void save() {
-    DataWriter.saveEvents();
-}
+        DataWriter.saveEvents();
+    }
 }
 
