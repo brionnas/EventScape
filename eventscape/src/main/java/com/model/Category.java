@@ -3,8 +3,6 @@ package com.model;
 public enum Category {
     MUSIC_EVENTS("Music Events"),
     ENTERTAINMENT("Entertainment"),
-    EDUCATION("Education"),
-    TECHNOLOGY("Technology"),
     ART("Art"),
     FOODS("Foods"),
     SPORTS("Sports");
