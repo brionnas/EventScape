@@ -2,6 +2,7 @@ module com.event {
     requires javafx.controls;
     requires javafx.fxml;
     requires json.simple;
+    requires junit; 
 
     opens com.event to javafx.fxml;
     exports com.event;
