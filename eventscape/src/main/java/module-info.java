@@ -8,5 +8,7 @@ module com.event {
     exports com.event;
     exports com.model;
 
+    opens com.model to javafx.fxml;
+
     opens com.controllers to javafx.fxml;
 }

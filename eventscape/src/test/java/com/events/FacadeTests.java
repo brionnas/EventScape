@@ -1,16 +1,21 @@
-package com.model; 
+package com.events; 
 import com.model.Facade;
+import com.model.User;
+import com.model.Event;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals; 
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue; 
+import static org.junit.Assert.assertTrue;
+
+import java.util.List;
+
 import org.junit.Test;
 
 //import java.text.ParseException;
 //import java.text.SimpleDateFormat;
 //import java.util.Date;
 //import java.util.List;
-//*need to switch to junit *
 public class FacadeTests {
 
     @Test 
@@ -28,7 +33,15 @@ public class FacadeTests {
     @Test
     public void testAddUser() {
         Facade facade = Facade.getInstance();
-        boolean result = facade.addUser("KnightAtlas360", "Roxy", "Sparks", "carletnightowl@email.com", "scarletnightowl@email.com", "847-1656", "2004-10-19", "smolbeans22");
+        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
+        java.util.Date dob = null;
+        try {
+            dob = sdf.parse("2004-10-19");
+        } catch (java.text.ParseException e) {
+            e.printStackTrace();
+        }
+        boolean result = facade.addUser("KnightAtlas360", "Roxy", "Sparks", "carletnightowl@email.com", "847-1656", dob, "smolbeans22");
+        assertTrue("Add user should return true for valid user", result);
     }
 
     @Test
@@ -65,6 +78,50 @@ public class FacadeTests {
         facade.logout(); // No return value, just checking for exceptions
         // If no exception is thrown, the test passes
     }
+
+    @Test
+    public void testAddEvent() {
+        Facade facade = Facade.getInstance();
+        boolean result = facade.addEvent("Test Event", "2023-10-01", "2023-10-02", "Test Location", "Test Description");
+        assertTrue("Add event should return true for valid event", result);
+    }
+    
+    @Test   
+    public void testGetEventById() {
+        Facade facade = Facade.getInstance();
+        Event event = facade.getEventById("Concert127");
+        assertFalse("Get event by ID should return null for non-existent event", event);
+    }
+
+    @Test   
+    public void testRemoveEvent() {
+        Facade facade = Facade.getInstance();
+        boolean result = facade.removeEvent("ComedyShow12690");
+        assertFalse("Remove event should return false for non-existent event", result);
+    }
+
+    @Test
+    public void testGetAllEvents() {
+        Facade facade = Facade.getInstance();
+        List<Event> events = facade.getAllEvents();
+        assertFalse("Event list should not be empty", events.isEmpty());
+    }
+
+    @Test
+    public void testSaveData() {
+        Facade facade = Facade.getInstance();
+        boolean result = facade.saveData();
+        assertTrue("Save data should return true", result);
+    }
+
+    @Test
+    public void testLoadData() {
+        Facade facade = Facade.getInstance();
+        boolean result = facade.loadData();
+        assertTrue("Load data should return true", result);
+    }
+}
+    
 
     //(^quick todo in class to show corrected^)
 
