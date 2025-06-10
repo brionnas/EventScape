@@ -38,14 +38,14 @@ public class UserList {
         return true;
     }
 
-public User getUserByUsername(String username) {
-    for (User user : getUsers()) {
-        if (user.getUserName().equals(username)) {
-            return user;
+    public User getUserByUsername(String username) {
+        for (User user : getUsers()) {
+            if (user.getUserName().equals(username)) {
+                return user;
+            }
         }
+        return null;
     }
-    return null;
-}
 
     public void removeUser(User user) {
         users.remove(user);
