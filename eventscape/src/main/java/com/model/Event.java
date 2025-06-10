@@ -59,7 +59,7 @@ public class Event {
 
 
     // Getters and setters
-    public String getEventId() { 
+    public UUID getEventId() { 
         return eventId; 
     }
     public String getName() { 
@@ -89,16 +89,16 @@ public class Event {
     public String getHost() { 
         return host;
      }
-    public List<String> getAttendees() {
+    public ArrayList<Person> getAttendees() {
          return attendees; 
         }
-    public List<String> getWaitlist() {
+    public ArrayList<Ticket> getWaitlist() {
          return waitlist;
          }
-    public List<String> getTickets() {
+    public ArrayList<Ticket> getTickets() {
          return tickets; 
         }
-    public List<String> getReviews() {
+    public ArrayList<Review> getReviews() {
          return reviews;
          }
 
@@ -106,19 +106,19 @@ public class Event {
         this.ticketsLeft = ticketsLeft;
     }
 
-    public void setAttendees(List<String> attendees) {
+    public void setAttendees(ArrayList<Person> attendees) {
         this.attendees = attendees;
     }       
-    public void setWaitlist(List<String> waitlist) {
+    public void setWaitlist(ArrayList<Ticket> waitlist) {
         this.waitlist = waitlist;
     }
-    public void setTickets(List<String> tickets) {
+    public void setTickets(ArrayList<Ticket> tickets) {
         this.tickets = tickets;
     }
-    public void setReviews(List<String> reviews) {
+    public void setReviews(ArrayList<Review> reviews) {
         this.reviews = reviews;
     }
-    public void setEventId(String eventId) {
+    public void setEventId(UUID eventId) {
         this.eventId = eventId;
     }
     public void setName(String name) {
