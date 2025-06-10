@@ -72,4 +72,22 @@ public List<Event> getAllEvents() {
     return new java.util.ArrayList<Event>();
 }
 
+// Add this method to your Facade class
+
+public Event getEventById(String eventId) {
+    // Implement your logic to retrieve an Event by its ID
+    // For now, return null or throw an exception if not found
+    // Example:
+    for (Event event : getAllEvents()) {
+        if (event.getId().equals(eventId)) {
+            return event;
+        }
+    }
+    return null;
 }
+
+// Other methods...
+
+}
+
+
