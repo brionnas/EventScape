@@ -61,8 +61,7 @@ public class User {
 
     public String getLastName(){
         return lastName;
-    }
-
+    } 
     public String getEmail(){
         return email;
      }

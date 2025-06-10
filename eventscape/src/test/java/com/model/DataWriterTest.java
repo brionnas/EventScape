@@ -7,15 +7,12 @@ import static org.junit.Assert.assertTrue;
 import java.util.Arrays;
 import java.util.List;
 
-import org.junit.Before; 
 import org.junit.Test; 
 
 import com.model.Facade; 
 
 public class DataWriterTest {
     
-    
-
 
     @Test
     public void testTesting(){
@@ -64,6 +61,40 @@ public class DataWriterTest {
     assertTrue(existingUsernames.contains(duplicateUsername)); // should be duplicate
     }
 
+    @Test
+    public void testStrongPassword() {
+    String password = "MyStr0ngP@ssword";
+    assertTrue(password.length() >= 8);
+    assertTrue(password.matches(".*[A-Z].*")); // has uppercase
+    assertTrue(password.matches(".*[a-z].*")); // has lowercase  
+    assertTrue(password.matches(".*[0-9].*")); // has number
+    }
+
+
+    @Test
+    public void testweakPassword() {
+        //short case 
+        String shortPassword = "123"; 
+        assertFalse(shortPassword.length() >= 8);
+
+        //weak but long enough 
+        String commonWeak = "password"; 
+        assertTrue(commonWeak.length() >= 8); 
+    }
+
+    @Test
+    public void testInvalidStudentId() {
+        String tooshort = "213"; 
+        assertFalse(tooshort.length() >= 7);
+
+        String tooLong = "T2343453453"; 
+        assertFalse(tooLong.length() >= 7);
+
+    }
     
+
+
+
+
 }
 
