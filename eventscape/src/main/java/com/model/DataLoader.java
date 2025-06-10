@@ -58,6 +58,8 @@ public class DataLoader extends DataConstants {
         return users;
     }
 }
+
+
     public static ArrayList<Event> loadEvents() {
     ArrayList<Event> events = new ArrayList<>();
 
@@ -88,6 +90,21 @@ public class DataLoader extends DataConstants {
             ArrayList<Ticket> waitlist = new ArrayList<Ticket>();
             ArrayList<Ticket> tickets = new ArrayList<>();
             ArrayList<Review> reviews = new ArrayList<>();
+
+            JSONArray ticketsJSON = (JSONArray) eventJSON.get("tickets");
+            for (int j=0; j < ticketsJSON.size(); j++) {
+                    UUID ticketConfirmation = UUID.fromString((String) ticketsJSON.get(j)); 
+                    //tickets.add(myTicket);
+                }
+
+            JSONArray attendeesJSON = (JSONArray) eventJSON.get("attendees");
+            for (int j=0; j < attendeesJSON.size(); j++) {
+                    JSONObject attendee = (JSONObject)attendeesJSON.get(j); 
+                    String status = (String) attendeesJSON.get("status"); 
+                    String seatNum = (String) attendeesJSON.get("seatNum");
+                    Attendeed myAttendee = new Ticket(USER_TICKET_CONFIRMATION, status, seatNum);
+                    attendee.add(myAttendee);
+                }
             
 
             Event event = new Event(eventId, name, category, subCategory, date,
