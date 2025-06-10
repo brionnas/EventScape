@@ -79,7 +79,7 @@ public Event getEventById(String eventId) {
     // For now, return null or throw an exception if not found
     // Example:
     for (Event event : getAllEvents()) {
-        if (event.getId().equals(eventId)) {
+        if (event.getEventId().equals(eventId)) {
             return event;
         }
     }
