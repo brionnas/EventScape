@@ -66,4 +66,10 @@ public boolean removeEvent(String eventId) {
     return false;
 }
 
+public List<Event> getAllEvents() {
+    // Replace with your actual event storage
+    // Example: return this.eventList;
+    return new java.util.ArrayList<Event>();
+}
+
 }
