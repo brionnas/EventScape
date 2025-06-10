@@ -17,7 +17,6 @@ public class DataWriterTest {
     @Test
     public void testTesting(){
       assertTrue(true); 
-
     }
     
     @Test
@@ -33,8 +32,8 @@ public class DataWriterTest {
     @Test
     public void testUsernameLengthValid() {
     String username = "johnsmith";
-    assertTrue(username.length() >= 6); // assuming minimum 6 characters
-    
+    assertTrue(username.length() >= 6); 
+    // assuming minimum 6 characters
     String longerUsername = "validusername123";
     assertTrue(longerUsername.length() >= 6);
 }
@@ -42,8 +41,8 @@ public class DataWriterTest {
     @Test
     public void testUsernameLengthInvalid() {
     String shortUsername = "bob";
-    assertFalse(shortUsername.length() >= 6); // should fail if minimum is 6
-    
+    assertFalse(shortUsername.length() >= 6); 
+    // should fail if minimum is 6
     String tooShort = "ab";
     assertFalse(tooShort.length() >= 6);
     }
@@ -53,12 +52,12 @@ public class DataWriterTest {
     public void testUsernameNotDuplicate() {
     // Assuming you have a way to get existing usernames
     List<String> existingUsernames = Arrays.asList("john123", "mary456", "bob789");
-    
+    // should be unique
     String newUsername = "alice123";
-    assertFalse(existingUsernames.contains(newUsername)); // should be unique
-    
+    assertFalse(existingUsernames.contains(newUsername)); 
+    // should be duplicate
     String duplicateUsername = "john123";
-    assertTrue(existingUsernames.contains(duplicateUsername)); // should be duplicate
+    assertTrue(existingUsernames.contains(duplicateUsername)); 
     }
 
     @Test
@@ -83,7 +82,7 @@ public class DataWriterTest {
     }
 
     @Test
-    public void testInvalidStudentId() {
+    public void testInvalidStudentIdLength() {
         String tooshort = "213"; 
         assertFalse(tooshort.length() >= 7);
 
@@ -92,9 +91,5 @@ public class DataWriterTest {
 
     }
     
-
-
-
-
 }
 
