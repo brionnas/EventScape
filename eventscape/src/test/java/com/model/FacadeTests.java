@@ -1,21 +1,77 @@
 package com.model; 
+import com.model.Facade;
 
 import static org.junit.Assert.assertEquals; 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue; 
+import org.junit.Test;
 
-import org.junit.Test; 
-import com.model.Facade; 
-
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-
+//import java.text.ParseException;
+//import java.text.SimpleDateFormat;
+//import java.util.Date;
+//import java.util.List;
+//*need to switch to junit *
 public class FacadeTests {
 
-    public static void main(String[] args) {
+    @Test 
+        public void testTesting(){
+         assertTrue(true); 
+      }
+
+    @Test
+    public void testFacadeSingleton() {
+        Facade facade1 = Facade.getInstance();
+        Facade facade2 = Facade.getInstance();
+        assertEquals("Both instances should be the same", facade1, facade2);
+    }   
+
+    @Test
+    public void testAddUser() {
+        Facade facade = Facade.getInstance();
+        boolean result = facade.addUser("KnightAtlas360", "Roxy", "Sparks", "carletnightowl@email.com", "carletnightowl@email.com", "847-1656", "2004-10-19", "smolbeans22");
+    }
+
+    @Test
+    public void testLogin() {
+        Facade facade = Facade.getInstance();
+        User result = facade.login("KnightAtlas360", "smolbeans22");
+        assertFalse("Login should fail for non-existent user", result);
+    }
+
+    @Test
+    public void testFindUser() {
+        Facade facade = Facade.getInstance();
+        User result = facade.findUser("KnightAtlas360");
+        assertFalse("Find user should return null for non-existent user", result);
+    }
+
+    @Test
+    public void testGetAllUsers() {
+        Facade facade = Facade.getInstance();
+        List<User> users = facade.getAllUsers();
+        assertFalse("User list should not be empty", users.isEmpty());
+    }
+
+    @Test
+    public void testRemoveUser() {
+        Facade facade = Facade.getInstance();
+        boolean result = facade.removeUser("KnightAtlas360");
+        assertFalse("Remove user should return false for non-existent user", result);
+    }
+
+    @Test
+    public void testLogout() {
+        Facade facade = Facade.getInstance();
+        facade.logout(); // No return value, just checking for exceptions
+        // If no exception is thrown, the test passes
+    }
+
+    //@Test  
+
+
+
+
+    /*public static void main(String[] args) {
         FacadeTests tester = new FacadeTests();
         tester.runTests();
     }
@@ -88,3 +144,4 @@ public class FacadeTests {
         System.out.println("\n===== FACADE TESTER COMPLETE =====");
     }
 }
+*/
