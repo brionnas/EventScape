@@ -41,29 +41,29 @@ public class FacadeTests {
             // Test 3: Find user by username
             System.out.println("\n-- Test 3: Find User --");
             User found = facade.findUser("KnightAtlas360");
-            System.out.println("Expected: KnightAtlas360 | Actual: " + (found != null ? found.getUsername() : "null"));
+            System.out.println("Expected: KnightAtlas360 | Actual: " + (found != null ? found.getUserName() : "null"));
 
             // Test 4: Find non-existent user
             System.out.println("\n-- Test 4: Find Non-existent User --");
             User missing = facade.findUser("ghost");
-            System.out.println("Expected: null | Actual: " + (missing != null ? missing.getUsername() : "null"));
+            System.out.println("Expected: null | Actual: " + (missing != null ? missing.getUserName() : "null"));
 
             // Test 5: Login with correct credentials
             System.out.println("\n-- Test 5: Login (Correct Credentials) --");
             User loggedIn = facade.login("KnightAtlas360", "smolbeans22");
-            System.out.println("Expected: KnightAtlas360 | Actual: " + (loggedIn != null ? loggedIn.getUsername() : "null"));
+            System.out.println("Expected: KnightAtlas360 | Actual: " + (loggedIn != null ? loggedIn.getUserName() : "null"));
 
             // Test 6: Login with incorrect password
             System.out.println("\n-- Test 6: Login (Wrong Password) --");
             User failedLogin = facade.login("KnightAtlas360", "wrongpass");
-            System.out.println("Expected: null | Actual: " + (failedLogin != null ? failedLogin.getUsername() : "null"));
+            System.out.println("Expected: null | Actual: " + (failedLogin != null ? failedLogin.getUserName() : "null"));
 
             // Test 7: List all users
             System.out.println("\n-- Test 7: Get All Users --");
             List<User> users = facade.getAllUsers();
             System.out.println("Total users: " + users.size());
             for (User u : users) {
-                System.out.println(" - " + u.getUsername());
+                System.out.println(" - " + u.getUserName());
             }
 
             // Test 8: Remove existing user
