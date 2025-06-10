@@ -106,4 +106,58 @@ public class UserListTests {
         assertNotNull(users);
         assertTrue("Should have at least one user after adding", users.size() > 0);
     }
+
+    @Test
+    public void testRemoveUserNullNoException() {
+        try {
+            userList.removeUser(null);
+        } catch (Exception e) {
+            fail("Should not throw exception on null");
+        }
+    }
+
+    @Test
+    public void testRemoveUserNotInListDoesNothing() {
+        int before = userList.getUsers().size();
+        User ghost = new User("ghost", "Ghost", "Guy", "ghost@email.com", "1234567890", sampleDate, "ghostpass");
+        userList.removeUser(ghost);
+        int after = userList.getUsers().size();
+        assertEquals(before, after);
+    }
+
+    @Test
+    public void testGetUserByUsernameCaseSensitive() {
+        assertNull("Should be case-sensitive and return null", userList.getUserByUsername("TESTUSER"));
+    }
+
+    @Test
+    public void testGetUserByUsernameNullReturnsNull() {
+        assertNull(userList.getUserByUsername(null));
+    }
+
+    @Test
+    public void testAddDuplicateUsernameStillAdds() {
+        boolean success = userList.addUser("testuser", "Dup", "User", "dup@example.com", "4445556666", sampleDate, "newpass");
+        assertTrue("Current version allows duplicates", success);
+    }
+
+    @Test
+    public void testAddUserWithNullValues() {
+        try {
+            userList.addUser(null, null, null, null, null, null, null);
+            fail("Expected an exception");
+        } catch (Exception e) {
+            assertTrue(true);
+        }
+    }
+
+    @Test
+    public void testAddUserNullThrows() {
+        try {
+            userList.addUser((User) null);
+            fail("Should throw NullPointerException");
+        } catch (NullPointerException | IllegalArgumentException e) {
+            // Expected
+        }
+    }
 }
