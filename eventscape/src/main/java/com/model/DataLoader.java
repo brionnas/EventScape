@@ -2,7 +2,7 @@ package com.model;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+import java.util.UUID;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -57,21 +57,7 @@ public class DataLoader extends DataConstants {
 
         return users;
     }
-    
-
-    public static void main(String[] args) {
-    ArrayList<User> users = DataLoader.getUsers();
-
-    for(User user : users) {
-        System.out.println(user);
-    }
 }
-
-    public static List<Event> getEvents() {
-        // This method is not implemented yet.        
-        throw new UnsupportedOperationException("Unimplemented method 'getEvents'");
-    }
-
     public static ArrayList<Event> loadEvents() {
     ArrayList<Event> events = new ArrayList<>();
 
@@ -82,7 +68,7 @@ public class DataLoader extends DataConstants {
         for (Object obj : eventsJSON) {
             JSONObject eventJSON = (JSONObject) obj;
 
-            String eventId = (String) eventJSON.get("eventId");
+            UUID eventId = UUID.fromString((String) eventJSON.get("eventId"));
             String name = (String) eventJSON.get("name");
             String category = (String) eventJSON.get("category");
             String subCategory = (String) eventJSON.get("subCategory");
@@ -98,34 +84,11 @@ public class DataLoader extends DataConstants {
             String host = (String) eventJSON.get("host");
 
             // Optional arrays (can be empty)
-            ArrayList<String> attendees = new ArrayList<>();
-            ArrayList<String> waitlist = new ArrayList<>();
-            ArrayList<String> tickets = new ArrayList<>();
-            ArrayList<String> reviews = new ArrayList<>();
-
-            JSONArray attendeesJSON = (JSONArray) eventJSON.get("attendees");
-            if (attendeesJSON != null) {
-                for (Object id : attendeesJSON)
-                    attendees.add((String) id);
-            }
-
-            JSONArray waitlistJSON = (JSONArray) eventJSON.get("waitlist");
-            if (waitlistJSON != null) {
-                for (Object id : waitlistJSON)
-                    waitlist.add((String) id);
-            }
-
-            JSONArray ticketsJSON = (JSONArray) eventJSON.get("tickets");
-            if (ticketsJSON != null) {
-                for (Object id : ticketsJSON)
-                    tickets.add((String) id);
-            }
-
-            JSONArray reviewsJSON = (JSONArray) eventJSON.get("reviews");
-            if (reviewsJSON != null) {
-                for (Object review : reviewsJSON)
-                    reviews.add((String) review);
-            }
+            ArrayList<Person> attendees = new ArrayList<Person>();
+            ArrayList<Ticket> waitlist = new ArrayList<Ticket>();
+            ArrayList<Ticket> tickets = new ArrayList<>();
+            ArrayList<Review> reviews = new ArrayList<>();
+            
 
             Event event = new Event(eventId, name, category, subCategory, date,
                     capacity, ticketsLeft, latitude, longitude, host,
@@ -139,7 +102,13 @@ public class DataLoader extends DataConstants {
 
     return events;
 }
+    
 
+    public static void main(String[] args) {
+    ArrayList<User> users = DataLoader.getUsers();
 
+        for(User user : users) {
+            System.out.println(user);
+        } 
+    };
 
-}
