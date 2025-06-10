@@ -92,6 +92,11 @@ public boolean loadData() {
     return true;
 }
 
+    public boolean saveData() {
+        // TODO: Implement actual save logic
+        return true;
+    }
+
 }
 
 
