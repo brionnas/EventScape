@@ -28,7 +28,7 @@ public class FacadeTests {
     @Test
     public void testAddUser() {
         Facade facade = Facade.getInstance();
-        boolean result = facade.addUser("KnightAtlas360", "Roxy", "Sparks", "carletnightowl@email.com", "carletnightowl@email.com", "847-1656", "2004-10-19", "smolbeans22");
+        boolean result = facade.addUser("KnightAtlas360", "Roxy", "Sparks", "carletnightowl@email.com", "scarletnightowl@email.com", "847-1656", "2004-10-19", "smolbeans22");
     }
 
     @Test
@@ -66,8 +66,12 @@ public class FacadeTests {
         // If no exception is thrown, the test passes
     }
 
-    //@Test  
+    //(^quick todo in class to show corrected^)
 
+    //FACADE TESTS CORRECTIONS
+    //-> needs to be in junit format
+    //-> one liners
+    //-> add event methods
 
 
 
