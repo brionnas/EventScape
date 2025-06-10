@@ -1,10 +1,12 @@
 package com.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 public class Event {
-    private String eventId;
+    private UUID eventId;
     private String name;
     private String category;
     private String subCategory;
@@ -14,15 +16,15 @@ public class Event {
     private String latitude;
     private String longitude;
     private String host;
-    private List<String> attendees;
-    private List<String> waitlist;
-    private List<String> tickets;
-    private List<String> reviews;
+    private ArrayList<Person> attendees;
+    private ArrayList<Ticket> waitlist;
+    private ArrayList<Ticket> tickets;
+    private ArrayList<Review> reviews;
 
-    public Event(String eventId, String name, String category, String subCategory,
+    public Event(UUID eventId, String name, String category, String subCategory,
                  Date date, int capacity, int ticketsLeft, String latitude, String longitude,
-                 String host, List<String> attendees, List<String> waitlist,
-                 List<String> tickets, List<String> reviews) {
+                 String host, ArrayList<Person> attendees, ArrayList<Ticket> waitlist,
+                 ArrayList<Ticket> tickets, ArrayList<Review> reviews) {
         this.eventId = eventId;
         this.name = name;
         this.category = category;
@@ -38,8 +40,8 @@ public class Event {
         this.tickets = tickets;
         this.reviews = reviews;
     }
-    public Event(String eventId, String name, String description, String date, String time, String location) {
-    this.eventId = eventId;
+    public Event(String name, String description, String date, String time, String location) {
+    this.eventId = UUID.randomUUID();
     this.name = name;
     this.category = description;
     this.subCategory = "General";
@@ -49,10 +51,10 @@ public class Event {
     this.latitude = "0.0";
     this.longitude = "0.0";
     this.host = location;
-    this.attendees = new java.util.ArrayList<>();
-    this.waitlist = new java.util.ArrayList<>();
-    this.tickets = new java.util.ArrayList<>();
-    this.reviews = new java.util.ArrayList<>();
+    this.attendees = new ArrayList<>();
+    this.waitlist = new ArrayList<>();
+    this.tickets = new ArrayList<>();
+    this.reviews = new ArrayList<>();
 }
 
 
