@@ -25,10 +25,11 @@ public class EventList {
     public List<Event> getEvents() {
         return events;
     }
-
+//push to the datawriter and then pull to get the right amount of events 
     public void addEvent(Event event) {
         events.add(event);
     }
+    //make the parameters equal event constructor 
 
     public Event getEventById(String eventId) {
         for (Event event : events) {
@@ -50,5 +51,5 @@ public class EventList {
 
     public void save() {
         DataWriter.saveEvents();
-    }
+    }// calling save and reading in from dataloader and make sure the events come back correctly 
 }

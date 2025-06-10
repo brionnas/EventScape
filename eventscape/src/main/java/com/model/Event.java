@@ -38,6 +38,23 @@ public class Event {
         this.tickets = tickets;
         this.reviews = reviews;
     }
+    public Event(String eventId, String name, String description, String date, String time, String location) {
+    this.eventId = eventId;
+    this.name = name;
+    this.category = description;
+    this.subCategory = "General";
+    this.date = new Date(); // or parse `date + " " + time` if needed
+    this.capacity = 100;
+    this.ticketsLeft = 100;
+    this.latitude = "0.0";
+    this.longitude = "0.0";
+    this.host = location;
+    this.attendees = new java.util.ArrayList<>();
+    this.waitlist = new java.util.ArrayList<>();
+    this.tickets = new java.util.ArrayList<>();
+    this.reviews = new java.util.ArrayList<>();
+}
+
 
     // Getters and setters
     public String getEventId() { 
