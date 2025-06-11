@@ -6,9 +6,11 @@ import java.util.List;
 public class Facade {
     private static Facade instance;
     private final UserList userList;
+    private final EventList eventList;
 
     private Facade() {
         userList = UserList.getInstance();
+        eventList = EventList.getInstance();
     }
 
     public static Facade getInstance() {
@@ -18,13 +20,13 @@ public class Facade {
         return instance;
     }
 
+    // --- User Methods ---
     public List<User> getAllUsers() {
         return userList.getUsers();
     }
 
-    
     public boolean addUser(String userName, String firstName, String lastName, String email, String phoneNumber, Date birthDate, String passwordHash) {
-       return UserList.getInstance().addUser(userName, firstName, lastName, email, phoneNumber, birthDate, passwordHash);
+        return userList.addUser(userName, firstName, lastName, email, phoneNumber, birthDate, passwordHash);
     }
 
     public User findUser(String username) {
@@ -40,7 +42,7 @@ public class Facade {
         return false;
     }
 
-     public User login(String username, String password) {
+    public User login(String username, String password) {
         User user = userList.getUserByUsername(username);
         if (user != null && user.getPasswordHash().equals(password)) {
             return user;
@@ -49,54 +51,51 @@ public class Facade {
     }
 
     public void logout() {
-        UserList.getInstance().save();
+        userList.save();
     }
 
-    // Add this method to your Facade class
-
-public boolean addEvent(String name, String startDate, String endDate, String location, String description) {
-    // TODO: Implement actual logic to add event
-    // For now, return true to match test expectation
-    return true;
-}
-
-public boolean removeEvent(String eventId) {
-    // TODO: Implement actual event removal logic
-    // Return false for now to match test expectations for non-existent event
-    return false;
-}
-
-public List<Event> getAllEvents() {
-    // Replace with your actual event storage
-    // Example: return this.eventList;
-    return new java.util.ArrayList<Event>();
-}
-
-// Add this method to your Facade class
-
-public Event getEventById(String eventId) {
-    // Implement your logic to retrieve an Event by its ID
-    // For now, return null or throw an exception if not found
-    // Example:
-    for (Event event : getAllEvents()) {
-        if (event.getEventId().equals(eventId)) {
-            return event;
-        }
-    }
-    return null;
-}
-
-// Add this method to the Facade class
-public boolean loadData() {
-    // TODO: Implement actual data loading logic
-    return true;
-}
-
-    public boolean saveData() {
-        // TODO: Implement actual save logic
+    // --- Event Methods ---
+    public boolean addEvent(String name, String startDate, String endDate, String location, String description) {
+        Event event = new Event(name, startDate, endDate, location, description);
+        eventList.addEvent(event);
         return true;
     }
 
+    public boolean removeEvent(String eventId) {
+        try {
+            java.util.UUID uuid = java.util.UUID.fromString(eventId);
+            Event event = eventList.getEventById(uuid);
+            if (event != null) {
+                eventList.removeEvent(event);
+                return true;
+            }
+        } catch (IllegalArgumentException e) {
+            // Invalid UUID string
+        }
+        return false;
+    }
+
+    public List<Event> getAllEvents() {
+        return eventList.getEvents();
+    }
+
+    public Event getEventById(String eventId) {
+        try {
+            java.util.UUID uuid = java.util.UUID.fromString(eventId);
+            return eventList.getEventById(uuid);
+        } catch (IllegalArgumentException e) {
+            return null;
+        }
+    }
+
+    // --- Persistence ---
+    public boolean loadData() {
+        return userList.load() && eventList.load();
+    }
+
+    public boolean saveData() {
+        userList.save();
+        eventList.save();
+        return true;
+    }
 }
-
-
