@@ -23,5 +23,15 @@ public class Ticket {
     public String toString() {
         return "\nTicket: " + ticketConfirmation + ", " + seatNum + ", " + status;
     }
+
+    public Object getUserId() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getUserId'");
+    }
+
+    public Object getTicketId() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getTicketId'");
+    }
 }
 
