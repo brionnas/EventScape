@@ -36,12 +36,9 @@ public class DataLoader extends DataConstants {
                 ArrayList<Ticket> tickets = new ArrayList<>();
 
                 for (int j=0; j < ticketsJSON.size(); j++) {
-                    JSONObject ticketJSON = (JSONObject)ticketsJSON.get(j); 
-                    String ticketConfirmation = (String) ticketJSON.get(USER_TICKET_CONFIRMATION); 
-                    String status = (String) ticketJSON.get("status"); 
-                    String seatNum = (String) ticketJSON.get("seatNum");
-                    Ticket myTicket = new Ticket(ticketConfirmation, status, seatNum);
-                    tickets.add(myTicket);
+                    UUID ticketId = UUID.fromString((String)ticketsJSON.get(j)); 
+                    Ticket ticket = TicketList.getInstance().getTicketById(ticketId);
+                    tickets.add(ticket);
                 }
 
              users.add(new User( userName, userFirstName, userLastName, email, phoneNumber, birthDate, passwordHash, isLocked2, failedAttempts, studentVerified, tickets));
@@ -60,27 +57,19 @@ public class DataLoader extends DataConstants {
 
     public static ArrayList<Ticket> getTickets()
     {
-        ArrayList<Ticket> Tickets = new ArrayList<Ticket>();
-
          ArrayList<Ticket> allTickets = new ArrayList<Ticket>();
 
         try { 
             FileReader reader = new FileReader(USER_FILE_NAME);
-            JSONArray peopleJSON = (JSONArray)new JSONParser().parse(reader); 
+            JSONArray ticketsJSON = (JSONArray)new JSONParser().parse(reader); 
 
-            for (int i=0; i < peopleJSON.size(); i++) {
-                JSONObject personJSON = (JSONObject)peopleJSON.get(i); 
-
-                JSONArray ticketsJSON = (JSONArray) personJSON.get(USER_TICKETS);
-
-                for (int j=0; j < ticketsJSON.size(); j++) {
-                    JSONObject ticketJSON = (JSONObject)ticketsJSON.get(j); 
-                    String ticketConfirmation = (String) ticketJSON.get(USER_TICKET_CONFIRMATION); 
-                    String status = (String) ticketJSON.get("status"); 
-                    String seatNum = (String) ticketJSON.get("seatNum");
-                    Ticket myTicket = new Ticket(ticketConfirmation, status, seatNum);
-                    allTickets.add(myTicket);
-                }
+            for (int i=0; i < ticketsJSON.size(); i++) {
+                JSONObject ticketJSON = (JSONObject)ticketsJSON.get(i); 
+                String ticketConfirmation = (String) ticketJSON.get(USER_TICKET_CONFIRMATION); 
+                String status = (String) ticketJSON.get("status"); 
+                String seatNum = (String) ticketJSON.get("seatNum");
+                Ticket myTicket = new Ticket(ticketConfirmation, status, seatNum);
+                allTickets.add(myTicket);
             }
 
         } catch (Exception e) { 
