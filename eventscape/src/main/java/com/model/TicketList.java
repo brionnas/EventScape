@@ -8,7 +8,7 @@ public class TicketList {
     private ArrayList<Ticket> tickets;
 
     private TicketList() {
-        tickets = new ArrayList<>();
+        tickets = DataLoader.getTickets();
     }
 
     public static TicketList getInstance() {
@@ -43,6 +43,12 @@ public class TicketList {
 
     public ArrayList<Ticket> getAllTickets() {
         return tickets;
+    }
+
+    public boolean saveTickets() {
+        //DataWriter.saveTickets();
+
+        return true;
     }
 }
 
