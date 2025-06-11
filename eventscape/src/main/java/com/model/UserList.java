@@ -55,4 +55,8 @@ public class UserList {
         DataWriter.saveUsers();
         return true;
     }
+
+    public boolean load() {
+        return true;
+    }
 }
