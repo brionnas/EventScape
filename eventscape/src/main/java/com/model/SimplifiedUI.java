@@ -89,12 +89,7 @@ public class SimplifiedUI {
         UUID eventId = UUID.randomUUID();
 
         Event newEvent = new Event(
-            eventId.toString(), name, category, subCategory, date, capacity, capacity, // ticketsLeft
-            latitude, longitude, host,
-            new ArrayList<>(), // attendees
-            new ArrayList<>(), // waitlist
-            new ArrayList<>(), // tickets
-            new ArrayList<>()  // reviews
+            eventId.toString(), name, category, subCategory, latitude
         );
 
         EventList.getInstance().addEvent(newEvent);
