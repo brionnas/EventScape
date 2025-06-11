@@ -57,7 +57,53 @@ public class DataLoader extends DataConstants {
 
         return users;
     }
-}
+
+    public static ArrayList<Ticket> getTickets()
+    {
+        ArrayList<Ticket> Tickets = new ArrayList<Ticket>();
+
+        try { 
+            FileReader reader = new FileReader(USER_FILE_NAME);
+            JSONArray peopleJSON = (JSONArray)new JSONParser().parse(reader); 
+
+            for (int i=0; i < peopleJSON.size(); i++) {
+                JSONObject personJSON = (JSONObject)peopleJSON.get(i); 
+                String userName = (String)personJSON.get(USER_NAME); 
+                String userFirstName = (String)personJSON.get(USER_FIRST_NAME); 
+                String userLastName = (String)personJSON.get(USER_LAST_NAME); 
+                String phoneNumber = (String) personJSON.get(USER_PHONE_NUMBER);
+                String email = (String) personJSON.get("email");
+                Date birthDate = Utilities.toDate((String) personJSON.get("birthDate")); 
+                String passwordHash = (String) personJSON.get("passwordHash");
+                boolean  isLocked2 = (Boolean) personJSON.get("isLocked");
+                int failedAttempts = ((Long) personJSON.get("failedLoginAttempts")).intValue();
+                boolean studentVerified = (Boolean) personJSON.get("studentVerified");
+
+                JSONArray ticketsJSON = (JSONArray) ticketsJSON.get(USER_TICKETS);
+                ArrayList<Ticket> tickets = new ArrayList<Ticket>();
+
+                for (int j=0; j < ticketsJSON.size(); j++) {
+                    JSONObject ticketJSON = (JSONObject)ticketsJSON.get(j); 
+                    String ticketConfirmation = (String) ticketJSON.get(USER_TICKET_CONFIRMATION); 
+                    String status = (String) ticketJSON.get("status"); 
+                    String seatNum = (String) ticketJSON.get("seatNum");
+                    Ticket myTicket = new Ticket(ticketConfirmation, status, seatNum);
+                    tickets.add(myTicket);
+                }
+
+             tickets.add(new Ticket(getTicketConfirmation, getSeatNum, getStatus));
+
+
+            }
+
+        } catch (Exception e) { 
+            e.printStackTrace();
+        }
+
+
+
+        return tickets;
+     }
 
 
     public static ArrayList<Event> loadEvents() {
@@ -106,6 +152,18 @@ public class DataLoader extends DataConstants {
                     attendee.add(myAttendee);
                 }
             
+            JSONArray waitlistJSON = (JSONArray) ticketsJSON.get("tickets"); 
+            for (int j=0; j < ticketsJSON.size(); j++) {
+                UUID ticketConfirmation = UUID.fromString((String) ticketsJSON.get(j)); 
+                    //tickets.add(myTicket);
+            }
+
+            JSONArray reviewsJSON = (JSONArray) reviewsJSON.get("reviews"); 
+            for (int j=0; j < ticketsJSON.size(); j++) {
+                UUID ticketConfirmation = UUID.fromString((String) ticketsJSON.get(j)); 
+                //tickets.add(myTicket); 
+            }
+            
 
             Event event = new Event(eventId, name, category, subCategory, date,
                     capacity, ticketsLeft, latitude, longitude, host,
@@ -127,5 +185,6 @@ public class DataLoader extends DataConstants {
         for(User user : users) {
             System.out.println(user);
         } 
-    };
+    }
+}
 
