@@ -1,5 +1,6 @@
 package com.model;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -163,5 +164,17 @@ public class Event {
                 ", tickets=" + tickets +
                 ", reviews=" + reviews +
                 '}';
+    }
+    public LocalDateTime getDateTime() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getDateTime'");
+    }
+    public boolean isAtCapacity() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'isAtCapacity'");
+    }
+    public float getAverageRating() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getAverageRating'");
     }
 }
