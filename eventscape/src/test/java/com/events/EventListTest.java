@@ -2,6 +2,9 @@ package com.events;
 
 import org.junit.Before;
 import org.junit.Test;
+import com.model.Event;
+import com.model.EventList;
+
 import org.junit.After;
 import static org.junit.Assert.*;
 
@@ -24,11 +27,11 @@ public class EventListTest {
         eventList.getEvents().clear(); // Clean start
 
         // Sample events
-        testEvent1 = new Event("EVT001", "Test Event 1", "Desc 1", "2024-06-15", "10:00", "Loc 1");
-        testEvent2 = new Event("EVT002", "Test Event 2", "Desc 2", "2024-06-16", "14:00", "Loc 2");
-        testEvent3 = new Event("EVT003", "Test Event 3", "Desc 3", "2024-06-17", "18:00", "Loc 3");
+        // Update the constructor arguments below to match your Event class constructor
+        testEvent1 = new Event(null, "EVT001", "Test Event 1", "Desc 1", null, 0, 0, "2024-06-15", null, null, null, null, null, null);
+        testEvent2 = new Event(null, "EVT002", "Test Event 2", "Desc 2", null, 0, 0, "2024-06-16", null, null, null, null, null, null);
+        testEvent3 = new Event(null, "EVT003", "Test Event 3", "Desc 3", null, 0, 0, "2024-06-17", null, null, null, null, null, null);
     }
-
     @After
     public void tearDown() {
         resetSingletonInstance();
@@ -95,20 +98,39 @@ public class EventListTest {
     @Test
     public void testGetByIdFound() {
         eventList.addEvent(testEvent1);
-        Event found = eventList.getEventById("EVT001");
+        Event found = eventList.getEventById(java.util.UUID.fromString("EVT001"));
         assertNotNull(found);
         assertEquals("EVT001", found.getEventId());
     }
 
     @Test
     public void testGetByIdNotFound() {
-        assertNull(eventList.getEventById("FAKE_ID"));
+        assertNull(eventList.getEventById(java.util.UUID.fromString("00000000-0000-0000-0000-00000000FAKE")));
     }
 
     @Test
     public void testGetByIdCaseSensitive() {
         eventList.addEvent(testEvent1);
-        assertNull(eventList.getEventById("evt001")); // Expected: case-sensitive
+        // Use a valid UUID string for testing case sensitivity
+        assertNull(eventList.getEventById(java.util.UUID.fromString("EVT001"))); // Expected: case-sensitive
+    }
+    public EventList getEventList() {
+        return eventList;
+    }
+    public void setEventList(EventList eventList) {
+        this.eventList = eventList;
+    }
+    public Event getTestEvent1() {
+        return testEvent1;
+    }
+    public void setTestEvent1(Event testEvent1) {
+        this.testEvent1 = testEvent1;
+    }
+    public Event getTestEvent2() {
+        return testEvent2;
+    }
+    public void setTestEvent2(Event testEvent2) {
+        this.testEvent2 = testEvent2;
     }
 
     
@@ -120,6 +142,6 @@ public class EventListTest {
     //     }
     // }
 
-    
+
 }
 
