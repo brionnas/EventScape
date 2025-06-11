@@ -19,7 +19,7 @@ public abstract class DataConstants {
     protected static final String USER_EMAIL = "email";
     protected static final String USER_PASSWORD_HASH = "passwordHash"; 
     protected static final String USER_STUDENT_VARIFIED = "studentVerified"; 
-   
+    
    
 
 }
