@@ -1,37 +1,37 @@
 package com.model;
 
-public class Ticket {
-    private String ticketConfirmation; // UUID string
-    private String seatNum;
-    private TicketStatus status;
+import java.util.ArrayList;
+import java.util.UUID;
 
-    public Ticket(String ticketConfirmation, String seatNum, String statusStr) {
+public class Ticket {
+    private UUID ticketConfirmation; // UUID string
+    private UUID seatNum;
+    private TicketStatus status;
+    private ArrayList<Person> people; 
+
+    public Ticket(UUID ticketConfirmation, UUID eventId, ArrayList<Person> people) {
         this.ticketConfirmation = ticketConfirmation;
-        this.seatNum = seatNum;
+        this.seatNum = eventId;
         try {
-            this.status = TicketStatus.valueOf(statusStr.toUpperCase());
+            this.status = TicketStatus.PENDING;
         } catch (Exception e) {
             this.status = TicketStatus.PENDING;
         }
     }
 
     // Getters and setters
-    public String getTicketConfirmation() { return ticketConfirmation; }
-    public String getSeatNum() { return seatNum; }
+    public UUID getTicketConfirmation() { return ticketConfirmation; }
+    public UUID getSeatNum() { return seatNum; }
     public String getStatus() { return status.toString(); }
+    public ArrayList<Person> getPeople() {return people; }
 
     public String toString() {
-        return "\nTicket: " + ticketConfirmation + ", " + seatNum + ", " + status;
+        return "\nTicket: " + ticketConfirmation + ", " + seatNum + ", " + status + ", People: " + people;
     }
 
     public Object getUserId() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getUserId'");
-    }
-
-    public Object getTicketId() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getTicketId'");
     }
 }
 

@@ -34,7 +34,7 @@ public class TicketList {
 
     public Ticket getTicketById(UUID ticketId) {
         for (Ticket t : tickets) {
-            if (t.getTicketId().equals(ticketId)) {
+            if (t.getTicketConfirmation().equals(ticketId)) {
                 return t;
             }
         }

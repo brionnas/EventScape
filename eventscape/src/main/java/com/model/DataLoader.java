@@ -11,6 +11,7 @@ import org.json.simple.parser.JSONParser;
 
 public class DataLoader extends DataConstants {
 
+
     public static ArrayList<User> getUsers()
     {
         ArrayList<User> users = new ArrayList<User>();
@@ -60,15 +61,29 @@ public class DataLoader extends DataConstants {
          ArrayList<Ticket> allTickets = new ArrayList<Ticket>();
 
         try { 
-            FileReader reader = new FileReader(USER_FILE_NAME);
+            FileReader reader = new FileReader(TICKET_FILE_NAME);
             JSONArray ticketsJSON = (JSONArray)new JSONParser().parse(reader); 
 
             for (int i=0; i < ticketsJSON.size(); i++) {
                 JSONObject ticketJSON = (JSONObject)ticketsJSON.get(i); 
-                String ticketConfirmation = (String) ticketJSON.get(USER_TICKET_CONFIRMATION); 
-                String status = (String) ticketJSON.get("status"); 
-                String seatNum = (String) ticketJSON.get("seatNum");
-                Ticket myTicket = new Ticket(ticketConfirmation, status, seatNum);
+                UUID ticketUUID = UUID.fromString((String) ticketJSON.get("ticketUUID")); 
+                UUID eventId = UUID.fromString((String) ticketJSON.get("eventId"));
+                
+                // Process people array
+                ArrayList<Person> people = new ArrayList<>();
+                JSONArray peopleJSON = (JSONArray) ticketJSON.get("people");
+                if (peopleJSON != null) {
+                    for (int j = 0; j < peopleJSON.size(); j++) {
+                        JSONObject personJSON = (JSONObject) peopleJSON.get(j);
+                        String firstName = (String) personJSON.get("firstName");
+                        String lastName = (String) personJSON.get("lastName");
+                        Date birthDate = Utilities.toDate((String) personJSON.get("birthDate"));
+                        Person person = new Person(firstName, lastName, birthDate);
+                        people.add(person);
+                    }
+                }
+                
+                Ticket myTicket = new Ticket(ticketUUID, eventId, people);
                 allTickets.add(myTicket);
             }
 
@@ -112,15 +127,35 @@ public class DataLoader extends DataConstants {
             ArrayList<Review> reviews = new ArrayList<>();
 
             JSONArray ticketsJSON = (JSONArray) eventJSON.get("tickets");
-            for (int j=0; j < ticketsJSON.size(); j++) {
-                    UUID ticketConfirmation = UUID.fromString((String) ticketsJSON.get(j)); 
-                    //tickets.add(myTicket);
+                if (ticketsJSON != null) {
+                    for (int j = 0; j < ticketsJSON.size(); j++) {
+                        // If tickets are stored as UUIDs, get the ticket from TicketList
+                        UUID ticketId = UUID.fromString((String) ticketsJSON.get(j));
+                        Ticket ticket = TicketList.getInstance().getTicketById(ticketId);
+                        if (ticket != null) {
+                            tickets.add(ticket);
+                        }
+                        
+                        // Alternative: If tickets are stored as full objects in JSON
+                        // JSONObject ticketJSON = (JSONObject) ticketsJSON.get(j);
+                        // UUID ticketConfirmation = UUID.fromString((String) ticketJSON.get("ticketConfirmation"));
+                        // String status = (String) ticketJSON.get("status");
+                        // String seatNum = (String) ticketJSON.get("seatNum");
+                        // Ticket ticket = new Ticket(ticketConfirmation, status, seatNum);
+                        // tickets.add(ticket);
+                    }
                 }
-            
-             JSONArray attendeesJSON = (JSONArray) eventJSON.get("attendees");
+                
+                // Process attendees array
+                JSONArray attendeesJSON = (JSONArray) eventJSON.get("attendees");
                 if (attendeesJSON != null) {
                     for (int j = 0; j < attendeesJSON.size(); j++) {
                         JSONObject attendeeJSON = (JSONObject) attendeesJSON.get(j);
+                        // Create Person object from JSON and add to attendees
+                        // String firstName = (String) attendeeJSON.get("firstName");
+                        // String lastName = (String) attendeeJSON.get("lastName");
+                        // Person attendee = new Person(firstName, lastName);
+                        // attendees.add(attendee);
                     }
                 }
                 
@@ -128,7 +163,20 @@ public class DataLoader extends DataConstants {
                 JSONArray waitlistJSON = (JSONArray) eventJSON.get("waitlist");
                 if (waitlistJSON != null) {
                     for (int j = 0; j < waitlistJSON.size(); j++) {
-                        String ticketConfirmation = (String) waitlistJSON.get(j);
+                        // If waitlist contains ticket UUIDs
+                        UUID ticketId = UUID.fromString((String) waitlistJSON.get(j));
+                        Ticket ticket = TicketList.getInstance().getTicketById(ticketId);
+                        if (ticket != null) {
+                            waitlist.add(ticket);
+                        }
+                        
+                        // Alternative: If waitlist contains full ticket objects
+                        // JSONObject waitlistTicketJSON = (JSONObject) waitlistJSON.get(j);
+                        // UUID ticketConfirmation = UUID.fromString((String) waitlistTicketJSON.get("ticketConfirmation"));
+                        // String status = (String) waitlistTicketJSON.get("status");
+                        // String seatNum = (String) waitlistTicketJSON.get("seatNum");
+                        // Ticket waitlistTicket = new Ticket(ticketConfirmation, status, seatNum);
+                        // waitlist.add(waitlistTicket);
                     }
                 }
 
@@ -137,13 +185,17 @@ public class DataLoader extends DataConstants {
                 if (reviewsJSON != null) {
                     for (int j = 0; j < reviewsJSON.size(); j++) {
                         JSONObject reviewJSON = (JSONObject) reviewsJSON.get(j);
+                        // Create Review object from JSON and add to reviews
+                        // String reviewText = (String) reviewJSON.get("reviewText");
+                        // int rating = ((Long) reviewJSON.get("rating")).intValue();
+                        // Review review = new Review(reviewText, rating);
+                        // reviews.add(review);
                     }
                 }
-            
 
-            Event event = new Event(eventId, name, category, subCategory, date,
-                    capacity, ticketsLeft, latitude, longitude, host,
-                    attendees, waitlist, tickets, reviews);
+                Event event = new Event(eventId, name, category, subCategory, date,
+                        capacity, ticketsLeft, latitude, longitude, host,
+                        attendees, waitlist, tickets, reviews);
 
             events.add(event);
         }
@@ -152,8 +204,7 @@ public class DataLoader extends DataConstants {
     }
 
     return events;
-}
-    
+    }
 
     public static void main(String[] args) {
     ArrayList<User> users = DataLoader.getUsers();
