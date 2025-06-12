@@ -9,9 +9,9 @@ public class Ticket {
     private TicketStatus status;
     private ArrayList<Person> people; 
 
-    public Ticket(UUID ticketConfirmation, UUID eventId, ArrayList<Person> people) {
+    public Ticket(UUID ticketConfirmation, UUID status, ArrayList<Person> people2) {
         this.ticketConfirmation = ticketConfirmation;
-        this.seatNum = eventId;
+        this.seatNum = status;
         try {
             this.status = TicketStatus.PENDING;
         } catch (Exception e) {
