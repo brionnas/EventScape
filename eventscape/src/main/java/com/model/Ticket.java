@@ -5,11 +5,13 @@ import java.util.UUID;
 
 public class Ticket {
     private UUID ticketConfirmation; // UUID string
+    private UUID eventId;
     private TicketStatus status;
     private ArrayList<Person> people; 
 
-    public Ticket(UUID ticketConfirmation, TicketStatus status, ArrayList<Person> people) {
+    public Ticket(UUID ticketConfirmation, UUID eventId, TicketStatus status, ArrayList<Person> people) {
         this.ticketConfirmation = ticketConfirmation;
+        this.eventId = eventId;
         this.status = status;
         this.people = people;
         try {
@@ -31,6 +33,10 @@ public class Ticket {
     public Object getUserId() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getUserId'");
+    }
+
+    public Event getEvent() {
+        return EventList.getInstance().getEventById(eventId);
     }
 }
 

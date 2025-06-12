@@ -67,6 +67,7 @@ public class DataLoader extends DataConstants {
             for (int i=0; i < ticketsJSON.size(); i++) {
                 JSONObject ticketJSON = (JSONObject)ticketsJSON.get(i); 
                 UUID ticketUUID = UUID.fromString((String) ticketJSON.get("ticketUUID")); 
+                UUID eventUUID = UUID.fromString((String) ticketJSON.get("eventId")); 
                 TicketStatus status = TicketStatus.valueOf((String) ticketJSON.get("ticketStatus")); 
                 
                 // Process people array
@@ -83,7 +84,7 @@ public class DataLoader extends DataConstants {
                     }
                 }
                 
-                Ticket ticket = new Ticket(ticketUUID, status, people);
+                Ticket ticket = new Ticket(ticketUUID, eventUUID, status, people);
                 allTickets.add(ticket);
             }
 

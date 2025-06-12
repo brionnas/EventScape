@@ -20,6 +20,11 @@
           "firstName": "Diego",
           "lastName": "Jorge",
           "birthDate": "2001-01-02"
+        },
+        {
+          "firstName": "Jenny",
+          "lastName": "Smith",
+          "birthDate": "2001-01-02"
         }
     ]
   }
