@@ -16,14 +16,13 @@ public class Event {
     private String latitude;
     private String longitude;
     private String host;
-    private ArrayList<Person> attendees;
     private ArrayList<Ticket> waitlist;
     private ArrayList<Ticket> tickets;
     private ArrayList<Review> reviews;
 
     public Event(UUID eventId, String name, String category, String subCategory,
                  Date date, int capacity, int ticketsLeft, String latitude, String longitude,
-                 String host, ArrayList<Person> attendees, ArrayList<Ticket> waitlist,
+                 String host,  ArrayList<Ticket> waitlist,
                  ArrayList<Ticket> tickets, ArrayList<Review> reviews) {
         this.eventId = eventId;
         this.name = name;
@@ -35,7 +34,6 @@ public class Event {
         this.latitude = latitude;
         this.longitude = longitude;
         this.host = host;
-        this.attendees = attendees;
         this.waitlist = waitlist;
         this.tickets = tickets;
         this.reviews = reviews;
@@ -51,7 +49,6 @@ public class Event {
     this.latitude = "0.0";
     this.longitude = "0.0";
     this.host = location;
-    this.attendees = new ArrayList<>();
     this.waitlist = new ArrayList<>();
     this.tickets = new ArrayList<>();
     this.reviews = new ArrayList<>();
@@ -89,9 +86,6 @@ public class Event {
     public String getHost() { 
         return host;
      }
-    public ArrayList<Person> getAttendees() {
-         return attendees; 
-        }
     public ArrayList<Ticket> getWaitlist() {
          return waitlist;
          }
@@ -104,11 +98,7 @@ public class Event {
 
     public void setTicketsLeft(int ticketsLeft) {
         this.ticketsLeft = ticketsLeft;
-    }
-
-    public void setAttendees(ArrayList<Person> attendees) {
-        this.attendees = attendees;
-    }       
+    }     
     public void setWaitlist(ArrayList<Ticket> waitlist) {
         this.waitlist = waitlist;
     }
@@ -158,7 +148,6 @@ public class Event {
                 ", latitude='" + latitude + '\'' +
                 ", longitude='" + longitude + '\'' +
                 ", host='" + host + '\'' +
-                ", attendees=" + attendees +
                 ", waitlist=" + waitlist +
                 ", tickets=" + tickets +
                 ", reviews=" + reviews +

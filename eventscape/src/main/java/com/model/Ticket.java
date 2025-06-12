@@ -5,13 +5,13 @@ import java.util.UUID;
 
 public class Ticket {
     private UUID ticketConfirmation; // UUID string
-    private UUID seatNum;
     private TicketStatus status;
     private ArrayList<Person> people; 
 
-    public Ticket(UUID ticketConfirmation, UUID status, ArrayList<Person> people2) {
+    public Ticket(UUID ticketConfirmation, TicketStatus status, ArrayList<Person> people) {
         this.ticketConfirmation = ticketConfirmation;
-        this.seatNum = status;
+        this.status = status;
+        this.people = people;
         try {
             this.status = TicketStatus.PENDING;
         } catch (Exception e) {
@@ -21,12 +21,11 @@ public class Ticket {
 
     // Getters and setters
     public UUID getTicketConfirmation() { return ticketConfirmation; }
-    public UUID getSeatNum() { return seatNum; }
     public String getStatus() { return status.toString(); }
     public ArrayList<Person> getPeople() {return people; }
 
     public String toString() {
-        return "\nTicket: " + ticketConfirmation + ", " + seatNum + ", " + status + ", People: " + people;
+        return "\nTicket: " + ticketConfirmation + ", " + status + ", People: " + people;
     }
 
     public Object getUserId() {

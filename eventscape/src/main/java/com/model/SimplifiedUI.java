@@ -147,7 +147,7 @@ public class SimplifiedUI {
         return;
     }
 
-    Ticket ticket = new Ticket(UUID.randomUUID().toString(), "GA", "Confirmed");
+    Ticket ticket = new Ticket(UUID.randomUUID(), TicketStatus.PENDING, new ArrayList<Person>());
 
     if (user.getTickets() == null)
         user.setTickets(new ArrayList<>());
