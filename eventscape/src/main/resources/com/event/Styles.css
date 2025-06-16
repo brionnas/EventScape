@@ -1,0 +1,17 @@
+
+.root {
+    -fx-font-size: 16 pt; 
+    -fx-font-family: "Helventica" ; 
+    -fx-background: pink; 
+}
+
+.label { 
+    -fx-text-fill:black; 
+    -fx-font-size:24pt; 
+}
+
+.button {
+    -fx-background-color: cyan; 
+    -fx-text-fill:black; 
+    -fx-font-size:24pt; 
+}
