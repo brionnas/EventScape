@@ -8,21 +8,22 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.LoginController">
+<VBox alignment="CENTER" prefHeight="416.0" prefWidth="433.0" spacing="20.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.LoginController">
    <children>
       <Label text="Login" />
-      <HBox prefHeight="100.0" prefWidth="200.0">
+      <HBox prefHeight="52.0" prefWidth="393.0">
          <children>
             <Label text="UserName:" />
-            <TextField fx:id="txtUserName" alignment="CENTER_RIGHT" />
+            <TextField fx:id="txtUserName" alignment="CENTER" />
          </children>
       </HBox>
-      <HBox prefHeight="100.0" prefWidth="200.0">
+      <HBox prefHeight="52.0" prefWidth="393.0">
          <children>
             <Label text="Password:" />
-            <TextField fx:id="txtPassword" />
+            <TextField fx:id="txtPassword" alignment="CENTER" />
          </children>
       </HBox>
+      <Label fx:id="lblErrorMessage" text="lbl error message" />
       <Button fx:id="Login" onAction="#login" text="Login" />
    </children>
    <padding>

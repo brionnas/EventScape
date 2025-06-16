@@ -4,7 +4,7 @@ import java.io.IOException;
 import javafx.fxml.FXML;
 import com.event.App;
 
-public class SecondaryController {
+public class Home {
 
     @FXML
     private void switchToPrimary() throws IOException {

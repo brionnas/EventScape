@@ -1,15 +1,21 @@
 package com.controllers;
 
+import com.model.Facade;
+import com.model.User;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import com.model.*;
 
 public class LoginController {
 
     @FXML
     private Button Login;
+
+    @FXML
+    private Label lblErrorMessage;
 
     @FXML
     private TextField txtPassword;
@@ -19,7 +25,7 @@ public class LoginController {
 
     @FXML
     void login(ActionEvent event) {
-        String userName = txtUserName.getText();
+         String userName = txtUserName.getText();
         String password = txtPassword.getText(); 
 
         Facade facade = Facade.getInstance(); 
@@ -32,6 +38,7 @@ public class LoginController {
 
         
         System.out.println("Welcome " + user.getFirstName());
+
     }
 
 }
