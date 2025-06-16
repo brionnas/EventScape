@@ -38,5 +38,10 @@ public class Ticket {
     public Event getEvent() {
         return EventList.getInstance().getEventById(eventId);
     }
+
+    public Object getSeatNum() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getSeatNum'");
+    }
 }
 
