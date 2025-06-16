@@ -23,7 +23,7 @@
             <TextField fx:id="txtPassword" alignment="CENTER" />
          </children>
       </HBox>
-      <Label fx:id="lblErrorMessage" text="lbl error message" />
+      <Label fx:id="lblErrorMessage" text="error! Try again :(" />
       <Button fx:id="Login" onAction="#login" text="Login" />
    </children>
    <padding>
