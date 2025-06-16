@@ -28,9 +28,10 @@ public class EventListTest {
 
         // Sample events
         // Update the constructor arguments below to match your Event class constructor
-        testEvent1 = new Event(null, "EVT001", "Test Event 1", "Desc 1", null, 0, 0, "2024-06-15", null, null, null, null, null, null);
-        testEvent2 = new Event(null, "EVT002", "Test Event 2", "Desc 2", null, 0, 0, "2024-06-16", null, null, null, null, null, null);
-        testEvent3 = new Event(null, "EVT003", "Test Event 3", "Desc 3", null, 0, 0, "2024-06-17", null, null, null, null, null, null);
+        // Example: If your Event constructor is Event(String eventId, String name, String description, String date)
+        testEvent1 = new Event("00000000-0000-0000-0000-00000000E001", "Test Event 1", "Desc 1", "2024-06-15", null);
+        testEvent2 = new Event("00000000-0000-0000-0000-00000000E002", "Test Event 2", "Desc 2", "2024-06-16", null);
+        testEvent3 = new Event("00000000-0000-0000-0000-00000000E003", "Test Event 3", "Desc 3", "2024-06-17", null);
     }
     @After
     public void tearDown() {
