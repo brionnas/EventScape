@@ -35,8 +35,6 @@ public class LoginController {
             System.out.println("error");
             return;
         }
-
-        
         System.out.println("Welcome " + user.getFirstName());
 
     }
