@@ -1,13 +1,17 @@
 package com.controllers;
 
-import java.io.IOException;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import com.event.App;
+import javafx.scene.control.Button;
 
 public class Home {
 
     @FXML
-    private void switchToPrimary() throws IOException {
-        App.setRoot("Login");
+    private Button HomeButton;
+
+    @FXML
+    void switchToPrimary(ActionEvent event) {
+
     }
+
 }
