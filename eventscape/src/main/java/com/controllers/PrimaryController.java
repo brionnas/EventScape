@@ -5,7 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
-public class LoginController {
+public class PrimaryController {
 
     @FXML
     private Button Login;
@@ -18,7 +18,7 @@ public class LoginController {
 
     @FXML
     void switchToSecondary(ActionEvent event) {
-
+        System.out.println("hello");
     }
 
 }
