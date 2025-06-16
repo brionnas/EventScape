@@ -14,3 +14,6 @@ Basic Favorites: Allow users to “star” events in localStorage so they can re
 
 Video Demonstration:
 https://www.youtube.com/watch?v=CHF3WBU8mRQ
+
+Mockitt prototype:
+https://mockitt.com/proto/2WNRGA6RsxxqmsYyBg6VI/sharing?view_mode=device&screen=rbpUoGI0hfQVjPEzP&canvasId=ptmgfynsUoGKPyX50PDuP1
