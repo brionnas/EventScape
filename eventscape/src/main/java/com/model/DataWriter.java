@@ -62,7 +62,7 @@ public class DataWriter extends DataConstants {
 
         for (Event event : events) {
             JSONObject obj = new JSONObject();
-            obj.put("eventId", event.getEventId());
+            obj.put("eventId", event.getEventId().toString());
             obj.put("name", event.getName());
             obj.put("category", event.getCategory());
             obj.put("subCategory", event.getSubCategory());
@@ -101,13 +101,9 @@ public class DataWriter extends DataConstants {
         userDetails.put(USER_STUDENT_VARIFIED, user.getStudentVerified());
 
         JSONArray ticketArray = new JSONArray();
-        if (user.getTickets() != null){ 
+        if (user.getTickets() != null) {
             for (Ticket ticket : user.getTickets()) {
-                JSONObject ticketJSON = new JSONObject();
-                ticketJSON.put("ticketConfirmation", ticket.getTicketConfirmation());
-                ticketJSON.put("seatNum", ticket.getSeatNum());
-                ticketJSON.put("status", ticket.getStatus().toString());
-                ticketArray.add(ticketJSON);
+                ticketArray.add(ticket.getTicketConfirmation().toString());
             }
         }
         userDetails.put("tickets", ticketArray);
@@ -123,8 +119,44 @@ public class DataWriter extends DataConstants {
         return userDetails;
     }
 
+    public static void saveTickets() {
+        ArrayList<Ticket> tickets = TicketList.getInstance().getAllTickets();
+        JSONArray jsonTickets = new JSONArray();
+        SimpleDateFormat formatter = new SimpleDateFormat("MM-dd-yyyy");
+
+        for (Ticket ticket : tickets) {
+            JSONObject ticketJSON = new JSONObject();
+            ticketJSON.put("ticketUUID", ticket.getTicketConfirmation().toString());
+            ticketJSON.put("eventId", ticket.getEventId().toString());
+            ticketJSON.put("ticketStatus", ticket.getStatus().toString());
+
+            JSONArray peopleArray = new JSONArray();
+            if (ticket.getPeople() != null) {
+                for (Person person : ticket.getPeople()) {
+                    JSONObject personJSON = new JSONObject();
+                    personJSON.put("firstName", person.getFirstName());
+                    personJSON.put("lastName", person.getLastName());
+                    personJSON.put("birthDate", formatter.format(person.getBirthDate()));
+                    peopleArray.add(personJSON);
+                }
+            }
+
+            ticketJSON.put("people", peopleArray);
+            jsonTickets.add(ticketJSON);
+        }
+
+        try (FileWriter file = new FileWriter(TICKET_FILE_NAME)) {
+            file.write(jsonTickets.toJSONString());
+            file.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
     public static void main(String[] args) {
         DataWriter.saveUsers();
         DataWriter.saveEvents();
+        DataWriter.saveTickets();
     }
 } 

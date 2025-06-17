@@ -25,6 +25,7 @@ public class Ticket {
     public UUID getTicketConfirmation() { return ticketConfirmation; }
     public String getStatus() { return status.toString(); }
     public ArrayList<Person> getPeople() {return people; }
+    public UUID getEventId() { return eventId; }
 
     public String toString() {
         return "\nTicket: " + ticketConfirmation + ", " + status + ", People: " + people;
