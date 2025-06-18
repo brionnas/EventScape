@@ -1,6 +1,4 @@
 {
-    "java.configuration.updateBuildConfiguration": "interactive",
-    "java.debug.settings.onBuildFailureProceed": true,
     "files.exclude": {
         "**/.git": true,
         "**/.svn": true,
