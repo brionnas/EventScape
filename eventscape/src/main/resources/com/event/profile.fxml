@@ -6,6 +6,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import java.net.URL?>
 
 <VBox xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.ProfileController">
    <children>
@@ -100,11 +101,16 @@
             </VBox>
             <VBox alignment="CENTER" styleClass="nav-item,active" HBox.hgrow="ALWAYS">
                <children>
-                  <Label styleClass="nav-icon" text="👤" />
-                  <Label styleClass="nav-label" text="Profile" />
+                  <Label styleClass="nav-icon-active" text="👤" />
+                  <Label styleClass="nav-label-active" text="Profile" />
                </children>
             </VBox>
          </children>
       </HBox>
    </children>
+
+   <!-- ADD THIS SECTION - Same as in Login.fxml -->
+   <stylesheets>
+      <URL value="@styles.css" />
+   </stylesheets>
 </VBox>

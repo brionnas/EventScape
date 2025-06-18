@@ -5,6 +5,7 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import java.net.URL?>
 
 <VBox xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.TicketsController">
    <children>
@@ -40,8 +41,8 @@
             </VBox>
             <VBox alignment="CENTER" styleClass="nav-item,active" HBox.hgrow="ALWAYS">
                <children>
-                  <Label styleClass="nav-icon" text="🎫" />
-                  <Label styleClass="nav-label" text="Tickets" />
+                  <Label styleClass="nav-icon-active" text="🎫" />
+                  <Label styleClass="nav-label-active" text="Tickets" />
                </children>
             </VBox>
             <VBox alignment="CENTER" styleClass="nav-item" HBox.hgrow="ALWAYS" onMouseClicked="#switchToProfile">
@@ -53,4 +54,9 @@
          </children>
       </HBox>
    </children>
+
+   <!-- ADD THIS SECTION - Same as in Login.fxml -->
+   <stylesheets>
+      <URL value="@styles.css" />
+   </stylesheets>
 </VBox>
