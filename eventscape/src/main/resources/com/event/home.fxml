@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
+<?import java.net.URL?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import java.net.URL?>
 
-<VBox xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.Home">
+<VBox xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.Home">
    <children>
       <!-- Header -->
       <VBox styleClass="header">
@@ -19,10 +18,10 @@
       </VBox>
 
       <!-- Search and Categories -->
-      <VBox styleClass="content" spacing="20.0">
+      <VBox spacing="20.0" styleClass="content">
          <children>
             <!-- Search Bar -->
-            <TextField fx:id="searchField" styleClass="search-input" promptText="Search events..." onAction="#handleSearch" />
+            <TextField fx:id="searchField" onAction="#handleSearch" promptText="Search events..." styleClass="search-input" />
 
             <!-- Categories -->
             <VBox spacing="10.0">
@@ -30,7 +29,7 @@
                   <Label styleClass="info-label" text="Categories" />
                   <ScrollPane fitToHeight="true">
                      <content>
-                        <HBox fx:id="categoriesHBox" styleClass="categories" spacing="10.0">
+                        <HBox fx:id="categoriesHBox" spacing="10.0" styleClass="categories">
                            <!-- Categories will be added dynamically -->
                         </HBox>
                      </content>
@@ -59,7 +58,7 @@
       </ScrollPane>
 
       <!-- Bottom Navigation -->
-      <HBox styleClass="bottom-nav" spacing="0.0">
+      <HBox spacing="0.0" styleClass="bottom-nav">
          <children>
             <VBox alignment="CENTER" styleClass="nav-item,active" HBox.hgrow="ALWAYS">
                <children>
@@ -67,13 +66,13 @@
                   <Label styleClass="nav-label" text="Home" />
                </children>
             </VBox>
-            <VBox alignment="CENTER" styleClass="nav-item" HBox.hgrow="ALWAYS" onMouseClicked="#switchToTickets">
+            <VBox alignment="CENTER" onMouseClicked="#switchToTickets" styleClass="nav-item" HBox.hgrow="ALWAYS">
                <children>
-                  <Label styleClass="nav-icon" text="🎫" />
+                  <Label onMouseClicked="#switchToTickets" styleClass="nav-icon" text="🎫" />
                   <Label styleClass="nav-label" text="Tickets" />
                </children>
             </VBox>
-            <VBox alignment="CENTER" styleClass="nav-item" HBox.hgrow="ALWAYS" onMouseClicked="#switchToProfile">
+            <VBox alignment="CENTER" onMouseClicked="#switchToProfile" styleClass="nav-item" HBox.hgrow="ALWAYS">
                <children>
                   <Label styleClass="nav-icon" text="👤" />
                   <Label styleClass="nav-label" text="Profile" />

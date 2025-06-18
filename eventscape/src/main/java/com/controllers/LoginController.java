@@ -2,6 +2,7 @@ package com.controllers;
 
 import java.io.IOException;
 
+import com.event.App;
 import com.model.Facade;
 import com.model.User;
 
@@ -47,16 +48,7 @@ void login(ActionEvent event) {
     System.out.println("Welcome " + user.getFirstName());
 
     try {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/event/home.fxml"));
-        Parent root = loader.load();
-
-        // Access Home controller and pass the User
-        Home homeController = loader.getController();
-        homeController.setUser(user);
-
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(new Scene(root));
-        stage.show();
+       App.setRoot("home");
     } catch (IOException e) {
         e.printStackTrace();
     }

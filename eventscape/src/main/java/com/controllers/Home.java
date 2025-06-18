@@ -9,16 +9,19 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
 
 import javafx.scene.control.ScrollPane;
 import java.io.IOException;
+import java.net.URL;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import com.event.App;
 
-public class Home {
+public class Home implements javafx.fxml.Initializable {
 
     @FXML
     private Label welcomeLabel;
@@ -60,12 +63,12 @@ public class Home {
         VBox eventCard = new VBox();
         eventCard.getStyleClass().add("event-card");
 
-        // Event image/icon
+        
         VBox eventImage = new VBox();
         eventImage.getStyleClass().add("event-image");
         eventImage.setPrefHeight(100);
         
-        Label eventEmoji = new Label("🎵"); // Default emoji
+        Label eventEmoji = new Label("🎵"); 
         eventEmoji.getStyleClass().add("event-emoji");
         eventImage.getChildren().add(eventEmoji);
 
@@ -79,7 +82,7 @@ public class Home {
         HBox eventMeta = new HBox();
         eventMeta.getStyleClass().add("event-meta");
 
-        Label eventCategory = new Label("Music"); // Default category
+        Label eventCategory = new Label("Music"); 
         eventCategory.getStyleClass().add("event-category");
 
         Label eventDate = new Label(event.getDate().toString());
@@ -126,7 +129,7 @@ public class Home {
     private void handleCategorySelection(ActionEvent event) {
         Button clickedButton = (Button) event.getSource();
         
-        // Remove active class from all category buttons
+        
         if (categoriesHBox != null) {
             categoriesHBox.getChildren().forEach(node -> {
                 if (node instanceof Button) {
@@ -135,26 +138,26 @@ public class Home {
             });
         }
         
-        // Add active class to clicked button
+        
         if (!clickedButton.getStyleClass().contains("active")) {
             clickedButton.getStyleClass().add("active");
         }
         
-        // Filter events by category (implement filtering logic here)
+        
         System.out.println("Category selected: " + clickedButton.getText());
     }
 
     @FXML
     private void handleViewDetails(ActionEvent event) {
         System.out.println("View Details clicked");
-        // In a real app, you would navigate to event details
+       
     }
 
     @FXML
     private void handleSearch(ActionEvent event) {
         String searchTerm = searchField.getText();
         System.out.println("Searching for: " + searchTerm);
-        // Implement search functionality
+        
     }
 
     @FXML
@@ -167,8 +170,8 @@ public class Home {
     }
 
     @FXML
-    private void switchToTickets(ActionEvent event) {
-        try {
+    void switchToTickets(MouseEvent event) {
+         try {
             App.setRoot("tickets");
         } catch (IOException e) {
             e.printStackTrace();
@@ -176,12 +179,17 @@ public class Home {
     }
 
     @FXML
-    private void switchToProfile(ActionEvent event) {
+    private void switchToProfile(MouseEvent event) {
         try {
             App.setRoot("profile");
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void initialize(URL arg0, ResourceBundle arg1) {
+        setUser(Facade.getInstance().getCurrentUser());
     }
 }
 

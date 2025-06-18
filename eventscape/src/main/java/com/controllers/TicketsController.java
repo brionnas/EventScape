@@ -35,15 +35,14 @@ public class TicketsController {
     }
 
     private void loadUserTickets() {
-        // In a real app, you would fetch user-specific tickets
-        // For now, we'll show sample tickets
+        
         Facade facade = Facade.getInstance();
         List<Event> events = facade.getAllEvents();
         
-        // Clear existing tickets
+       
         ticketsListVBox.getChildren().clear();
         
-        // Add sample tickets (in real app, filter by user purchases)
+        
         for (int i = 0; i < Math.min(events.size(), 3); i++) {
             Event event = events.get(i);
             VBox ticketItem = createTicketItem(event, i == 0 ? "Confirmed" : "Pending");

@@ -7,6 +7,7 @@ public class Facade {
     private static Facade instance;
     private final UserList userList;
     private final EventList eventList;
+    private User user;
 
     private Facade() {
         userList = UserList.getInstance();
@@ -42,8 +43,12 @@ public class Facade {
         return false;
     }
 
+    public User getCurrentUser() {
+        return user;
+    }
+
     public User login(String username, String password) {
-        User user = userList.getUserByUsername(username);
+        user = userList.getUserByUsername(username);
         if (user != null && user.getPasswordHash().equals(password)) {
             return user;
         }
