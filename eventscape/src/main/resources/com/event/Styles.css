@@ -1,17 +1,395 @@
+/* EventHub JavaFX Stylesheet */
+
+/* Root styling */
 .root {
-    -fx-font-size: 16pt;
-    -fx-font-family: "Helvetica";
-    -fx-background-color: pink;
+    -fx-background-color: linear-gradient(to bottom right, #667eea, #764ba2);
+    -fx-font-family: "Segoe UI", "Helvetica", "Arial", sans-serif;
+    -fx-font-size: 14pt;
 }
 
+/* Header */
+.header {
+    -fx-background-color: linear-gradient(to bottom right, #667eea, #764ba2);
+    -fx-text-fill: white;
+    -fx-padding: 20;
+    -fx-alignment: center;
+}
+
+.header-title {
+    -fx-text-fill: white;
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+}
+
+.header-subtitle {
+    -fx-text-fill: rgba(255,255,255,0.9);
+    -fx-font-size: 14px;
+}
+
+/* Content areas */
+.content {
+    -fx-padding: 20;
+    -fx-background-color: #f8f9fa;
+}
+
+/* Form elements */
+.form-group {
+    -fx-spacing: 8;
+}
+
+.form-group Label {
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+}
+
+.form-group TextField, .form-group PasswordField {
+    -fx-padding: 12 16 12 16;
+    -fx-border-color: #e9ecef;
+    -fx-border-width: 2;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-font-size: 16px;
+    -fx-background-color: white;
+}
+
+.form-group TextField:focused, .form-group PasswordField:focused {
+    -fx-border-color: #667eea;
+}
+
+.form-group TextField:editable {
+    -fx-border-color: #667eea;
+    -fx-background-color: #fff;
+}
+
+/* Buttons */
+.btn-primary {
+    -fx-background-color: linear-gradient(to bottom right, #667eea, #764ba2);
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-padding: 15;
+    -fx-background-radius: 10;
+    -fx-cursor: hand;
+    -fx-border-width: 0;
+}
+
+.btn-primary:hover {
+    -fx-translate-y: -2;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 10, 0, 0, 2);
+}
+
+.btn-secondary {
+    -fx-background-color: #667eea;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-padding: 8 16 8 16;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+    -fx-border-width: 0;
+}
+
+.btn-secondary:hover {
+    -fx-background-color: #5a6fd8;
+}
+
+.btn-secondary:sign-out {
+    -fx-background-color: #dc3545;
+}
+
+.btn-secondary:sign-out:hover {
+    -fx-background-color: #c82333;
+}
+
+/* Search input */
+.search-input {
+    -fx-padding: 12 16 12 16;
+    -fx-border-color: #e9ecef;
+    -fx-border-width: 2;
+    -fx-border-radius: 25;
+    -fx-background-radius: 25;
+    -fx-font-size: 16px;
+    -fx-background-color: white;
+}
+
+.search-input:focused {
+    -fx-border-color: #667eea;
+}
+
+/* Categories */
+.categories {
+    -fx-spacing: 10;
+}
+
+.category-chip {
+    -fx-background-color: #e3f2fd;
+    -fx-text-fill: #1976d2;
+    -fx-padding: 8 16 8 16;
+    -fx-background-radius: 20;
+    -fx-font-size: 14px;
+    -fx-cursor: hand;
+    -fx-border-width: 0;
+}
+
+.category-chip:active {
+    -fx-background-color: #1976d2;
+    -fx-text-fill: white;
+}
+
+.category-chip:hover {
+    -fx-background-color: #bbdefb;
+}
+
+.category-chip:active:hover {
+    -fx-background-color: #1565c0;
+}
+
+/* Event cards */
+.event-card {
+    -fx-background-color: white;
+    -fx-background-radius: 15;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 15, 0, 0, 4);
+    -fx-spacing: 0;
+}
+
+.event-card:hover {
+    -fx-translate-y: -5;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 20, 0, 0, 8);
+}
+
+.event-image {
+    -fx-background-color: linear-gradient(to bottom right, #ff6b6b, #ffa726);
+    -fx-background-radius: 15 15 0 0;
+    -fx-alignment: center;
+    -fx-pref-height: 100;
+}
+
+.event-image:sports-gradient {
+    -fx-background-color: linear-gradient(to bottom right, #4caf50, #8bc34a);
+}
+
+.event-image:art-gradient {
+    -fx-background-color: linear-gradient(to bottom right, #9c27b0, #e91e63);
+}
+
+.event-emoji {
+    -fx-text-fill: white;
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+}
+
+.event-details {
+    -fx-padding: 15;
+    -fx-spacing: 8;
+}
+
+.event-title {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+}
+
+.event-meta {
+    -fx-spacing: 10;
+}
+
+.event-category {
+    -fx-background-color: #e3f2fd;
+    -fx-text-fill: #1976d2;
+    -fx-padding: 4 8 4 8;
+    -fx-background-radius: 12;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+
+.event-date {
+    -fx-text-fill: #666666;
+    -fx-font-size: 14px;
+}
+
+.event-capacity {
+    -fx-spacing: 10;
+    -fx-font-size: 14px;
+}
+
+.capacity-available {
+    -fx-text-fill: #4caf50;
+    -fx-font-weight: bold;
+}
+
+/* Tickets */
+.ticket-item {
+    -fx-background-color: white;
+    -fx-background-radius: 10;
+    -fx-padding: 15;
+    -fx-spacing: 8;
+    -fx-border-color: #667eea;
+    -fx-border-width: 0 0 0 4;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);
+}
+
+.ticket-header {
+    -fx-spacing: 10;
+}
+
+.ticket-title {
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+    -fx-font-size: 16px;
+}
+
+.ticket-status {
+    -fx-background-color: #4caf50;
+    -fx-text-fill: white;
+    -fx-padding: 4 8 4 8;
+    -fx-background-radius: 12;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+
+.ticket-status:pending {
+    -fx-background-color: #ff9800;
+}
+
+.ticket-details {
+    -fx-spacing: 4;
+}
+
+.ticket-details Label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #666666;
+}
+
+/* Profile */
+.profile-header {
+    -fx-background-color: linear-gradient(to bottom right, #667eea, #764ba2);
+    -fx-text-fill: white;
+    -fx-padding: 20;
+    -fx-spacing: 15;
+    -fx-alignment: center;
+}
+
+.profile-avatar {
+    -fx-pref-width: 80;
+    -fx-pref-height: 80;
+    -fx-background-color: rgba(255,255,255,0.2);
+    -fx-background-radius: 50;
+    -fx-alignment: center;
+}
+
+.profile-name {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 20px;
+}
+
+.profile-subtitle {
+    -fx-text-fill: rgba(255,255,255,0.9);
+    -fx-font-size: 14px;
+}
+
+.profile-info {
+    -fx-background-color: white;
+    -fx-background-radius: 10;
+    -fx-padding: 15;
+    -fx-spacing: 15;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);
+}
+
+.info-row {
+    -fx-spacing: 10;
+}
+
+.info-label {
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+    -fx-font-size: 16px;
+}
+
+.info-value {
+    -fx-text-fill: #666666;
+}
+
+/* Bottom Navigation */
+.bottom-nav {
+    -fx-background-color: white;
+    -fx-border-color: #e9ecef;
+    -fx-border-width: 1 0 0 0;
+    -fx-padding: 10 0 10 0;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, -2);
+}
+
+.nav-item {
+    -fx-alignment: center;
+    -fx-spacing: 4;
+    -fx-cursor: hand;
+    -fx-padding: 8;
+}
+
+.nav-item:hover {
+    -fx-background-color: #f8f9fa;
+    -fx-background-radius: 8;
+}
+
+/* Navigation icons and labels */
+.nav-icon {
+    -fx-font-size: 20px;
+    -fx-text-fill: #666666;
+}
+
+.nav-label {
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #666666;
+}
+
+/* Active navigation state - apply these classes directly to the labels */
+.nav-icon-active {
+    -fx-font-size: 20px;
+    -fx-text-fill: #667eea;
+}
+
+.nav-label-active {
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #667eea;
+}
+
+/* Login specific styles */
+.login-form {
+    -fx-padding: 30 20 30 20;
+    -fx-spacing: 20;
+    -fx-background-color: white;
+    -fx-background-radius: 15;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 15, 0, 0, 4);
+}
+
+/* Legacy styles for compatibility */
 .label {
-    -fx-text-fill: black;
-    -fx-font-size: 24pt;
+    -fx-text-fill: #333333;
+    -fx-font-size: 14pt;
 }
 
 .button {
-    -fx-background-color: cyan;
-    -fx-text-fill: black;
-    -fx-font-size: 24pt;
+    -fx-background-color: #667eea;
+    -fx-text-fill: white;
+    -fx-font-size: 14pt;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+    -fx-border-width: 0;
 }
+
+.button:hover {
+    -fx-background-color: #5a6fd8;
+}
+
+.event-label {
+    -fx-background-color: white;
+    -fx-padding: 15;
+    -fx-border-color: #e9ecef;
+    -fx-border-width: 1;
+    -fx-background-radius: 10;
+    -fx-font-size: 14pt;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);
+}
+
 
