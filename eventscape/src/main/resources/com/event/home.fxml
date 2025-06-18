@@ -6,6 +6,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import java.net.URL?>
 
 <VBox xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.Home">
    <children>
@@ -82,4 +83,8 @@
       </HBox>
    </children>
 
+   <!-- ADD THIS SECTION - Same as in Login.fxml -->
+   <stylesheets>
+      <URL value="@styles.css" />
+   </stylesheets>
 </VBox>
