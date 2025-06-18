@@ -82,7 +82,6 @@
       </HBox>
    </children>
 
-   <!-- ADD THIS SECTION - Same as in Login.fxml -->
    <stylesheets>
       <URL value="@styles.css" />
    </stylesheets>

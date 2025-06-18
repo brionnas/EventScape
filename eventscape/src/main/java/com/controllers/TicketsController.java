@@ -13,6 +13,8 @@ import javafx.scene.layout.VBox;
 import java.io.IOException;
 import java.util.List;
 
+import javafx.scene.input.MouseEvent;
+
 import com.event.App;
 
 public class TicketsController {
@@ -73,7 +75,7 @@ public class TicketsController {
     }
 
     @FXML
-    private void switchToHome(ActionEvent event) {
+     private void switchToHome(MouseEvent event) {
         try {
             App.setRoot("home");
         } catch (IOException e) {
@@ -82,7 +84,7 @@ public class TicketsController {
     }
 
     @FXML
-    private void switchToProfile(ActionEvent event) {
+    private void switchToProfile(MouseEvent event) {
         try {
             App.setRoot("profile");
         } catch (IOException e) {

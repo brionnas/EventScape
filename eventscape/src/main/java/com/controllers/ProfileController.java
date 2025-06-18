@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
@@ -120,13 +121,13 @@ public class ProfileController {
     }
 
     @FXML
-    private void handleCancelEdit(ActionEvent event) {
+    private void handleCancelEdit(MouseEvent event) {
         // Reset fields to original values
         updateProfileDisplay();
     }
 
     @FXML
-    private void handleSignOut(ActionEvent event) {
+    private void handleSignOut(MouseEvent event) {
         try {
             App.setRoot("Login");
         } catch (IOException e) {
@@ -135,7 +136,7 @@ public class ProfileController {
     }
 
     @FXML
-    private void switchToHome(ActionEvent event) {
+    private void switchToHome(MouseEvent event) {
         try {
             App.setRoot("home");
         } catch (IOException e) {
@@ -144,7 +145,7 @@ public class ProfileController {
     }
 
     @FXML
-    private void switchToTickets(ActionEvent event) {
+    private void switchToTickets(MouseEvent event) {
         try {
             App.setRoot("tickets");
         } catch (IOException e) {
