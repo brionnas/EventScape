@@ -8,7 +8,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
@@ -19,15 +21,17 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
-
 import javafx.scene.control.ScrollPane;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
-import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.ResourceBundle;
+
+import javafx.scene.paint.Color;
 
 import com.event.App;
 
@@ -35,7 +39,7 @@ public class Home implements javafx.fxml.Initializable {
 
     @FXML
     private ListView<Event> lst_events;
-    
+
     @FXML
     private Label welcomeLabel;
 
@@ -66,69 +70,104 @@ public class Home implements javafx.fxml.Initializable {
 
         ObservableList<Event> eventObservableList = FXCollections.observableArrayList(events);
 
-        // Set the items to your ListView
         lst_events.setItems(eventObservableList);
-/* 
-        for (Event event : events) {
-            VBox eventCard = createEventCard(event);
-            eventListVBox.getChildren().add(eventCard);
-        }*/
 
         lst_events.setCellFactory(listView -> new ListCell<Event>() {
             private ImageView imageView = new ImageView();
-            private HBox content = new HBox(10); // 10px spacing
+            private HBox content = new HBox(10);
             private Label textLabel = new Label();
             {
-                imageView.setFitHeight(50); // Set desired height
-                imageView.setFitWidth(50);  // Set desired width
+                imageView.setFitHeight(50);
+                imageView.setFitWidth(50);
                 imageView.setPreserveRatio(true);
                 content.getChildren().addAll(imageView, textLabel);
                 content.setAlignment(Pos.CENTER_LEFT);
             }
-    
+
             @Override
             protected void updateItem(Event event, boolean empty) {
                 super.updateItem(event, empty);
                 if (empty || event == null) {
                     setGraphic(null);
                 } else {
-
-                    // Load image (assuming your Event has getImagePath() method)
                     System.out.println("Path is " + getClass().getResourceAsStream("/com/event/images/" + event.getEventId() + ".jpg"));
                     Image image = new Image(getClass().getResourceAsStream("/com/event/images/" + event.getEventId() + ".jpg"));
-
                     imageView.setImage(image);
-                    
-                    // Set text
+
                     textLabel.setText(event.getName() + " - " + event.getDate());
-                    
                     setGraphic(content);
                 }
             }
-    });
+        });
     }
 
     @FXML
     void eventClicked(MouseEvent e) {
-        System.out.println("Clicked");
         Event event = lst_events.getSelectionModel().getSelectedItem();
-        System.out.println("You selected " + event.getName());
+        if (event != null) {
+            showEventDetailsWindow(event);
+        }
     }
+
+   private void showEventDetailsWindow(Event event) {
+    Stage detailStage = new Stage(StageStyle.TRANSPARENT);
+
+
+    VBox layout = new VBox();
+    layout.getStyleClass().add("event-popup");
+
+    SimpleDateFormat formatter = new SimpleDateFormat("MM-dd-yyyy");
+
+    Label title = new Label("🎟️ " + event.getName());
+    title.getStyleClass().add("event-popup-title");
+    Label category = new Label("Category: " + event.getCategory());
+    Label subCategory = new Label("Subcategory: " + event.getSubCategory());
+    Label date = new Label("Date: " + formatter.format(event.getDate()));
+
+    Label capacity = new Label("Capacity: " + event.getCapacity());
+    Label ticketsLeft = new Label("Tickets Left: " + event.getTicketsLeft());
+
+    List<Label> infoLabels = List.of(category, subCategory, date, capacity, ticketsLeft);
+    infoLabels.forEach(label -> label.getStyleClass().add("event-popup-label"));
+
+    Button buyBtn = new Button("Buy Ticket");
+    buyBtn.getStyleClass().add("btn-primary");
+    buyBtn.setOnAction(e -> {
+        System.out.println("Ticket purchased.");
+        detailStage.close();
+    });
+
+    Button closeBtn = new Button("Close");
+    closeBtn.getStyleClass().add("close-button");
+    closeBtn.setOnAction(e -> detailStage.close());
+
+    HBox buttonRow = new HBox(buyBtn, closeBtn);
+    buttonRow.getStyleClass().add("event-popup-button-row");
+
+    layout.getChildren().add(title);
+    layout.getChildren().addAll(infoLabels);
+    layout.getChildren().add(buttonRow);
+
+    Scene scene = new Scene(layout);
+    scene.setFill(Color.TRANSPARENT);
+    scene.getStylesheets().add(getClass().getResource("/com/event/Styles.css").toExternalForm());
+    detailStage.setScene(scene);
+    detailStage.show();
+}
+
 
     private VBox createEventCard(Event event) {
         VBox eventCard = new VBox();
         eventCard.getStyleClass().add("event-card");
 
-        
         VBox eventImage = new VBox();
         eventImage.getStyleClass().add("event-image");
         eventImage.setPrefHeight(100);
-        
-        Label eventEmoji = new Label("🎵"); 
+
+        Label eventEmoji = new Label("🎵");
         eventEmoji.getStyleClass().add("event-emoji");
         eventImage.getChildren().add(eventEmoji);
 
-        // Event details
         VBox eventDetails = new VBox();
         eventDetails.getStyleClass().add("event-details");
 
@@ -138,7 +177,7 @@ public class Home implements javafx.fxml.Initializable {
         HBox eventMeta = new HBox();
         eventMeta.getStyleClass().add("event-meta");
 
-        Label eventCategory = new Label("Music"); 
+        Label eventCategory = new Label("Music");
         eventCategory.getStyleClass().add("event-category");
 
         Label eventDate = new Label(event.getDate().toString());
@@ -157,7 +196,7 @@ public class Home implements javafx.fxml.Initializable {
 
         Button viewDetailsBtn = new Button("View Details");
         viewDetailsBtn.getStyleClass().add("btn-secondary");
-        viewDetailsBtn.setOnAction(this::handleViewDetails);
+        viewDetailsBtn.setOnAction(e -> showEventDetailsWindow(event));
 
         eventDetails.getChildren().addAll(eventTitle, eventMeta, eventCapacity, viewDetailsBtn);
         eventCard.getChildren().addAll(eventImage, eventDetails);
@@ -168,7 +207,7 @@ public class Home implements javafx.fxml.Initializable {
     private void setupCategories() {
         if (categoriesHBox != null) {
             String[] categories = {"All", "Music", "Sports", "Art", "Food", "Tech"};
-            
+
             for (String category : categories) {
                 Button categoryBtn = new Button(category);
                 categoryBtn.getStyleClass().add("category-chip");
@@ -184,8 +223,7 @@ public class Home implements javafx.fxml.Initializable {
     @FXML
     private void handleCategorySelection(ActionEvent event) {
         Button clickedButton = (Button) event.getSource();
-        
-        
+
         if (categoriesHBox != null) {
             categoriesHBox.getChildren().forEach(node -> {
                 if (node instanceof Button) {
@@ -193,27 +231,23 @@ public class Home implements javafx.fxml.Initializable {
                 }
             });
         }
-        
-        
+
         if (!clickedButton.getStyleClass().contains("active")) {
             clickedButton.getStyleClass().add("active");
         }
-        
-        
+
         System.out.println("Category selected: " + clickedButton.getText());
     }
 
     @FXML
     private void handleViewDetails(ActionEvent event) {
         System.out.println("View Details clicked");
-       
     }
 
     @FXML
     private void handleSearch(ActionEvent event) {
         String searchTerm = searchField.getText();
         System.out.println("Searching for: " + searchTerm);
-        
     }
 
     @FXML
@@ -227,7 +261,7 @@ public class Home implements javafx.fxml.Initializable {
 
     @FXML
     void switchToTickets(MouseEvent event) {
-         try {
+        try {
             App.setRoot("tickets");
         } catch (IOException e) {
             e.printStackTrace();
@@ -248,5 +282,3 @@ public class Home implements javafx.fxml.Initializable {
         setUser(Facade.getInstance().getCurrentUser());
     }
 }
-
-

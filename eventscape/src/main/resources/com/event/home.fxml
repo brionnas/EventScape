@@ -8,7 +8,10 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.Home">
+<VBox xmlns="http://javafx.com/javafx/23.0.1"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.controllers.Home">
+
    <children>
       <!-- Header -->
       <VBox styleClass="header">
@@ -22,7 +25,10 @@
       <VBox spacing="20.0" styleClass="content">
          <children>
             <!-- Search Bar -->
-            <TextField fx:id="searchField" onAction="#handleSearch" promptText="Search events..." styleClass="search-input" />
+            <TextField fx:id="searchField"
+                       onAction="#handleSearch"
+                       promptText="Search events..."
+                       styleClass="search-input" />
 
             <!-- Categories -->
             <VBox spacing="10.0">
@@ -30,9 +36,7 @@
                   <Label styleClass="info-label" text="Categories" />
                   <ScrollPane fitToHeight="true">
                      <content>
-                        <HBox fx:id="categoriesHBox" spacing="10.0" styleClass="categories">
-                           <!-- Categories will be added dynamically -->
-                        </HBox>
+                        <HBox fx:id="categoriesHBox" spacing="10.0" styleClass="categories" />
                      </content>
                   </ScrollPane>
                </children>
@@ -48,12 +52,14 @@
                   <VBox spacing="10.0">
                      <children>
                         <Label styleClass="info-label" text="Upcoming Events" />
-                        <VBox fx:id="eventListVBox" spacing="15.0">
-                           <!-- Events will be added dynamically -->
-                        </VBox>
+                        <VBox fx:id="eventListVBox" spacing="15.0" />
                      </children>
                   </VBox>
-                  <ListView fx:id="lst_events"  onMouseClicked="#eventClicked" prefHeight="200.0" prefWidth="73.0" />
+
+                  <!-- ListView used in controller -->
+                  <ListView fx:id="lst_events"
+                            onMouseClicked="#eventClicked"
+                            prefHeight="200.0" />
                </children>
             </VBox>
          </content>
@@ -70,7 +76,7 @@
             </VBox>
             <VBox alignment="CENTER" onMouseClicked="#switchToTickets" styleClass="nav-item" HBox.hgrow="ALWAYS">
                <children>
-                  <Label onMouseClicked="#switchToTickets" styleClass="nav-icon" text="🎫" />
+                  <Label styleClass="nav-icon" text="🎫" />
                   <Label styleClass="nav-label" text="Tickets" />
                </children>
             </VBox>
