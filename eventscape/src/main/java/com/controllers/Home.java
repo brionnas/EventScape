@@ -4,17 +4,27 @@ import com.model.Facade;
 import com.model.User;
 import com.model.Event;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
 
 import javafx.scene.control.ScrollPane;
+
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -23,6 +33,9 @@ import com.event.App;
 
 public class Home implements javafx.fxml.Initializable {
 
+    @FXML
+    private ListView<Event> lst_events;
+    
     @FXML
     private Label welcomeLabel;
 
@@ -51,12 +64,55 @@ public class Home implements javafx.fxml.Initializable {
         Facade facade = Facade.getInstance();
         List<Event> events = facade.getAllEvents();
 
-        eventListVBox.getChildren().clear();
+        ObservableList<Event> eventObservableList = FXCollections.observableArrayList(events);
 
+        // Set the items to your ListView
+        lst_events.setItems(eventObservableList);
+/* 
         for (Event event : events) {
             VBox eventCard = createEventCard(event);
             eventListVBox.getChildren().add(eventCard);
-        }
+        }*/
+
+        lst_events.setCellFactory(listView -> new ListCell<Event>() {
+            private ImageView imageView = new ImageView();
+            private HBox content = new HBox(10); // 10px spacing
+            private Label textLabel = new Label();
+            {
+                imageView.setFitHeight(50); // Set desired height
+                imageView.setFitWidth(50);  // Set desired width
+                imageView.setPreserveRatio(true);
+                content.getChildren().addAll(imageView, textLabel);
+                content.setAlignment(Pos.CENTER_LEFT);
+            }
+    
+            @Override
+            protected void updateItem(Event event, boolean empty) {
+                super.updateItem(event, empty);
+                if (empty || event == null) {
+                    setGraphic(null);
+                } else {
+
+                    // Load image (assuming your Event has getImagePath() method)
+                    System.out.println("Path is " + getClass().getResourceAsStream("/com/event/images/" + event.getEventId() + ".jpg"));
+                    Image image = new Image(getClass().getResourceAsStream("/com/event/images/" + event.getEventId() + ".jpg"));
+
+                    imageView.setImage(image);
+                    
+                    // Set text
+                    textLabel.setText(event.getName() + " - " + event.getDate());
+                    
+                    setGraphic(content);
+                }
+            }
+    });
+    }
+
+    @FXML
+    void eventClicked(MouseEvent e) {
+        System.out.println("Clicked");
+        Event event = lst_events.getSelectionModel().getSelectedItem();
+        System.out.println("You selected " + event.getName());
     }
 
     private VBox createEventCard(Event event) {

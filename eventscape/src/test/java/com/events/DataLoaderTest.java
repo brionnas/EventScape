@@ -7,9 +7,12 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
-import org.junit.Test; 
+import org.junit.Test;
 
-import com.model.Facade; 
+import com.model.DataLoader;
+import com.model.Event;
+import com.model.Facade;
+import com.model.User; 
 
 public class DataLoaderTest {
    
@@ -52,7 +55,7 @@ public class DataLoaderTest {
     @Test
     public void testingGetEventsThrowsException() {
         try {
-            DataLoader.getEvents();
+            DataLoader.loadEvents();
             fail("Expected UnsupportedOperationException to be thrown"); 
         } catch (UnsupportedOperationException e) { 
             assertEquals("Expected specific message", "Unimplemented method 'getEvents'", e.getMessage()); 
