@@ -6,8 +6,10 @@ import java.util.UUID;
 public class Ticket {
     private UUID ticketConfirmation; // UUID string
     private UUID eventId;
+    private UUID userId; 
     private TicketStatus status;
-    private ArrayList<Person> people; 
+    private ArrayList<Person> people;
+    private String ticketId; 
 
     public Ticket(UUID ticketConfirmation, UUID eventId, TicketStatus status, ArrayList<Person> people) {
         this.ticketConfirmation = ticketConfirmation;
@@ -21,6 +23,13 @@ public class Ticket {
         }
     }
 
+    public Ticket(Event event, User currentUser) {
+         this.ticketConfirmation = UUID.randomUUID();
+        this.eventId = event.getEventId();
+        this.status = TicketStatus.CONFIRMED; 
+        this.people = new ArrayList<>();
+    }
+
     // Getters and setters
     public UUID getTicketConfirmation() { return ticketConfirmation; }
     public String getStatus() { return status.toString(); }
@@ -32,17 +41,29 @@ public class Ticket {
     }
 
     public Object getUserId() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getUserId'");
+        return userId;
     }
 
     public Event getEvent() {
         return EventList.getInstance().getEventById(eventId);
     }
 
-    public Object getSeatNum() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getSeatNum'");
+     public String getTicket() {
+        return ticketConfirmation.toString();
     }
+
+    public String getSeatNum() {
+        return "General Admission"; 
+    }
+
+    public void setStatus(TicketStatus status) {
+        this.status = status;
+    }
+
+    public String getTicketId() {
+        return this.ticketId != null ? this.ticketId : "UNKNOWN_ID"; 
+    }
+
+
 }
 

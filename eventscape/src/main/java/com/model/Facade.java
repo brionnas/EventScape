@@ -1,5 +1,6 @@
 package com.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -90,6 +91,26 @@ public class Facade {
             return eventList.getEventById(uuid);
         } catch (IllegalArgumentException e) {
             return null;
+        }
+    }
+
+    public void addTicketToUser(User user, Ticket ticket) {
+           
+        if (user == null || ticket == null) {
+            System.out.println("Error: User or Ticket is null");
+            return;
+        }
+        
+        if (user.getTickets() == null) {
+            user.setTickets(new ArrayList<>());
+        }
+        user.getTickets().add(ticket);
+        
+        Event event = ticket.getEvent();
+        if (event != null && event.getTicketsLeft() > 0) {
+            event.getTicketsLeft();
+        } else if (event == null) {
+            System.out.println("Error: Event in ticket is null");
         }
     }
 

@@ -1,6 +1,7 @@
 package com.controllers;
 
 import com.model.Facade;
+import com.model.Ticket;
 import com.model.User;
 import com.model.Event;
 
@@ -28,6 +29,7 @@ import javafx.stage.StageStyle;
 import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -109,7 +111,7 @@ public class Home implements javafx.fxml.Initializable {
         }
     }
 
-   private void showEventDetailsWindow(Event event) {
+    private void showEventDetailsWindow(Event event) {
     Stage detailStage = new Stage(StageStyle.TRANSPARENT);
 
 
@@ -133,28 +135,48 @@ public class Home implements javafx.fxml.Initializable {
     Button buyBtn = new Button("Buy Ticket");
     buyBtn.getStyleClass().add("btn-primary");
     buyBtn.setOnAction(e -> {
-        System.out.println("Ticket purchased.");
+            try {
+            System.out.println("=== DEBUG: Buy button clicked ===");
+            System.out.println("Event object: " + event);
+            System.out.println("Event name: " + (event != null ? event.getName() : "EVENT IS NULL"));
+            System.out.println("Event ID: " + (event != null ? event.getEventId() : "NO EVENT ID"));
+            System.out.println("Current user: " + (currentUser != null ? currentUser.getFirstName() : "USER IS NULL"));
+            
+           
+            if (currentUser == null) {
+                System.out.println("ERROR: Current user is null - cannot create ticket");
+                detailStage.close();
+                return;
+            }
+            
+            // Create a new ticket for this event using your constructor
+            Ticket newTicket = new Ticket(event, currentUser);
+            System.out.println("Created ticket: " + newTicket);
+            System.out.println("Ticket event ID: " + newTicket.getEventId());
+            System.out.println("Ticket event: " + newTicket.getEvent());
+            
+            // Initialize tickets list if null
+            if (currentUser.getTickets() == null) {
+                currentUser.setTickets(new ArrayList<>());
+                System.out.println("Initialized empty tickets list for user");
+            }
+            
+            // Add the ticket to the user's tickets list
+            currentUser.getTickets().add(newTicket);
+            
+            System.out.println("Ticket purchased for: " + event.getName());
+            System.out.println("User now has " + currentUser.getTickets().size() + " tickets");
+            
+        } catch (Exception ex) {
+            System.out.println("ERROR purchasing ticket: " + ex.getMessage());
+            ex.printStackTrace();
+        }
+        
         detailStage.close();
-    });
 
-    Button closeBtn = new Button("Close");
-    closeBtn.getStyleClass().add("close-button");
-    closeBtn.setOnAction(e -> detailStage.close());
 
-    HBox buttonRow = new HBox(buyBtn, closeBtn);
-    buttonRow.getStyleClass().add("event-popup-button-row");
-
-    layout.getChildren().add(title);
-    layout.getChildren().addAll(infoLabels);
-    layout.getChildren().add(buttonRow);
-
-    Scene scene = new Scene(layout);
-    scene.setFill(Color.TRANSPARENT);
-    scene.getStylesheets().add(getClass().getResource("/com/event/Styles.css").toExternalForm());
-    detailStage.setScene(scene);
-    detailStage.show();
-}
-
+     }); 
+    }
 
     private VBox createEventCard(Event event) {
         VBox eventCard = new VBox();
