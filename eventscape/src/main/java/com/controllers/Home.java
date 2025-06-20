@@ -112,70 +112,102 @@ public class Home implements javafx.fxml.Initializable {
     }
 
     private void showEventDetailsWindow(Event event) {
-    Stage detailStage = new Stage(StageStyle.TRANSPARENT);
+        Stage detailStage = new Stage(StageStyle.TRANSPARENT);
+        detailStage.initOwner(((Stage) lst_events.getScene().getWindow()));
 
+        VBox layout = new VBox();
+        layout.getStyleClass().add("event-popup");
 
-    VBox layout = new VBox();
-    layout.getStyleClass().add("event-popup");
+        SimpleDateFormat formatter = new SimpleDateFormat("MM-dd-yyyy");
 
-    SimpleDateFormat formatter = new SimpleDateFormat("MM-dd-yyyy");
-
-    Label title = new Label("🎟️ " + event.getName());
-    title.getStyleClass().add("event-popup-title");
-    Label category = new Label("Category: " + event.getCategory());
-    Label subCategory = new Label("Subcategory: " + event.getSubCategory());
-    Label date = new Label("Date: " + formatter.format(event.getDate()));
-
-    Label capacity = new Label("Capacity: " + event.getCapacity());
-    Label ticketsLeft = new Label("Tickets Left: " + event.getTicketsLeft());
-
-    List<Label> infoLabels = List.of(category, subCategory, date, capacity, ticketsLeft);
-    infoLabels.forEach(label -> label.getStyleClass().add("event-popup-label"));
-
-    Button buyBtn = new Button("Buy Ticket");
-    buyBtn.getStyleClass().add("btn-primary");
-    buyBtn.setOnAction(e -> {
-            try {
-            System.out.println("=== DEBUG: Buy button clicked ===");
-            System.out.println("Event object: " + event);
-            System.out.println("Event name: " + (event != null ? event.getName() : "EVENT IS NULL"));
-            System.out.println("Event ID: " + (event != null ? event.getEventId() : "NO EVENT ID"));
-            System.out.println("Current user: " + (currentUser != null ? currentUser.getFirstName() : "USER IS NULL"));
-            
-           
-            if (currentUser == null) {
-                System.out.println("ERROR: Current user is null - cannot create ticket");
-                detailStage.close();
-                return;
-            }
-            
-            // Create a new ticket for this event using your constructor
-            Ticket newTicket = new Ticket(event, currentUser);
-            System.out.println("Created ticket: " + newTicket);
-            System.out.println("Ticket event ID: " + newTicket.getEventId());
-            System.out.println("Ticket event: " + newTicket.getEvent());
-            
-            // Initialize tickets list if null
-            if (currentUser.getTickets() == null) {
-                currentUser.setTickets(new ArrayList<>());
-                System.out.println("Initialized empty tickets list for user");
-            }
-            
-            // Add the ticket to the user's tickets list
-            currentUser.getTickets().add(newTicket);
-            
-            System.out.println("Ticket purchased for: " + event.getName());
-            System.out.println("User now has " + currentUser.getTickets().size() + " tickets");
-            
-        } catch (Exception ex) {
-            System.out.println("ERROR purchasing ticket: " + ex.getMessage());
-            ex.printStackTrace();
-        }
+        Label title = new Label("🎟️ " + event.getName());
+        title.getStyleClass().add("event-popup-title");
         
-        detailStage.close();
+        Label category = new Label("Category: " + event.getCategory());
+        Label subCategory = new Label("Subcategory: " + event.getSubCategory());
+        Label date = new Label("Date: " + formatter.format(event.getDate()));
+        Label capacity = new Label("Capacity: " + event.getCapacity());
+        Label ticketsLeft = new Label("Tickets Left: " + event.getTicketsLeft());
 
+        List<Label> infoLabels = List.of(category, subCategory, date, capacity, ticketsLeft);
+        infoLabels.forEach(label -> label.getStyleClass().add("event-popup-label"));
 
-     }); 
+        // Create button container
+        HBox buttonContainer = new HBox(10);
+        buttonContainer.getStyleClass().add("event-popup-button-row");
+        
+        Button buyBtn = new Button("Buy Ticket");
+        buyBtn.getStyleClass().add("btn-primary");
+        buyBtn.setOnAction(e -> {
+            try {
+                System.out.println("=== DEBUG: Buy button clicked ===");
+                System.out.println("Event: " + event.getName());
+                System.out.println("Current user: " + (currentUser != null ? currentUser.getFirstName() : "USER IS NULL"));
+                
+                if (currentUser == null) {
+                    System.out.println("ERROR: Current user is null - cannot create ticket");
+                    detailStage.close();
+                    return;
+                }
+                
+                // Create a new ticket for this event
+                Ticket newTicket = new Ticket(event, currentUser);
+                System.out.println("Created ticket: " + newTicket);
+                
+                // Initialize tickets list if null
+                if (currentUser.getTickets() == null) {
+                    currentUser.setTickets(new ArrayList<>());
+                    System.out.println("Initialized empty tickets list for user");
+                }
+                
+                // Add the ticket to the user's tickets list
+                currentUser.getTickets().add(newTicket);
+                
+                // Update the facade's current user to ensure persistence
+                Facade.getInstance().setCurrentUser(currentUser);
+                
+                System.out.println("Ticket purchased for: " + event.getName());
+                System.out.println("User now has " + currentUser.getTickets().size() + " tickets");
+                
+                // Show success message
+                title.setText("✅ Ticket Purchased!");
+                buyBtn.setText("Purchased");
+                buyBtn.setDisable(true);
+                
+                // Auto-close after 2 seconds using Timeline instead of Thread.sleep
+                javafx.animation.Timeline timeline = new javafx.animation.Timeline(
+                    new javafx.animation.KeyFrame(
+                        javafx.util.Duration.seconds(2),
+                        actionEvent -> detailStage.close()
+                    )
+                );
+                timeline.play();
+                
+            } catch (Exception ex) {
+                System.out.println("ERROR purchasing ticket: " + ex.getMessage());
+                ex.printStackTrace();
+            }
+        });
+        
+        Button closeBtn = new Button("Close");
+        closeBtn.getStyleClass().add("close-button");
+        closeBtn.setOnAction(e -> detailStage.close());
+        
+        buttonContainer.getChildren().addAll(buyBtn, closeBtn);
+        
+        // Add all elements to layout
+        layout.getChildren().addAll(title, category, subCategory, date, capacity, ticketsLeft, buttonContainer);
+        
+        // Create scene and show stage
+        Scene scene = new Scene(layout, 400, 300);
+        scene.getStylesheets().add(getClass().getResource("/com/event/styles.css").toExternalForm());
+        scene.setFill(Color.TRANSPARENT);
+        
+        detailStage.setScene(scene);
+        detailStage.setTitle("Event Details");
+        detailStage.setResizable(false);
+        detailStage.centerOnScreen();
+        detailStage.show();
     }
 
     private VBox createEventCard(Event event) {

@@ -48,9 +48,18 @@ public class Facade {
         return user;
     }
 
+    // Added this method for proper user state management
+    public void setCurrentUser(User user) {
+        this.user = user;
+    }
+
     public User login(String username, String password) {
         user = userList.getUserByUsername(username);
         if (user != null && user.getPasswordHash().equals(password)) {
+            // Initialize tickets list if null
+            if (user.getTickets() == null) {
+                user.setTickets(new ArrayList<>());
+            }
             return user;
         }
         return null;
@@ -58,6 +67,7 @@ public class Facade {
 
     public void logout() {
         userList.save();
+        user = null; // Clear current user on logout
     }
 
     // --- Event Methods ---
@@ -94,8 +104,8 @@ public class Facade {
         }
     }
 
+    // Fixed the addTicketToUser method
     public void addTicketToUser(User user, Ticket ticket) {
-           
         if (user == null || ticket == null) {
             System.out.println("Error: User or Ticket is null");
             return;
@@ -108,9 +118,43 @@ public class Facade {
         
         Event event = ticket.getEvent();
         if (event != null && event.getTicketsLeft() > 0) {
-            event.getTicketsLeft();
+            // Fixed: Actually decrement the tickets left
+            event.setTicketsLeft(event.getTicketsLeft() - 1);
+            System.out.println("Ticket added. Remaining tickets for " + event.getName() + ": " + event.getTicketsLeft());
         } else if (event == null) {
             System.out.println("Error: Event in ticket is null");
+        } else {
+            System.out.println("Warning: No tickets left for event " + event.getName());
+        }
+    }
+
+    // New method to purchase a ticket (combines ticket creation and adding to user)
+    public boolean purchaseTicket(User user, Event event) {
+        if (user == null || event == null) {
+            System.out.println("Error: User or Event is null");
+            return false;
+        }
+        
+        if (event.getTicketsLeft() <= 0) {
+            System.out.println("Error: No tickets available for " + event.getName());
+            return false;
+        }
+        
+        try {
+            Ticket newTicket = new Ticket(event, user);
+            addTicketToUser(user, newTicket);
+            
+            // Update the current user if this is the current user
+            if (this.user != null && this.user.equals(user)) {
+                this.user = user;
+            }
+            
+            System.out.println("Successfully purchased ticket for " + event.getName());
+            return true;
+        } catch (Exception e) {
+            System.out.println("Error purchasing ticket: " + e.getMessage());
+            e.printStackTrace();
+            return false;
         }
     }
 

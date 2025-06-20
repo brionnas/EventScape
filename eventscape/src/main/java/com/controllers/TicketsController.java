@@ -42,10 +42,19 @@ public class TicketsController implements Initializable {
     }
 
     private void loadUserTickets() {
+        // Always get the latest user data from Facade
+        User latestUser = Facade.getInstance().getCurrentUser();
+        if (latestUser != null) {
+            this.currentUser = latestUser;
+        }
+        
         ticketsListVBox.getChildren().clear();
         
         // Get the actual tickets from the current user
-        ArrayList<Ticket> userTickets = currentUser.getTickets();
+        ArrayList<Ticket> userTickets = currentUser != null ? currentUser.getTickets() : null;
+        
+        System.out.println("Loading tickets for user: " + (currentUser != null ? currentUser.getFirstName() : "null"));
+        System.out.println("Number of tickets: " + (userTickets != null ? userTickets.size() : 0));
         
         if (userTickets == null || userTickets.isEmpty()) {
             Label noTicketsLabel = new Label("No tickets purchased yet");
@@ -66,19 +75,22 @@ public class TicketsController implements Initializable {
         VBox ticketItem = new VBox();
         ticketItem.getStyleClass().add("ticket-item");
         
-        Event event = ticket.getEvent(); // Assuming Ticket has getEvent() method
+        Event event = ticket.getEvent();
         
         Label titleLabel = new Label(event.getName());
         titleLabel.getStyleClass().add("ticket-title");
         
         Label dateLabel = new Label("Date: " + event.getDate());
         
-        Label statusLabel = new Label(ticket.getStatus()); // Assuming Ticket has getStatus() method
+        Label statusLabel = new Label(ticket.getStatus());
         statusLabel.getStyleClass().add("ticket-status");
         
-        String ticketIdString = ticket.getTicketId() != null ? ticket.getTicketId().toString() : "Unknown ID";
-
-        Label ticketIdLabel = new Label("Ticket ID: #" + ticket.getTicketId().toString().substring(0, 8)); // Show first 8 characters of UUID
+        // Handle potential null ticket ID
+        String ticketIdString = ticket.getTicketId() != null ? 
+            ticket.getTicketId().toString().substring(0, Math.min(8, ticket.getTicketId().toString().length())) : 
+            "Unknown ID";
+        
+        Label ticketIdLabel = new Label("Ticket ID: #" + ticketIdString);
         
         ticketItem.getChildren().addAll(titleLabel, dateLabel, statusLabel, ticketIdLabel);
         
@@ -107,5 +119,10 @@ public class TicketsController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         // Set the current user when the controller initializes
         setUser(Facade.getInstance().getCurrentUser());
+    }
+    
+    // Add this method to refresh tickets when the view becomes visible
+    public void refreshTickets() {
+        loadUserTickets();
     }
 }
