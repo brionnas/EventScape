@@ -19,4 +19,6 @@ Mockitt prototype:
 https://mockitt.com/proto/2WNRGA6RsxxqmsYyBg6VI/sharing?view_mode=device&screen=rbpUoGI0hfQVjPEzP&canvasId=ptmgfynsUoGKPyX50PDuP1
 
 GUI Video:
-https://www.youtube.com/watch?v=caGQtmzDQDg
+
+https://youtu.be/7r5E-SSbrU8 (Brionna)
+https://www.youtube.com/watch?v=caGQtmzDQDg(idonna)
